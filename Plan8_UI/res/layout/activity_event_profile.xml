@@ -1,0 +1,152 @@
+<LinearLayout  
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+   	xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+		
+    <android.support.v7.widget.Toolbar
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/event_profile_activity_toolbar"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+		android:minHeight="?attr/actionBarSize"
+	    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    	app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    	android:background="@color/toolbar" />
+    
+	<fragment
+		android:id="@+id/event_profile_map"
+		android:layout_width="match_parent"
+		android:layout_height="200dp"
+		class="com.google.android.gms.maps.SupportMapFragment" />
+	
+    <ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+	    android:layout_marginLeft="5dp"
+	    android:layout_marginRight="5dp"
+	    android:layout_marginEnd="5dp"
+	    android:layout_marginStart="5dp"
+        android:scrollbars="none" >
+		
+		<RelativeLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" >
+		    
+			<TableLayout
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content">
+				
+			    <TableRow 		        
+			        android:layout_marginTop="5dp"
+			        android:layout_marginBottom="5dp">
+				    
+				    <EditText
+				        android:id="@+id/event_profile_title"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="1"
+				        android:inputType="text"
+				        android:focusable="false"
+				        android:maxLength="30"
+				        android:hint="Title"
+				        android:text="Mobicom Wireframe Presentation" />
+			    
+			    </TableRow>
+			    
+			    <TableRow
+			        android:layout_marginTop="5dp"
+			        android:layout_marginBottom="5dp">
+			        
+			        <EditText
+				        android:id="@+id/event_profile_date_start"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="1"
+				        android:focusable="false"
+				        android:hint="Start Date"
+				        android:text="Nov 10, 2014" />
+			        
+			        <EditText
+				        android:id="@+id/event_profile_time_start"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="1"
+				        android:focusable="false"
+				        android:hint="Start Time"
+				        android:text="12:45" />
+			        
+			    </TableRow>
+			    
+			    <TableRow
+			        android:layout_marginTop="5dp"
+			        android:layout_marginBottom="5dp">
+			        
+			        <EditText
+				        android:id="@+id/event_profile_date_end"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="1"
+				        android:focusable="false"
+				        android:hint="End Date"
+				        android:text="Nov 10, 2014" />
+			        
+			        <EditText
+				        android:id="@+id/event_profile_time_end"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="1"
+				        android:focusable="false"
+				        android:hint="End Time"
+				        android:text="14:15" />
+			        
+			    </TableRow>
+			    
+			    <EditText
+			        android:id="@+id/event_profile_location"
+			        android:layout_width="0dp"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:layout_weight="1"
+			        android:inputType="text"
+				    android:focusable="false"
+			        android:hint="Location"
+				    android:text="G301" />
+			    
+			    <EditText
+			        android:id="@+id/event_profile_description"
+			        android:layout_width="0dp"
+			        android:layout_height="wrap_content"
+			        android:layout_weight="1"
+			        android:layout_marginTop="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:inputType="textMultiLine"
+			        android:maxLength="300"
+				    android:focusable="false"
+			        android:hint="Description"
+				    android:text="Something" />
+			    
+				<Button
+		            android:id="@+id/event_profile_invite_button"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:text="Invite Friends" />	
+		            
+				<Button
+		            android:id="@+id/event_profile_attendees_button"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:text="View Attendees" />	
+		            
+			</TableLayout>
+		
+		</RelativeLayout>
+		
+	</ScrollView>
+	
+</LinearLayout>

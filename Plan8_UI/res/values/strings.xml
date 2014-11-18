@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Moihana</string>
+    <string name="title_activity_events">Upcoming Events</string>
+    <string name="title_activity_create_event">Create Event</string>
+    <string name="title_activity_register">New Account</string>
+    <string name="title_activity_send_friend_request">Send Friend Request</string>
+    <string name="title_activity_friend_profile">Moira\'s Profile</string>
+    <string name="title_activity_event_profile">Mobicom Wireframe Presentation</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="login_button">Log In</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open_square_bracket">[</string>
+    <string name="close_square_bracket">]</string>
+    <string name="dash">-</string>
+    <string name="create_event_cancel">Cancel</string>
+    <string name="create_event_save">Create Event</string>
+    <string name="event_profile_save">Save Edits Made</string>
+    <string name="event_profile_edit">Edit Event</string>
+    <string name="event_profile_cancel">Cancel</string>
+    <string name="event_profile_back">Back</string>
+    <string name="event_profile_delete">Delete Event</string>
+    <string name="friend_profile_cancel">Go Back</string>
+    <string name="register_button">Create New Account</string>
+    <string name="register_cancel">Cancel</string>
+    <string name="register_save">Create Account</string>
+    <string name="send_friend_request_cancel">Cancel</string>
+    <string name="send_friend_request_save">Send Friend Request</string>
+    <string name="title_activity_event_attendees">EventAttendeesActivity</string>
+    <string name="title_activity_attendee_location">AttendeeLocationActivity</string>
+    <string name="title_activity_invite_friends">InviteFriendsActivity</string>
+	<string name="invite_friends_cancel">Cancel</string>
+    <string name="invite_friends_save">Send Invites</string>
+	
+</resources>

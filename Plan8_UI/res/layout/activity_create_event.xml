@@ -1,0 +1,134 @@
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+   	xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+	    android:id="@+id/create_event_activity_toolbar"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+		android:minHeight="?attr/actionBarSize"
+	    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    	app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    	android:background="@color/toolbar" />
+	
+	<fragment
+		android:id="@+id/create_event_map"
+		android:layout_width="match_parent"
+		android:layout_height="200dp"
+		class="com.google.android.gms.maps.SupportMapFragment" />
+
+    <ScrollView
+        android:id="@+id/create_event_scrollview"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:scrollbars="none" >
+		
+		<TableLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+			android:layout_marginLeft="5dp"
+		    android:layout_marginRight="5dp"
+		    android:layout_marginEnd="5dp"
+		    android:layout_marginStart="5dp"
+		    android:scrollbars="none" >
+			
+		    <TableRow 		        
+		        android:layout_marginTop="5dp"
+		        android:layout_marginBottom="5dp">
+			    
+			    <EditText
+			        android:id="@+id/create_event_title"
+			        android:layout_width="0dp"
+			        android:layout_height="wrap_content"
+			        android:layout_weight="1"
+			        android:maxLength="30"
+			        android:hint="Title"
+			        android:inputType="text" />
+		    
+		    </TableRow>
+		    
+		    <TableRow
+		        android:layout_marginTop="5dp"
+		        android:layout_marginBottom="5dp">
+		        
+		        <EditText
+			        android:id="@+id/create_event_date_start"
+			        android:layout_width="0dp"
+			        android:layout_height="wrap_content"
+			        android:layout_weight="1"
+			        android:focusable="false"
+			        android:hint="Start Date" />
+		        
+		        <EditText
+			        android:id="@+id/create_event_time_start"
+			        android:layout_width="0dp"
+			        android:layout_height="wrap_content"
+			        android:layout_weight="1"
+			        android:focusable="false"
+			        android:hint="Start Time" />
+		        
+		    </TableRow>
+		    
+		    <TableRow
+		        android:layout_marginTop="5dp"
+		        android:layout_marginBottom="5dp">
+		        
+		        <EditText
+			        android:id="@+id/create_event_date_end"
+			        android:layout_width="0dp"
+			        android:layout_height="wrap_content"
+			        android:layout_weight="1"
+			        android:focusable="false"
+			        android:hint="End Date" />
+		        
+		        <EditText
+			        android:id="@+id/create_event_time_end"
+			        android:layout_width="0dp"
+			        android:layout_height="wrap_content"
+			        android:layout_weight="1"
+			        android:focusable="false"
+			        android:hint="End Time" />
+		        
+		    </TableRow>
+		    
+		    <EditText
+		        android:id="@+id/create_event_location"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="5dp"
+		        android:layout_marginBottom="5dp"
+		        android:layout_weight="1"
+		        android:hint="Location"
+		        android:inputType="text" />
+		    
+		    <EditText
+		        android:id="@+id/create_event_description"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="5dp"
+		        android:layout_marginBottom="5dp"
+		        android:layout_weight="1"
+		        android:maxLength="300"
+		        android:hint="Description"
+		        android:inputType="textMultiLine" />
+		    
+	        <TableRow>
+	            
+		        <Button
+		            android:id="@+id/create_event_invite_button"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:text="Invite Friends" />
+		        
+	        </TableRow>
+	        
+		</TableLayout>
+		
+	</ScrollView>
+	
+</LinearLayout>
