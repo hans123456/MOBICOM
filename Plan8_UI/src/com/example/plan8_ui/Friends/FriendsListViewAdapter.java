@@ -46,9 +46,9 @@ public class FriendsListViewAdapter extends ArrayAdapter<Friend>{
 		
 		Friend i = getItem(position);
 		
-		friend_view_holder.getImage_view_pic().setImageResource(i.getPic());
-		friend_view_holder.getText_view_first_name().setText(i.getFirst_name());
-		friend_view_holder.getText_view_last_name().setText(i.getLast_name());
+		friend_view_holder.getImage_view_pic().setImageResource(i.get_pic());
+		friend_view_holder.getText_view_first_name().setText(i.get_first_name());
+		friend_view_holder.getText_view_last_name().setText(i.get_last_name());
 		
 		return convertView;
 		

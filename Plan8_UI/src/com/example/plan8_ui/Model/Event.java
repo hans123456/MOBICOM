@@ -2,13 +2,26 @@ package com.example.plan8_ui.Model;
 
 public class Event {
 
+	public static final String id_id = "id";
+	public static final String id_title = "title";
+	public static final String id_description = "description";
+	public static final String id_location = "location";
+	public static final String id_date_start = "date_start";
+	public static final String id_time_start = "time_start";
+	public static final String id_date_end = "date_end";
+	public static final String id_time_end = "time_end";
+	public static final String id_latitude = "latitude";
+	public static final String id_longitude = "longitude";
+	public static final String id_created_by = "created_by";
+	public static final String id_you = "you";
+	
 	private String id;
 	private String title; 
-	private String body; 
-	private String dateFrom;
-	private String dateTo;
-	private String timeFrom; 
-	private String timeTo; 
+	private String description; 
+	private String date_start;
+	private String date_end;
+	private String time_start; 
+	private String time_end; 
 	private String location; 
 	private String createdBy = "";	
 	private String latitude = "14.566402";
@@ -21,137 +34,126 @@ public class Event {
 	
 	public Event(String id,
 					String title,
-					String body,
-					String dateFrom, 
-					String dateTo, 
-					String timeFrom,
-					String timeTo, 
 					String location,
-					String latitude,
-					String longtitude,
-					String createdBy,
-					boolean creator){
-		
+					String date_start, 
+					String time_start,
+					String date_end,
+					String time_end){
+
 		this.id = id;
 		this.title = title;
-		this.body = body;
-		this.dateFrom = dateFrom;
-		this.dateTo = dateTo;
-		this.timeFrom = timeFrom;
-		this.timeTo = timeTo;
 		this.location = location;
-		this.latitude = latitude;
-		this.longitude = longtitude;
-		this.createdBy = createdBy;
-		this.creator = creator;
-		
+		this.date_start = date_start;
+		this.date_end = date_end;
+		this.time_start = time_start;
+		this.time_end = time_end;
+
 	}
 	
-	public Event(
-			String title,
-			String body,
-			String dateFrom, 
-			String dateTo, 
-			String timeFrom,
-			String timeTo,
-			String location,
-			String latitude,
-			String longtitude){
+	public Event(String title,
+					String description,
+					String location,
+					String date_start, 
+					String time_start,
+					String date_end, 
+					String time_end,
+					String latitude,
+					String longtitude){
 		
 		this.title = title;
-		this.body = body;
-		this.dateFrom = dateFrom;
-		this.dateTo = dateTo;
-		this.timeFrom = timeFrom;
-		this.timeTo = timeTo;
+		this.description = description;
 		this.location = location;
+		this.date_start = date_start;
+		this.time_start = time_start;
+		this.date_end = date_end;
+		this.time_end = time_end;
 		this.latitude = latitude;
 		this.longitude = longtitude;
 		
 	}
 
-	public boolean isCreator() {
+	public boolean is_creator() {
 		return creator;
 	}
 
-	public String getTitle(){
+	public String get_title(){
 		return title;
 	}
 
-	public String getDateFrom(){
-		return dateFrom;
+	public String get_date_start(){
+		return date_start;
 	}
 
-	public String getDateTo() {
-		return dateTo;
+	public String get_date_end() {
+		return date_end;
 	}
 
-	public String getTimeFrom() 
+	public String get_time_start() 
 	{
-		return timeFrom;
+		return time_start;
 	}
 
-	public String getTimeTo() {
-		return timeTo;
+	public String get_time_end() {
+		return time_end;
 	}
 
-	public String getLocation() {
+	public String get_location() {
 		return location;
 	}
 
-	public String getLatitude() {
+	public String get_latitude() {
 		return latitude;
 	}
 
-	public String getLongitude() {
+	public String get_longitude() {
 		return longitude;
 	}
 	
-	public String getCreatedBy() {
+	public String get_CreatedBy() {
 		return createdBy;
 	}
 
-	public String getId() {
+	public String get_id() {
 		return id;
 	}
 
-	public String getBody() {
-		return body;
+	public String get_description() {
+		return description;
 	}
 
-	public void setTitle(String title) {
+	public void set_title(String title) {
 		this.title = title;
 	}
 
-	public void setBody(String body) {
-		this.body = body;
+	public void set_description(String description) {
+		this.description = description;
 	}
 
-	public void setDateFrom(String dateFrom) {
-		this.dateFrom = dateFrom;
+	public void set_date_start(String date_start) {
+		this.date_start = date_start;
 	}
 
-	public void setDateTo(String dateTo) {
-		this.dateTo = dateTo;
+	public void set_date_end(String date_end) {
+		this.date_end = date_end;
 	}
 
-	public void setTimeFrom(String timeFrom) {
-		this.timeFrom = timeFrom;
+	public void set_time_start(String time_start) {
+		this.time_start = time_start;
 	}
 
-	public void setTimeTo(String timeTo) {
-		this.timeTo = timeTo;
+	public void set_time_end(String time_end) {
+		this.time_end = time_end;
 	}
 
-	public void setLocation(String location) {
+	public void set_location(String location) {
 		this.location = location;
 	}
 
-	public void setLatitude(String latitude) {
+	public void set_latitude(String latitude) {
 		this.latitude = latitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void set_longitude(String longitude) {
 		this.longitude = longitude;
 	}
 

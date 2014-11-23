@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.Interfaces.AsyncFetchListTaskCompleteListener;
 import com.example.plan8_ui.Model.Event;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -23,7 +24,7 @@ import com.melnykov.fab.FloatingActionButton;
  * instance of this fragment.
  *
  */
-public class UpcomingEventsFragment extends Fragment {
+public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTaskCompleteListener<ArrayList<Event>>{
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
@@ -145,5 +146,11 @@ public class UpcomingEventsFragment extends Fragment {
 		}
 		
 	};
+
+	@Override
+	public void update_list(ArrayList<Event> result) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

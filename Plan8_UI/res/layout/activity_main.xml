@@ -25,34 +25,42 @@
 			android:id="@+id/title_buttons_shape"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:layout_margin="10dip"
+			android:layout_marginBottom="5dp"
 			android:maxLines="1"
 			android:gravity="center_horizontal"
 			android:layout_gravity="center_horizontal"
 			android:text="Moihana"
-			android:textSize="40dp"
+			android:textSize="45dp"
 			flatui:fl_textColor="fl_main" />
 
-        <EditText
+        <com.cengalabs.flatui.views.FlatEditText
             android:id="@+id/main_activity_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_gravity="center"
+            android:background="@android:color/transparent"
             android:ems="10"
+            android:padding="10dp"
             android:singleLine="true"
             android:inputType="text"
-            android:hint="Username" />
+            android:hint="Username"
+            flatui:fl_fieldStyle="fl_box"
+			flatui:fl_theme="@array/dark" />
       
-        <EditText
+        <com.cengalabs.flatui.views.FlatEditText
             android:id="@+id/main_activity_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_gravity="center"
+            android:background="@android:color/transparent"
             android:ems="10"
+            android:padding="10dp"
+            android:inputType="textPassword"
             android:hint="Password"
-            android:inputType="textPassword" />
+            flatui:fl_fieldStyle="fl_box"
+			flatui:fl_theme="@array/dark" />
        
 	    <com.cengalabs.flatui.views.FlatButton
 	        android:id="@+id/main_activity_login_button"
@@ -63,7 +71,8 @@
 	        android:text="@string/login_button"
 	        android:textColor="@android:color/white"
 			flatui:fl_textAppearance="fl_none"
-			flatui:fl_theme="@array/candy" />
+			flatui:fl_theme="@array/candy"
+			flatui:fl_blockButtonEffectHeight="3dp" />
 	    
 	    <com.cengalabs.flatui.views.FlatButton
 	        android:id="@+id/main_activity_register_button"
@@ -74,7 +83,8 @@
 	        android:layout_margin="10dp"
 	        android:textColor="@android:color/white"
 			flatui:fl_textAppearance="fl_none"
-			flatui:fl_theme="@array/dark" />
+			flatui:fl_theme="@array/dark"
+			flatui:fl_blockButtonEffectHeight="3dp" />
 	    
     </TableLayout>
     
