@@ -24,7 +24,7 @@ class User_Model extends CI_Model {
 
     }
 
-    public function get_profile_unique_id($data){
+    public function get_profile_by_unique_id($data){
 
         $unique_id = $data;
 

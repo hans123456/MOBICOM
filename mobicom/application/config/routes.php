@@ -44,7 +44,8 @@ $route['home'] = 'controller/home';
 $route['login'] = 'user_controller/login';
 $route['logout'] = 'user_controller/logout';
 $route['register'] = 'user_controller/register';
-$route['search_profile_unique_id'] = 'user_controller/search_profile_unique_id';
+$route['change_profile_picture'] = 'user_controller/change_profile_picture';
+$route['search_profile_by_unique_id'] = 'user_controller/search_profile_by_unique_id';
 
 $route['(:any)_events'] = 'event_controller/$1_events';
 $route['event_info'] = 'event_controller/event_info';

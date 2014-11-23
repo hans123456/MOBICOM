@@ -142,7 +142,7 @@ class Event_Model extends CI_Model {
                 ".$this->columns['time end'].",
                 ".$this->columns['latitude'].",
                 ".$this->columns['longitude'].",
-                IF(`users`.`id` = ".$user->id.", 'You', CONCAT(`users`.`first_name`, ' ',`users`.`last_name`)) AS `created by`,
+                IF(`users`.`id` = ".$user->id.", 'you', CONCAT(`users`.`first_name`, ' ',`users`.`last_name`)) AS `created_by`,
                 IF(`users`.`id` = ".$user->id.", true, false) AS `is_user`
 
             FROM
@@ -393,7 +393,6 @@ class Event_Model extends CI_Model {
         }
 
     }
-
 
     public function get_attendee_location($attendee_id, $event_id){
 

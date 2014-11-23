@@ -1,7 +1,7 @@
 <?php
 
-    if(isset($data)){
-        echo $data;
-    }
+	if(isset($data)){
+		echo $data;
+	}
 
 ?>

@@ -148,129 +148,144 @@ class Friend_Model extends CI_Model {
 	public function accept_friend_request($friend_id){
 
 		$user = $this->ion_auth->user()->row();
-		$query = $this->db->query("
 
-			INSERT INTO
-			    `friends`
-			    (
-			        `user_a_id`,
-			        `user_b_id`,
-			        `status`
-			    )
+		$this->db->trans_start();
 
-			    VALUES
-			    (
-			        ".$user->id.",
-			        ".$friend_id.",
-			        1
-			    )
+			$query = $this->db->query("
 
-			ON DUPLICATE KEY
-			    UPDATE
-			        `user_a_id` = ".$user->id.",
-			        `user_b_id` = ".$friend_id.",
-			        `status` = 1
+				INSERT INTO
+				    `friends`
+				    (
+				        `user_a_id`,
+				        `user_b_id`,
+				        `status`
+				    )
 
-			;
+				    VALUES
+				    (
+				        ".$user->id.",
+				        ".$friend_id.",
+				        1
+				    )
 
-		");
+				ON DUPLICATE KEY
+				    UPDATE
+				        `user_a_id` = ".$user->id.",
+				        `user_b_id` = ".$friend_id.",
+				        `status` = 1
 
-		$query = $this->db->query("
+				;
 
-			INSERT INTO
-			    `friends`
-			    (
-			        `user_a_id`,
-			        `user_b_id`,
-			        `status`
-			    )
+			");
 
-			    VALUES
-			    (
-			        ".$friend_id.",
-			        ".$user->id.",
-			        1
-			    )
+			$query = $this->db->query("
 
-			ON DUPLICATE KEY
-			    UPDATE
-			        `user_a_id` = ".$friend_id.",
-			        `user_b_id` = ".$user->id.",
-			        `status` = 1
+				INSERT INTO
+				    `friends`
+				    (
+				        `user_a_id`,
+				        `user_b_id`,
+				        `status`
+				    )
 
-			;
+				    VALUES
+				    (
+				        ".$friend_id.",
+				        ".$user->id.",
+				        1
+				    )
 
-		");
+				ON DUPLICATE KEY
+				    UPDATE
+				        `user_a_id` = ".$friend_id.",
+				        `user_b_id` = ".$user->id.",
+				        `status` = 1
+
+				;
+
+			");
+
+		$this->db->trans_complete();
 
 	}
 
 	public function unfriend($friend_id){
 
 		$user = $this->ion_auth->user()->row();
-		$query = $this->db->query("
 
-			DELETE
-				FROM
-			    `friends`
+		$this->db->trans_start();
 
-			WHERE
-		        `user_a_id` = ".$user->id." and
-		        `user_b_id` = ".$friend_id."
+			$this->db->query("
 
-			;
+				DELETE
+					FROM
+				    `friends`
 
-		");
+				WHERE
+			        `user_a_id` = ".$user->id." and
+			        `user_b_id` = ".$friend_id."
 
-		$query = $this->db->query("
+				;
 
-			DELETE
-				FROM
-			    `friends`
+			");
 
-			WHERE
-		        `user_a_id` = ".$friend_id." and
-		        `user_b_id` = ".$user->id."
+			$this->db->query("
 
-			;
+				DELETE
+					FROM
+				    `friends`
 
-		");
+				WHERE
+			        `user_a_id` = ".$friend_id." and
+			        `user_b_id` = ".$user->id."
+
+				;
+
+			");
+
+		$this->db->trans_complete();
 
 	}
 
 	public function delete_friend_request($friend_id){
 
 		$user = $this->ion_auth->user()->row();
-		$query = $this->db->query("
 
-			DELETE
-				FROM
-			    	`friends`
+		$this->db->trans_start();
 
-			WHERE
-		        (
-			       	`user_a_id` = ".$user->id." and
-			        `user_b_id` = ".$friend_id."
-			    )
+			$this->db->query("
 
-			;
+				DELETE
+					FROM
+				    	`friends`
 
-		");
+				WHERE
+			        (
+				       	`user_a_id` = ".$user->id." and
+				        `user_b_id` = ".$friend_id."
+				    )
 
-		$query = $this->db->query("
+				;
 
-			DELETE
-				FROM
-			    	`friends`
+			");
 
-			WHERE
-		        {
-					`user_a_id` = ".$friend_id." and
-			        `user_b_id` = ".$user->id."
-				}
+			$this->db->query("
 
-			;
+				DELETE
+					FROM
+				    	`friends`
 
-		");
+				WHERE
+			        {
+						`user_a_id` = ".$friend_id." and
+				        `user_b_id` = ".$user->id."
+					}
+
+				;
+
+			");
+
+		$this->db->trans_complete();
 
 	}
 

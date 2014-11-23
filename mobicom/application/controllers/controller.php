@@ -2,17 +2,17 @@
 
 class Controller extends CI_Controller {
 
-    public function __construct(){
+	public function __construct(){
 
-        parent::__construct();
+		parent::__construct();
 
-    }
+	}
 
-    public function home(){
+	public function home(){
 
-        $this->load->view('home_view');
+		$this->load->view('home_view');
 
-    }
+	}
 
 }
 
