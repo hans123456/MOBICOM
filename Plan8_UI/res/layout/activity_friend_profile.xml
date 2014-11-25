@@ -36,7 +36,7 @@
 		        android:orientation="vertical" >
 		    
 				<TextView
-				    android:id="@+id/friend_profile_id_text"
+				    android:id="@+id/friend_profile_id_text_view"
 				    android:layout_width="match_parent"
 				    android:layout_height="wrap_content"
 				    android:layout_marginTop="40dp"
@@ -45,7 +45,7 @@
 				    android:text="7A1CBKTYUL" />
 			
 				<ImageView
-				    android:id="@+id/friend_profile_profile_pic"
+				    android:id="@+id/friend_profile_profile_pic_image_view"
 				    android:layout_width="wrap_content"
 				    android:layout_height="wrap_content"
 				    android:layout_marginTop="15dp"
@@ -56,7 +56,7 @@
 				    android:src="@drawable/moi_pic_150x150" />
 				
 				<TextView 
-				    android:id="@+id/friend_profile_first_text"
+				    android:id="@+id/friend_profile_first_text_view"
 				    android:layout_height="wrap_content"
 				    android:layout_width="match_parent"
 				    android:layout_marginTop="15dp"
@@ -67,7 +67,7 @@
 				    android:text="Moira"/>
 				
 				<TextView 
-				    android:id="@+id/friend_profile_last_text"
+				    android:id="@+id/friend_profile_last_text_view"
 				    android:layout_height="wrap_content"
 				    android:layout_width="match_parent"
 				    android:layout_marginTop="5dp"

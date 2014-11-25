@@ -62,13 +62,13 @@ public class EventProfileActivity extends ActionBarActivity {
 		dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
 		timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
 
-		title_et = (EditText) findViewById(R.id.event_profile_title);
-		start_date_et = (EditText) findViewById(R.id.event_profile_date_start);
-		start_time_et = (EditText) findViewById(R.id.event_profile_time_start);
-		end_date_et = (EditText) findViewById(R.id.event_profile_date_end);
-		end_time_et = (EditText) findViewById(R.id.event_profile_time_end);
-		location_et = (EditText) findViewById(R.id.event_profile_location);
-		description_et = (EditText) findViewById(R.id.event_profile_description);
+		title_et = (EditText) findViewById(R.id.event_profile_title_edit_text);
+		start_date_et = (EditText) findViewById(R.id.event_profile_date_start_edit_text);
+		start_time_et = (EditText) findViewById(R.id.event_profile_time_start_edit_text);
+		end_date_et = (EditText) findViewById(R.id.event_profile_date_end_edit_text);
+		end_time_et = (EditText) findViewById(R.id.event_profile_time_end_edit_text);
+		location_et = (EditText) findViewById(R.id.event_profile_location_edit_text);
+		description_et = (EditText) findViewById(R.id.event_profile_description_edit_text);
 		
 		inviteButton = (Button) findViewById(R.id.event_profile_invite_button);
 		inviteButton.setOnClickListener(inviteButtonOCL);
@@ -85,7 +85,7 @@ public class EventProfileActivity extends ActionBarActivity {
 		if (googleMap == null) {
 
             googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(
-                    R.id.event_profile_map)).getMap();
+                    R.id.event_profile_map_fragment)).getMap();
             
             markerOptions = new MarkerOptions();
             

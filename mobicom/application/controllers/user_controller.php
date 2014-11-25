@@ -17,8 +17,9 @@ class User_Controller extends CI_Controller {
 		if(true == $this->ion_auth->logged_in()){
 
 			$user = $this->ion_auth->user()->row();
-			$info['first name'] = $user->first_name;
-			$info['last name'] = $user->last_name;
+			$info['unique_id'] = $user->unique_id;
+			$info['first_name'] = $user->first_name;
+			$info['last_name'] = $user->last_name;
 			$data['data'] = json_encode($info);
 
 		}else {
@@ -59,20 +60,16 @@ class User_Controller extends CI_Controller {
 		//$tables = $this->config->item('tables','ion_auth');
 
 		$result['username'] = 'valid';
-		$result['password'] = 'valid';
 		$result['email'] = 'valid';
+		$result['first_name'] = 'valid';
+		$result['last_name'] = 'valid';
+		$result['password'] = 'valid';
+		$result['confirm_password'] = 'valid';
 
 		if(true == $this->ion_auth->username_check($username) || true == strlen($username)<=5){
 
 			$valid_register = false;
 			$result['username'] = 'invalid';
-
-		}
-
-		if(0 != strcmp($confirm_password,$password) || false == preg_match_all('$\S*(?=\S{8,20})\S*$', $password)){
-
-			$valid_register = false;
-			$result['password'] = 'invalid';
 
 		}
 
@@ -82,6 +79,34 @@ class User_Controller extends CI_Controller {
 
 			$valid_register = false;
 			$result['email'] = 'invalid';
+
+		}
+
+		if(0 == strcmp($additional_data['first_name'],'')){
+
+			$valid_register = false;
+			$result['first_name'] = 'invalid';
+
+		}
+
+		if(0 == strcmp($additional_data['last_name'],'')){
+
+			$valid_register = false;
+			$result['last_name'] = 'invalid';
+
+		}
+
+		if(false == preg_match_all('$\S*(?=\S{8,20})\S*$', $password)){
+
+			$valid_register = false;
+			$result['password'] = 'invalid';
+
+		}
+
+		if(0 != strcmp($confirm_password,$password) || 0 == strcmp($confirm_password, '')){
+
+			$valid_register = false;
+			$result['confirm_password'] = 'invalid';
 
 		}
 

@@ -1,5 +1,7 @@
 package com.example.plan8_ui.Friends;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.Interfaces.AsyncFetchListTaskCompleteListener;
+import com.example.plan8_ui.Model.Friend;
 
 /**
  * A simple {@link Fragment} subclass. Use the
@@ -14,7 +18,7 @@ import com.example.plan8_ui.R;
  * instance of this fragment.
  *
  */
-public class FriendRequestsFragment extends Fragment {
+public class FriendRequestsFragment extends Fragment implements AsyncFetchListTaskCompleteListener<ArrayList<Friend>>{
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
@@ -64,6 +68,10 @@ public class FriendRequestsFragment extends Fragment {
 		// Inflate the layout for this fragment
 		return inflater.inflate(R.layout.fragment_friend_requests, container,
 				false);
+	}
+
+	@Override
+	public void update_list(ArrayList<Friend> result) {
 	}
 	
 }

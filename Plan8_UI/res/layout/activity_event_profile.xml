@@ -17,7 +17,7 @@
     	android:background="@color/toolbar" />
     
 	<fragment
-		android:id="@+id/event_profile_map"
+		android:id="@+id/event_profile_map_fragment"
 		android:layout_width="match_parent"
 		android:layout_height="200dp"
 		class="com.google.android.gms.maps.SupportMapFragment" />
@@ -44,7 +44,7 @@
 			        android:layout_marginBottom="5dp">
 				    
 				    <EditText
-				        android:id="@+id/event_profile_title"
+				        android:id="@+id/event_profile_title_edit_text"
 				        android:layout_width="match_parent"
 				        android:layout_height="wrap_content"
 				        android:layout_weight="1"
@@ -61,7 +61,7 @@
 			        android:layout_marginBottom="5dp">
 			        
 			        <EditText
-				        android:id="@+id/event_profile_date_start"
+				        android:id="@+id/event_profile_date_start_edit_text"
 				        android:layout_width="0dp"
 				        android:layout_height="wrap_content"
 				        android:layout_weight="1"
@@ -70,7 +70,7 @@
 				        android:text="Nov 10, 2014" />
 			        
 			        <EditText
-				        android:id="@+id/event_profile_time_start"
+				        android:id="@+id/event_profile_time_start_edit_text"
 				        android:layout_width="0dp"
 				        android:layout_height="wrap_content"
 				        android:layout_weight="1"
@@ -85,7 +85,7 @@
 			        android:layout_marginBottom="5dp">
 			        
 			        <EditText
-				        android:id="@+id/event_profile_date_end"
+				        android:id="@+id/event_profile_date_end_edit_text"
 				        android:layout_width="0dp"
 				        android:layout_height="wrap_content"
 				        android:layout_weight="1"
@@ -94,7 +94,7 @@
 				        android:text="Nov 10, 2014" />
 			        
 			        <EditText
-				        android:id="@+id/event_profile_time_end"
+				        android:id="@+id/event_profile_time_end_edit_text"
 				        android:layout_width="0dp"
 				        android:layout_height="wrap_content"
 				        android:layout_weight="1"
@@ -105,7 +105,7 @@
 			    </TableRow>
 			    
 			    <EditText
-			        android:id="@+id/event_profile_location"
+			        android:id="@+id/event_profile_location_edit_text"
 			        android:layout_width="0dp"
 			        android:layout_height="wrap_content"
 			        android:layout_marginTop="5dp"
@@ -117,7 +117,7 @@
 				    android:text="G301" />
 			    
 			    <EditText
-			        android:id="@+id/event_profile_description"
+			        android:id="@+id/event_profile_description_edit_text"
 			        android:layout_width="0dp"
 			        android:layout_height="wrap_content"
 			        android:layout_weight="1"

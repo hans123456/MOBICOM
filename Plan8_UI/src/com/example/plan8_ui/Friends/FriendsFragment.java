@@ -10,11 +10,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.Interfaces.AsyncFetchListTaskCompleteListener;
 import com.example.plan8_ui.Model.Friend;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -24,7 +24,7 @@ import com.melnykov.fab.FloatingActionButton;
  * this fragment.
  *
  */
-public class FriendsFragment extends Fragment {
+public class FriendsFragment extends Fragment implements AsyncFetchListTaskCompleteListener<ArrayList<Friend>>{
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
@@ -60,6 +60,13 @@ public class FriendsFragment extends Fragment {
 		// Required empty public constructor
 	}
 
+	private View FriendsFragment;
+	private FloatingActionButton addFriends;
+	private InputMethodManager im;
+	private ListView friends_list_view;
+	private FriendsListViewAdapter friends_list_view_adapter;
+	private ArrayList<Friend> friends;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -68,29 +75,22 @@ public class FriendsFragment extends Fragment {
 			mParam2 = getArguments().getString(ARG_PARAM2);
 		}
 		
-		fs = new ArrayList<Friend>();
-		fs.add(new Friend(R.drawable.moi_pic_60x60, "Moira", "Paguiligan"));
-		fs.add(new Friend(R.drawable.gege_pic_60x60, "Geraldine", "Cu"));
-		fs.add(new Friend(R.drawable.moi_pic_60x60, "Moira", "Paguiligan"));
-		fs.add(new Friend(R.drawable.gege_pic_60x60, "Geraldine", "Cu"));
-		fs.add(new Friend(R.drawable.moi_pic_60x60, "Moira", "Paguiligan"));
-		fs.add(new Friend(R.drawable.gege_pic_60x60, "Geraldine", "Cu"));
-		fs.add(new Friend(R.drawable.moi_pic_60x60, "Moira", "Paguiligan"));
-		fs.add(new Friend(R.drawable.gege_pic_60x60, "Geraldine", "Cu"));
-		fs.add(new Friend(R.drawable.moi_pic_60x60, "Moira", "Paguiligan"));
-		fs.add(new Friend(R.drawable.gege_pic_60x60, "Geraldine", "Cu"));
-		fs.add(new Friend(R.drawable.moi_pic_60x60, "Moira", "Paguiligan"));
-		fs.add(new Friend(R.drawable.gege_pic_60x60, "Geraldine", "Cu"));
+		friends = new ArrayList<Friend>();
+		friends.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
+		friends.add(new Friend("geraldine.cu.1", "Geraldine", "Cu"));
+		friends.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
+		friends.add(new Friend("geraldine.cu.1", "Geraldine", "Cu"));
+		friends.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
+		friends.add(new Friend("geraldine.cu.1", "Geraldine", "Cu"));
+		friends.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
+		friends.add(new Friend("geraldine.cu.1", "Geraldine", "Cu"));
+		friends.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
+		friends.add(new Friend("geraldine.cu.1", "Geraldine", "Cu"));
+		friends.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
+		friends.add(new Friend("geraldine.cu.1", "Geraldine", "Cu"));
 		
 	}
 
-	private View FriendsFragment;
-	private FloatingActionButton addFriends;
-	private InputMethodManager im;
-	private ListView friends_list_view;
-	private FriendsListViewAdapter friends_list_view_adapter;
-	private ArrayList<Friend> fs;
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -109,7 +109,7 @@ public class FriendsFragment extends Fragment {
 		friends_list_view.addHeaderView(padding);
 		friends_list_view.addFooterView(padding);
 		
-		friends_list_view_adapter = new FriendsListViewAdapter(getActivity(), R.layout.friend_item, fs);
+		friends_list_view_adapter = new FriendsListViewAdapter(getActivity(), R.layout.friend_item, friends);
 		friends_list_view.setAdapter(friends_list_view_adapter);
 		
 		addFriends = (FloatingActionButton) FriendsFragment.findViewById(R.id.friends_fab);
@@ -147,5 +147,11 @@ public class FriendsFragment extends Fragment {
 		};
 		
 	};
+
+	@Override
+	public void update_list(ArrayList<Friend> result) {
+		friends.clear();
+		friends.addAll(result);
+	}
 	
 }

@@ -394,6 +394,38 @@ class Event_Model extends CI_Model {
 
     }
 
+    public function get_event_attendees($event_id){
+
+        $query = $this->db->query("
+
+            SELECT
+                `users`.`pic`,
+                `users`.`first_name`,
+                `users`.`last_name`
+
+            FROM
+                `users`, `invites`
+
+            WHERE
+                `users`.`id` = `invites`.`user_id` and
+                `invites`.`event_id` = '".$event_id."' and
+                `invites`.`status` = 1
+
+        ");
+
+        $info = "";
+
+        if ($query->num_rows() > 0)
+        {
+            $info = json_encode($query->result_array());
+        }
+
+        $query->free_result();
+
+        return $info;
+
+    }
+
     public function get_attendee_location($attendee_id, $event_id){
 
         $attendee_id = 2;

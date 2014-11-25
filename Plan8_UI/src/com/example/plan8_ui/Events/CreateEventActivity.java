@@ -60,16 +60,16 @@ public class CreateEventActivity extends ActionBarActivity {
         dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
         timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
         
-        startDate = (EditText) findViewById(R.id.create_event_date_start);
+        startDate = (EditText) findViewById(R.id.create_event_date_start_edit_text);
         startDate.setOnClickListener(startDateOCL);
         
-        endDate = (EditText) findViewById(R.id.create_event_date_end);
+        endDate = (EditText) findViewById(R.id.create_event_date_end_edit_text);
         endDate.setOnClickListener(endDateOCL);
         
-        startTime = (EditText) findViewById(R.id.create_event_time_start);
+        startTime = (EditText) findViewById(R.id.create_event_time_start_edit_text);
         startTime.setOnClickListener(startTimeOCL);
         
-        endTime = (EditText) findViewById(R.id.create_event_time_end);
+        endTime = (EditText) findViewById(R.id.create_event_time_end_edit_text);
         endTime.setOnClickListener(endTimeOCL);
         
         inviteButton = (Button) findViewById(R.id.create_event_invite_button);
@@ -84,7 +84,7 @@ public class CreateEventActivity extends ActionBarActivity {
 		if (googleMap == null) {
 
             googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(
-                    R.id.create_event_map)).getMap();
+                    R.id.create_event_map_fragment)).getMap();
             
             markerOptions = new MarkerOptions().draggable(true);
             

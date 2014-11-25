@@ -56,7 +56,7 @@ public class MainMenuActivity extends ActionBarActivity {
 	    
 	    FragmentManager fragmentManager = getSupportFragmentManager();
 	    fragmentManager.beginTransaction()
-	                   .replace(R.id.main_menu_activity_content, fragment)
+	                   .replace(R.id.main_menu_activity_content_frame, fragment)
 	                   .commit();
 	    
 	}
@@ -131,7 +131,7 @@ public class MainMenuActivity extends ActionBarActivity {
 		    // Insert the fragment by replacing any existing fragment
 		    FragmentManager fragmentManager = getSupportFragmentManager();
 		    fragmentManager.beginTransaction()
-		                   .replace(R.id.main_menu_activity_content, fragment)
+		                   .replace(R.id.main_menu_activity_content_frame, fragment)
 		                   .commit();
 	
 		    // Highlight the selected item, update the title, and close the drawer

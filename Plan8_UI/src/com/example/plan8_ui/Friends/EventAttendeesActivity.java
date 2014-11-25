@@ -15,9 +15,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.Interfaces.AsyncFetchListTaskCompleteListener;
 import com.example.plan8_ui.Model.Friend;
 
-public class EventAttendeesActivity extends ActionBarActivity {
+public class EventAttendeesActivity extends ActionBarActivity implements AsyncFetchListTaskCompleteListener<ArrayList<Friend>>{
 
 	private ArrayList<Friend> attendees;
 	private FriendsListViewAdapter adapter;
@@ -34,8 +35,11 @@ public class EventAttendeesActivity extends ActionBarActivity {
         }
         
         attendees = new ArrayList<Friend>();
-        attendees.add(new Friend(R.drawable.moi_pic_60x60, "Moira", "Paguiligan"));
-        attendees.add(new Friend(R.drawable.gege_pic_60x60, "Geraldine", "Cu"));
+        attendees.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
+        	
+        attendees.add(new Friend("geraldine.cu.1", 
+        							"Geraldine", 
+        							"Cu"));
         
         adapter = new FriendsListViewAdapter(getBaseContext(), R.layout.friend_item, attendees); 
 
@@ -83,5 +87,11 @@ public class EventAttendeesActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void update_list(ArrayList<Friend> result) {
+		attendees.clear();
+		attendees.addAll(result);
 	}
 }

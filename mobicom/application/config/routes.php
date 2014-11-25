@@ -52,6 +52,7 @@ $route['event_info'] = 'event_controller/event_info';
 $route['edit_event_info'] = 'event_controller/edit_event_info';
 $route['create_event'] = 'event_controller/create_event';
 $route['invite_friends'] = 'event_controller/invite_friends_to_event';
+$route['event_attendees'] = 'event_controller/event_attendees';
 $route['attendee_location'] = 'event_controller/attendee_location';
 
 $route['friends'] = 'friend_controller/friends';

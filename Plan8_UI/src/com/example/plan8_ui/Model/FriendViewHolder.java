@@ -5,32 +5,32 @@ import android.widget.TextView;
 
 public class FriendViewHolder {
 
-	ImageView image_view_pic;
-	TextView text_view_first_name;
-	TextView text_view_last_name;
+	private ImageView pic_image_view;
+	private TextView first_name_text_view;
+	private TextView last_name_text_view;
 	
-	public ImageView getImage_view_pic() {
-		return image_view_pic;
+	public ImageView get_pic_image_view() {
+		return pic_image_view;
 	}
 	
-	public TextView getText_view_first_name() {
-		return text_view_first_name;
+	public TextView get_first_name_text_view() {
+		return first_name_text_view;
 	}
 	
-	public TextView getText_view_last_name() {
-		return text_view_last_name;
+	public TextView get_last_name_text_view() {
+		return last_name_text_view;
 	}
 	
-	public void setImage_view_pic(ImageView image_view_pic) {
-		this.image_view_pic = image_view_pic;
+	public void set_pic_image_view(ImageView pic_image_view) {
+		this.pic_image_view = pic_image_view;
 	}
 	
-	public void setText_view_first_name(TextView text_view_first_name) {
-		this.text_view_first_name = text_view_first_name;
+	public void set_first_name_text_view(TextView first_name_text_view) {
+		this.first_name_text_view = first_name_text_view;
 	}
 	
-	public void setText_view_last_name(TextView text_view_last_name) {
-		this.text_view_last_name = text_view_last_name;
+	public void set_last_name_text_view(TextView last_name_text_view) {
+		this.last_name_text_view = last_name_text_view;
 	}
 	
 }

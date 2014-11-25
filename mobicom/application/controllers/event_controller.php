@@ -66,6 +66,21 @@ class Event_Controller extends CI_Controller {
 
 	}
 
+	public function event_attendees(){
+
+		$data['data'] = "";
+		$event_id = 1;//$this->input->post('event_id');
+
+		if(true == $this->ion_auth->logged_in()){
+
+			$data['data'] = $this->event_model->get_event_attendees($event_id);
+
+		}
+
+		$this->load->view('general_view', $data);
+
+	}
+
 	public function event_info(){
 
 		$id = 1;//$this->input->post('id');
@@ -83,14 +98,14 @@ class Event_Controller extends CI_Controller {
 
 	public function edit_event_info(){
 
-		$data['event id'] = $this->input->post('event id');
+		$data['event id'] = $this->input->post('event_id');
 		$data['location'] = $this->input->post('location');
 		$data['title'] = $this->input->post('title');
 		$data['description'] = $this->input->post('description');
-		$data['date start'] = $this->input->post('date starts');
-		$data['time start'] = $this->input->post('time start');
-		$data['date end'] = $this->input->post('date end');
-		$data['time end'] = $this->input->post('time end');
+		$data['date start'] = $this->input->post('date_starts');
+		$data['time start'] = $this->input->post('time_start');
+		$data['date end'] = $this->input->post('date_end');
+		$data['time end'] = $this->input->post('time_end');
 		$data['latitude'] = $this->input->post('latitude');
 		$data['longitude'] = $this->input->post('longitude');
 
