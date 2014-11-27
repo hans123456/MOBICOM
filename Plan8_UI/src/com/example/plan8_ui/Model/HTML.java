@@ -3,7 +3,7 @@ package com.example.plan8_ui.Model;
 public class HTML {
 
 	// general
-	public static final String website = "http://localhost/mobicom/index.php/";
+	public static final String website = "http://192.168.1.142/mobicom/index.php/";
 	public static final String user_agent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36";
 	public static final String element_id = "result";
 	

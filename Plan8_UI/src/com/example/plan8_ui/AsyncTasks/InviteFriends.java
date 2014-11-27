@@ -26,22 +26,15 @@ public class InviteFriends extends AsyncTask<String, Void, String>{
 			first = false;
 		}
 		
-//		Document doc;
 		String result = null;
 		
 		try {
 			
-//			doc = 
 			Jsoup.connect(HTML.website + HTML.invite_friends)
 				  .data(HTML.post_invited_friends, imploded_text.toString())
 				  .userAgent(HTML.user_agent)
 				  .post();
-//			
-//			Element json_element = doc.getElementById(HTML.element_id);
-//			
-//			JSONArray json_array = new JSONArray(json_element.text());
-//			JSONObject json_object = json_array.getJSONObject(0);
-//			
+
 			result = "Sucess";
 			
 		} catch (Exception e) {

@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 import com.example.android.common.view.SlidingTabLayout;
 import com.example.plan8_ui.R;
@@ -59,25 +61,22 @@ public class FriendsMenuFragment extends Fragment {
 		}
 	}
 
-	private View FriendsFragmentView;
-	private ViewPager friends_view_pager;
-	private FriendsStatePagerAdapter friends_state_pager_adapter; 
+	// lazy
+	@InjectView(R.id.friends_pager) ViewPager friends_view_pager;
+	@InjectView(R.id.friends_sliding_tabs) SlidingTabLayout tabLayout;
+	
+	FriendsStatePagerAdapter friends_state_pager_adapter; 
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
-
-		super.onCreateView(inflater, container, savedInstanceState);
 		
-		FriendsFragmentView = inflater.inflate(R.layout.fragment_friends_menu, container, false);
+		super.onCreateView(inflater, container, savedInstanceState);
+		View FriendsFragmentView = inflater.inflate(R.layout.fragment_friends_menu, container, false);
+		ButterKnife.inject(this, FriendsFragmentView);
 		
 		friends_state_pager_adapter = new FriendsStatePagerAdapter(getFragmentManager());
-		
-		friends_view_pager = (ViewPager) FriendsFragmentView.findViewById(R.id.friends_pager);
 		friends_view_pager.setAdapter(friends_state_pager_adapter);
-		
-		SlidingTabLayout tabLayout = (SlidingTabLayout) FriendsFragmentView.findViewById(R.id.friends_sliding_tabs);
 		
 		tabLayout.setViewPager(friends_view_pager);
 		

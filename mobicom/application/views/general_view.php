@@ -8,8 +8,8 @@
 
 				$this->load->library('ion_auth');
 
-				if(true == $this->ion_auth->logged_in())
-				{
+				// if(true == $this->ion_auth->logged_in())
+				// {
 					if('' == $data)
 					{
 						echo 'empty';
@@ -18,11 +18,11 @@
 					{
 						echo $data;
 					}
-				}
-				else
-				{
-					echo "fail";
-				}
+				// }
+				// else
+				// {
+				// 	echo "fail";
+				// }
 
 			?>
 

@@ -65,7 +65,10 @@ public class FetchInvitedEvents extends AsyncTask<Void, Void, ArrayList<Event>> 
 	@Override
 	protected void onPostExecute(ArrayList<Event> result) {
 		super.onPostExecute(result);
-		listener.update_list(result);
+
+		if(result.size()>0)
+			listener.update_list(result);
+	
 	}
 	
 }

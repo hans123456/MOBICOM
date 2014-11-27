@@ -9,9 +9,9 @@ class Event_Model extends CI_Model {
         'description' => '`events`.`description`',
         'location' => '`events`.`location`',
         'date start' => "DATE_FORMAT(`events`.`date_start`, '%b %d, %Y') as date_start",
-        'time start' => "TIME_FORMAT(`events`.`time_start`, '%h:%i %p') as time_start",
+        'time start' => "TIME_FORMAT(`events`.`time_start`, '%H:%i') as time_start",
         'date end' => "DATE_FORMAT(`events`.`date_end`, '%b %d, %Y') as date_end",
-        'time end' => "TIME_FORMAT(`events`.`time_end`, '%h:%i %p') as time_end",
+        'time end' => "TIME_FORMAT(`events`.`time_end`, '%H:%i') as time_end",
         'latitude' => 'x(`events`.`geolocation`) as latitude',
         'longitude' => 'y(`events`.`geolocation`) as longitude'
 
@@ -312,7 +312,8 @@ class Event_Model extends CI_Model {
 
     public function get_upcoming_events(){
 
-        $user = $this->ion_auth->user()->row();
+        //$user = $this->ion_auth->user()->row();
+        //".$user->id."
         $query = $this->db->query("
 
             SELECT
@@ -325,7 +326,7 @@ class Event_Model extends CI_Model {
                 ".$this->columns['time end']."
 
             FROM
-                (SELECT `invites`.`event_id`, `invites`.`status` FROM `invites` WHERE `invites`.`user_id` = ".$user->id.") AS `invites`
+                (SELECT `invites`.`event_id`, `invites`.`status` FROM `invites` WHERE `invites`.`user_id` = 1) AS `invites`
                 ,`events`
 
             JOIN

@@ -68,7 +68,10 @@ public class FetchEventAttendees extends AsyncTask<String, Void, ArrayList<Frien
 	@Override
 	protected void onPostExecute(ArrayList<Friend> result) {
 		super.onPostExecute(result);
-		listener.update_list(result);
+		
+		if(result.size()>0)
+			listener.update_list(result);
+	
 	}
 	
 }

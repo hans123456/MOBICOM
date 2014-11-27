@@ -12,8 +12,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.AsyncTasks.FetchUpcomingEvents;
 import com.example.plan8_ui.Interfaces.AsyncFetchListTaskCompleteListener;
 import com.example.plan8_ui.Model.Event;
 import com.melnykov.fab.FloatingActionButton;
@@ -68,88 +73,75 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 		}
 		
 	}
-
-	private FloatingActionButton create_button;
-	private ListView events_list_view;
-	private EventsAdapter events_adapter;
-	private View UpcomingEventsFragmentView;
-	private ArrayList<Event> events;
+	
+	// lazy to find view by id 
+	@InjectView(R.id.upcoming_events_fragment_fab) FloatingActionButton create_button;
+	@InjectView(R.id.upcoming_events_fragment_list_view) ListView events_list_view;
+	
+	EventsAdapter eventsAdapter;
+	View UpcomingEventsFragmentView;
+	ArrayList<Event> events;
+	FetchUpcomingEvents fetchUpcomingEvents;
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, 
+								ViewGroup container,
+								Bundle savedInstanceState) {
 		
 		super.onCreateView(inflater, container, savedInstanceState);
-		
 		UpcomingEventsFragmentView = inflater.inflate(R.layout.fragment_upcoming_events, container, false);
-		
-		create_button = (FloatingActionButton) UpcomingEventsFragmentView.findViewById(R.id.upcoming_events_fragment_fab);
-		create_button.setOnClickListener(create_button_ocl);
+		ButterKnife.inject(this, UpcomingEventsFragmentView);
 		
 		events = new ArrayList<Event>();
-		events.add(new Event());
-		events.add(new Event());
-		events.add(new Event());
-		events.add(new Event());
-		events.add(new Event());
-		events.add(new Event());
-		events.add(new Event());
-		
-		events_adapter = new EventsAdapter(getActivity().getBaseContext(), R.layout.event_item, events);
+		eventsAdapter = new EventsAdapter(getActivity().getBaseContext(), R.layout.event_item, events);
 
-		events_list_view = (ListView) UpcomingEventsFragmentView.findViewById(R.id.upcoming_events_fragment_listview);
-		
-		View padding = new View(getActivity());
-		padding.setMinimumHeight(5);
-		events_list_view.removeHeaderView(padding);
-		events_list_view.removeFooterView(padding);
-		events_list_view.addHeaderView(padding);
-		events_list_view.addFooterView(padding);
-		
-		events_list_view.setOnItemClickListener(events_list_view_OICL);
-		events_list_view.setAdapter(events_adapter);
-
+		events_list_view.setAdapter(eventsAdapter);
 		create_button.attachToListView(events_list_view);
 
 		return UpcomingEventsFragmentView;
 
 	}
 	
+	@OnClick (R.id.upcoming_events_fragment_fab)
+	public void onClick(){
 
-	OnClickListener create_button_ocl = new OnClickListener() {
+		Intent i = new Intent();
+		i.setClass(getActivity().getBaseContext(), CreateEventActivity.class);
+		startActivityForResult(i, 0);
 		
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
+	}
+
+	@OnItemClick (R.id.upcoming_events_fragment_list_view)
+	public void onItemClick(int position){
+
+		Intent i = new Intent();
+		i.setClass(getActivity().getBaseContext(), EventProfileActivity.class);
+		startActivityForResult(i, 1);
 		
-			Intent i = new Intent();
-			i.setClass(getActivity().getBaseContext(), CreateEventActivity.class);
-			//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivityForResult(i, 0);
-			
+	}
+
+	@Override 
+	public void onResume() {
+		
+		super.onResume();
+		
+		if(fetchUpcomingEvents != null){
+			if(fetchUpcomingEvents.isCancelled() == false){
+				fetchUpcomingEvents.cancel(true);
+			}
 		}
 		
-	};
-
-	OnItemClickListener events_list_view_OICL = new OnItemClickListener() {
-
-		@Override
-		public void onItemClick(AdapterView<?> adapter, View view, int position,
-				long arg3) {
-			// TODO Auto-generated method stub
-			
-			Intent i = new Intent();
-			i.setClass(getActivity().getBaseContext(), EventProfileActivity.class);
-			//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivityForResult(i, 1);
-			
-		}
+		fetchUpcomingEvents = new FetchUpcomingEvents(this);
+		fetchUpcomingEvents.execute();
 		
-	};
-
+	}
+	
 	@Override
 	public void update_list(ArrayList<Event> result) {
-		// TODO Auto-generated method stub
+		
+		events.clear();
+		events.addAll(result);
+		eventsAdapter.notifyDataSetChanged();
 		
 	}
 	

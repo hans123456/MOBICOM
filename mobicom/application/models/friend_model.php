@@ -12,10 +12,12 @@ class Friend_Model extends CI_Model {
 	public function get_friends(){
 
 		$user = $this->ion_auth->user()->row();
+		//".$user->id."
 		$query = $this->db->query("
 
 			SELECT
 				`friends`.`id`,
+				`users`.`unique_id`,
 				`users`.`pic`,
 				`users`.`first_name`,
 				`users`.`last_name`
@@ -32,7 +34,7 @@ class Friend_Model extends CI_Model {
 						`friends`
 
 					WHERE
-						`friends`.`user_a_id` = ".$user->id." and
+						`friends`.`user_a_id` = 1 and
 						`friends`.`status` = 1
 
 				) as `friends`
@@ -58,10 +60,13 @@ class Friend_Model extends CI_Model {
 	public function get_friend_requests(){
 
 		$user = $this->ion_auth->user()->row();
+		// ".$user->id."
 		$query = $this->db->query("
 
 			SELECT
 				`friends`.`id`,
+				`users`.`unique_id`,
+				`users`.`pic`,
 				`users`.`first_name`,
 				`users`.`last_name`
 
@@ -77,7 +82,7 @@ class Friend_Model extends CI_Model {
 						`friends`
 
 					WHERE
-						`friends`.`user_b_id` = ".$user->id." and
+						`friends`.`user_b_id` = 1 and
 						`friends`.`status` = 0
 
 				) as `friends`
@@ -103,10 +108,13 @@ class Friend_Model extends CI_Model {
 	public function get_sent_friend_requests(){
 
 		$user = $this->ion_auth->user()->row();
+		// ".$user->id."
 		$query = $this->db->query("
 
 			SELECT
 				`friends`.`id`,
+				`users`.`unique_id`,
+				`users`.`pic`,
 				`users`.`first_name`,
 				`users`.`last_name`
 
@@ -122,7 +130,7 @@ class Friend_Model extends CI_Model {
 						`friends`
 
 					WHERE
-						`friends`.`user_a_id` = ".$user->id." and
+						`friends`.`user_a_id` = 1 and
 						`friends`.`status` = 0
 
 				) as `friends`

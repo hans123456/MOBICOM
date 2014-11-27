@@ -28,48 +28,51 @@ public class FetchFriendRequests extends AsyncTask<Void, Void, ArrayList<Friend>
 	@Override
 	protected ArrayList<Friend> doInBackground(Void... arg0) {
 		
-		ArrayList<Friend> friends = new ArrayList<Friend>();
+		ArrayList<Friend> friendRequests = new ArrayList<Friend>();	
 
 		try {
 			
-			Document doc = Jsoup.connect(HTML.website + HTML.upcoming_events)
-									.userAgent(HTML.user_agent)
-									.get();
+			Document doc = Jsoup.connect(HTML.website + HTML.friend_requests)
+								.userAgent(HTML.user_agent)
+								.get();
 			
 			Element json_element = doc.getElementById(HTML.element_id);
 			
-			JSONArray json_array = new JSONArray(json_element.text());
-			int length = json_array.length();
-			
-			for(int j=0; j<length; j++){
+			if(json_element.text().equals("empty") == false){
+					
+				JSONArray json_array = new JSONArray(json_element.text());
+				int length = json_array.length();
 				
-				JSONObject o = json_array.getJSONObject(j);
-				Iterator<String> i = o.keys();
-				Friend friend = new Friend();
-				
-				while(i.hasNext()){
-					String key = i.next();
-					String value = o.getString(key);
-					friend.put_information(key, value);
+				for(int j=0; j<length; j++){
+					
+					JSONObject o = json_array.getJSONObject(j);
+					Iterator<String> i = o.keys();
+					Friend friend = new Friend();
+					
+					while(i.hasNext()){
+						String key = i.next();
+						String value = o.getString(key);
+						friend.put_information(key, value);
+					}
+					
+					friendRequests.add(friend);
+					
 				}
-				
-				friends.add(friend);
-				
-				
-			}
 			
+			}
+				
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage());
 		}
 		
-		return friends;
+		return friendRequests;
 				
 	}
 
 	@Override
 	protected void onPostExecute(ArrayList<Friend> result) {
 		super.onPostExecute(result);
-		listener.update_list(result);
+		listener.update_list(result);	
 	}
 	
 }

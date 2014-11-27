@@ -14,11 +14,11 @@ class Friend_Controller extends CI_Controller {
 
 		$data['data'] = "";
 
-		if(true == $this->ion_auth->logged_in()){
+		//if(true == $this->ion_auth->logged_in()){
 
 			$data['data'] = $this->friend_model->get_friends();
 
-		}
+		//}
 
 		$this->load->view('general_view', $data);
 
@@ -28,11 +28,11 @@ class Friend_Controller extends CI_Controller {
 
 		$data['data'] = "";
 
-		if(true == $this->ion_auth->logged_in()){
+		//if(true == $this->ion_auth->logged_in()){
 
 			$data['data'] = $this->friend_model->get_friend_requests();
 
-		}
+		//}
 
 		$this->load->view('general_view', $data);
 
@@ -42,11 +42,11 @@ class Friend_Controller extends CI_Controller {
 
 		$data['data'] = "";
 
-		if(true == $this->ion_auth->logged_in()){
+		//if(true == $this->ion_auth->logged_in()){
 
 			$data['data'] = $this->friend_model->get_sent_friend_requests();
 
-		}
+		//}
 
 		$this->load->view('general_view', $data);
 

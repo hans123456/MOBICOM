@@ -14,11 +14,11 @@ class Event_Controller extends CI_Controller {
 
 		$data['data'] = "";
 
-		if(true == $this->ion_auth->logged_in()){
+		//if(true == $this->ion_auth->logged_in()){
 
 			$data['data'] = $this->event_model->get_upcoming_events();
 
-		}
+		//}
 
 		$this->load->view('general_view', $data);
 

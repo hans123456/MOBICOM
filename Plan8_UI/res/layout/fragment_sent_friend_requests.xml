@@ -4,11 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Sent Friend Requests Here" />
-
+    <ListView
+		android:id="@+id/sent_friend_requests_fragment_list_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingStart="5dp"
+        android:paddingRight="5dp"
+        android:paddingEnd="5dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:clipToPadding="false"
+		android:divider="@null"
+		android:scrollbars="none"/>
+    
 </FrameLayout>

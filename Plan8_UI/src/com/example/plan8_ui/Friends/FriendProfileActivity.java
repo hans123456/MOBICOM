@@ -3,26 +3,65 @@ package com.example.plan8_ui.Friends;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.Model.Friend;
+import com.squareup.picasso.Picasso;
 
 public class FriendProfileActivity extends ActionBarActivity {
-
+	
+	private final String TAG = "Friend Profile";
+	Friend friend;
+	
+	@InjectView(R.id.friend_profile_unique_id_text_view) TextView unique_id_text_view;
+	@InjectView(R.id.friend_profile_pic_image_view) ImageView pic_image_view;
+	@InjectView(R.id.friend_profile_first_name_text_view) TextView first_name_text_view;
+	@InjectView(R.id.friend_profile_last_name_text_view) TextView last_name_text_view;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_friend_profile);
+		ButterKnife.inject(this);
 		
 		Toolbar toolbar = (Toolbar) findViewById(R.id.friend_profile_activity_toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
         }
 		
+        Bundle b = getIntent().getExtras();
+        friend = new Friend();
+        
+        for(String i : b.keySet()){
+        	friend.put_information(i, b.getString(i));
+        }
+        
+        Picasso.with(getBaseContext())
+			.load("https://graph.facebook.com/"+friend.get_information(Friend.id_pic)+"/picture?type=large")
+			.resize(300, 300)
+			.centerCrop()
+			.into(pic_image_view);
+        
+        unique_id_text_view.setText(friend.get_information(Friend.id_unique_id));
+        first_name_text_view.setText(friend.get_information(Friend.id_first_name));
+        last_name_text_view.setText(friend.get_information(Friend.id_last_name));
+
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

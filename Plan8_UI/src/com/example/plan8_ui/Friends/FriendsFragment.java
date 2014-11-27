@@ -5,15 +5,18 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.AsyncTasks.FetchFriends;
 import com.example.plan8_ui.Interfaces.AsyncFetchListTaskCompleteListener;
 import com.example.plan8_ui.Model.Friend;
 import com.melnykov.fab.FloatingActionButton;
@@ -60,12 +63,11 @@ public class FriendsFragment extends Fragment implements AsyncFetchListTaskCompl
 		// Required empty public constructor
 	}
 
-	private View FriendsFragment;
-	private FloatingActionButton addFriends;
-	private InputMethodManager im;
-	private ListView friends_list_view;
-	private FriendsListViewAdapter friends_list_view_adapter;
-	private ArrayList<Friend> friends;
+	@InjectView(R.id.friends_fragment_fab) FloatingActionButton addFriends;
+	@InjectView(R.id.friends_fragment_list_view) ListView friends_list_view;
+	FriendsListViewAdapter friendsListViewAdapter;
+	ArrayList<Friend> friends;
+	FetchFriends fetchFriends;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -75,83 +77,71 @@ public class FriendsFragment extends Fragment implements AsyncFetchListTaskCompl
 			mParam2 = getArguments().getString(ARG_PARAM2);
 		}
 		
-		friends = new ArrayList<Friend>();
-		friends.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
-		friends.add(new Friend("geraldine.cu.1", "Geraldine", "Cu"));
-		friends.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
-		friends.add(new Friend("geraldine.cu.1", "Geraldine", "Cu"));
-		friends.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
-		friends.add(new Friend("geraldine.cu.1", "Geraldine", "Cu"));
-		friends.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
-		friends.add(new Friend("geraldine.cu.1", "Geraldine", "Cu"));
-		friends.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
-		friends.add(new Friend("geraldine.cu.1", "Geraldine", "Cu"));
-		friends.add(new Friend("moiradenise.paguiligan", "Moira", "Paguiligan"));
-		friends.add(new Friend("geraldine.cu.1", "Geraldine", "Cu"));
-		
 	}
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
 		super.onCreateView(inflater, container, savedInstanceState);
+		View FriendsFragment = inflater.inflate(R.layout.fragment_friends, container, false);
+		ButterKnife.inject(this, FriendsFragment);
 		
-		FriendsFragment = inflater.inflate(R.layout.fragment_friends, container, false);
-
-		friends_list_view = (ListView) FriendsFragment.findViewById(R.id.friends_listview);
-		friends_list_view.setOnItemClickListener(friends_list_view_OICL);
-
-		View padding = new View(getActivity());
-		padding.setMinimumHeight(5);
-		friends_list_view.removeHeaderView(padding);
-		friends_list_view.removeFooterView(padding);
-		friends_list_view.addHeaderView(padding);
-		friends_list_view.addFooterView(padding);
+		friends = new ArrayList<Friend>();
+		friendsListViewAdapter = new FriendsListViewAdapter(getActivity(), R.layout.friend_item, friends);
+		friends_list_view.setAdapter(friendsListViewAdapter);
 		
-		friends_list_view_adapter = new FriendsListViewAdapter(getActivity(), R.layout.friend_item, friends);
-		friends_list_view.setAdapter(friends_list_view_adapter);
-		
-		addFriends = (FloatingActionButton) FriendsFragment.findViewById(R.id.friends_fab);
-		addFriends.setOnClickListener(addFriendsOCL);
 		addFriends.attachToListView(friends_list_view);
 		
 		return FriendsFragment;
 		
 	}
 	
-	OnClickListener addFriendsOCL = new OnClickListener() {
-		
-		@Override
-		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
-			
-			Intent i = new Intent();
-			i.setClass(getActivity().getBaseContext(), SendFriendRequestActivity.class);
-			//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivityForResult(i, 0);
-			
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		if(fetchFriends != null){
+			if(fetchFriends.isCancelled() == false){
+				fetchFriends.cancel(true);
+			}
 		}
+	
+		fetchFriends = new FetchFriends(this);
+		fetchFriends.execute();
+		
+	}
+	
+	@OnClick (R.id.friends_fragment_fab)
+	public void onClick() {
+		
+		Intent i = new Intent();
+		i.setClass(getActivity().getBaseContext(), SendFriendRequestActivity.class);
+		startActivityForResult(i, 0);
+		
+	}
+	
+	@OnItemClick (R.id.friends_fragment_list_view)
+	public void onItemClick(int position) {
+		
+		Log.wtf("tag", "in");
+		Friend f = friends.get(position);
+		Intent i = new Intent();
+		i.setClass(getActivity().getBaseContext(), FriendProfileActivity.class);
+		i.putExtra(Friend.id_id, f.get_information(Friend.id_id));
+		i.putExtra(Friend.id_unique_id, f.get_information(Friend.id_unique_id));
+		i.putExtra(Friend.id_pic, f.get_information(Friend.id_pic));
+		i.putExtra(Friend.id_first_name, f.get_information(Friend.id_first_name));
+		i.putExtra(Friend.id_last_name, f.get_information(Friend.id_last_name));
+		startActivity(i);
 		
 	};
 	
-	OnItemClickListener friends_list_view_OICL = new OnItemClickListener() {
-
-		public void onItemClick(android.widget.AdapterView<?> adapter, View view, int position, long arg3) {
-			
-			Intent i = new Intent();
-			i.setClass(getActivity().getBaseContext(), FriendProfileActivity.class);
-			//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivityForResult(i, 1);
-			
-		};
-		
-	};
-
 	@Override
 	public void update_list(ArrayList<Friend> result) {
 		friends.clear();
 		friends.addAll(result);
+		friendsListViewAdapter.notifyDataSetChanged();
 	}
 	
 }

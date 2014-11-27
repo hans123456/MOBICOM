@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import com.example.plan8_ui.R;
 import com.example.plan8_ui.Model.Event;
@@ -26,20 +25,19 @@ public class EventsAdapter extends ArrayAdapter<Event>{
 			
 		    LayoutInflater vi = LayoutInflater.from(getContext());
 		    convertView = vi.inflate(R.layout.event_item, parent, false);
-		    
-		    EventViewHolder event_view_holder = new EventViewHolder();
-		    event_view_holder.set_date_start_text_view((TextView) convertView.findViewById(R.id.event_item_date_start_text_view));
-		    event_view_holder.set_time_start_text_view((TextView) convertView.findViewById(R.id.event_item_time_start_text_view));
-		    event_view_holder.set_date_end_text_view((TextView) convertView.findViewById(R.id.event_item_date_end_text_view));
-		    event_view_holder.set_time_end_text_view((TextView) convertView.findViewById(R.id.event_item_time_end_text_view));
-		    event_view_holder.set_title_text_view((TextView) convertView.findViewById(R.id.event_item_title_text_view));
-		    event_view_holder.set_location_text_view((TextView) convertView.findViewById(R.id.event_item_location_text_view));
-		    
-		    convertView.setTag(event_view_holder);
-		    
+		    convertView.setTag(new EventViewHolder(convertView));
+
 		}
 		
 		Event event = getItem(position);
+		EventViewHolder eventViewHolder = (EventViewHolder) convertView.getTag();
+		
+		eventViewHolder.get_title_text_view().setText(event.get_information(Event.id_title));
+		eventViewHolder.get_location_text_view().setText(event.get_information(Event.id_location));
+		eventViewHolder.get_date_start_text_view().setText(event.get_information(Event.id_date_start));
+		eventViewHolder.get_time_start_text_view().setText(event.get_information(Event.id_time_start));
+		eventViewHolder.get_date_end_text_view().setText(event.get_information(Event.id_date_end));
+		eventViewHolder.get_time_end_text_view().setText(event.get_information(Event.id_time_end));
 		
 		return convertView;
 

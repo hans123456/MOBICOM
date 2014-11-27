@@ -1,13 +1,22 @@
 package com.example.plan8_ui.Model;
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+import com.example.plan8_ui.R;
 
 public class FriendViewHolder {
 
-	private ImageView pic_image_view;
-	private TextView first_name_text_view;
-	private TextView last_name_text_view;
+	@InjectView(R.id.friend_item_image_view) ImageView pic_image_view;
+	@InjectView(R.id.friend_item_first_name_text_view) TextView first_name_text_view;
+	@InjectView(R.id.friend_item_last_name_text_view) TextView last_name_text_view;
+	
+	public FriendViewHolder(View v) {
+		ButterKnife.inject(this, v);
+	}
 	
 	public ImageView get_pic_image_view() {
 		return pic_image_view;
@@ -19,18 +28,6 @@ public class FriendViewHolder {
 	
 	public TextView get_last_name_text_view() {
 		return last_name_text_view;
-	}
-	
-	public void set_pic_image_view(ImageView pic_image_view) {
-		this.pic_image_view = pic_image_view;
-	}
-	
-	public void set_first_name_text_view(TextView first_name_text_view) {
-		this.first_name_text_view = first_name_text_view;
-	}
-	
-	public void set_last_name_text_view(TextView last_name_text_view) {
-		this.last_name_text_view = last_name_text_view;
 	}
 	
 }

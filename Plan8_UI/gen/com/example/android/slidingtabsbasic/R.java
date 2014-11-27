@@ -18,17 +18,17 @@ public final class R {
 	}
 	public static final class drawable {
 		public static final int ic_launcher = 0x7f020061;
-		public static final int tile = 0x7f020075;
+		public static final int tile = 0x7f020076;
 	}
 	public static final class id {
-		public static final int item_subtitle = 0x7f0c00ad;
-		public static final int item_title = 0x7f0c00ae;
+		public static final int item_subtitle = 0x7f0c00af;
+		public static final int item_title = 0x7f0c00b0;
 		public static final int log_fragment = 0x7f0c0089;
 		public static final int sample_content_fragment = 0x7f0c008a;
 		public static final int sample_main_layout = 0x7f0c0087;
 		public static final int sample_output = 0x7f0c0088;
-		public static final int sliding_tabs = 0x7f0c00a6;
-		public static final int viewpager = 0x7f0c00a7;
+		public static final int sliding_tabs = 0x7f0c00a7;
+		public static final int viewpager = 0x7f0c00a8;
 	}
 	public static final class layout {
 		public static final int activity_main = 0x7f03001d;

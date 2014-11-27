@@ -29,10 +29,10 @@ public class FetchFriends extends AsyncTask<Void, Void, ArrayList<Friend>> {
 	protected ArrayList<Friend> doInBackground(Void... arg0) {
 		
 		ArrayList<Friend> friends = new ArrayList<Friend>();
-
+		
 		try {
 			
-			Document doc = Jsoup.connect(HTML.website + HTML.upcoming_events).userAgent(HTML.user_agent).get();
+			Document doc = Jsoup.connect(HTML.website + HTML.friends).userAgent(HTML.user_agent).get();
 			Element json_element = doc.getElementById(HTML.element_id);
 			
 			JSONArray json_array = new JSONArray(json_element.text());
@@ -50,6 +50,7 @@ public class FetchFriends extends AsyncTask<Void, Void, ArrayList<Friend>> {
 					friend.put_information(key, value);
 				}
 				
+				friend.put_information(Friend.id_pic, "steffi.chua1");
 				friends.add(friend);
 				
 			}
