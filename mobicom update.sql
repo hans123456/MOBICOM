@@ -109,6 +109,7 @@ INSERT INTO `plan8`.`events` (`id`, `title`, `description`, `date_start`, `time_
 
 DROP TABLE IF EXISTS `invites`;
 
+-- 0 invite, 1 going, 2 declined
 CREATE TABLE `invites` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
