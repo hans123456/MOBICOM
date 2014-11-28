@@ -64,31 +64,19 @@ class Friend_Model extends CI_Model {
 		$query = $this->db->query("
 
 			SELECT
-				`friends`.`id`,
+				`users`.`id`,
 				`users`.`unique_id`,
 				`users`.`pic`,
 				`users`.`first_name`,
 				`users`.`last_name`
 
 			FROM
-				`users`,
-
-				(
-
-					SELECT
-						`friends`.`user_b_id` as 'id'
-
-					FROM
-						`friends`
-
-					WHERE
-						`friends`.`user_b_id` = 1 and
-						`friends`.`status` = 0
-
-				) as `friends`
+				`users`, `friends`
 
 			WHERE
-				`users`.`id` = `friends`.`id`
+				`friends`.`user_b_id` = 1 and
+				`users`.`id` = `friends`.`user_a_id` and
+				`friends`.`status` = 0
 
 		");
 
@@ -112,31 +100,19 @@ class Friend_Model extends CI_Model {
 		$query = $this->db->query("
 
 			SELECT
-				`friends`.`id`,
+				`users`.`id`,
 				`users`.`unique_id`,
 				`users`.`pic`,
 				`users`.`first_name`,
 				`users`.`last_name`
 
 			FROM
-				`users`,
-
-				(
-
-					SELECT
-						`friends`.`user_b_id` as 'id'
-
-					FROM
-						`friends`
-
-					WHERE
-						`friends`.`user_a_id` = 1 and
-						`friends`.`status` = 0
-
-				) as `friends`
+				`users`, `friends`
 
 			WHERE
-				`users`.`id` = `friends`.`id`
+				`friends`.`user_a_id` = 1 and
+				`users`.`id` = `friends`.`user_b_id` and
+				`friends`.`status` = 0
 
 		");
 

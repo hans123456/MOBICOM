@@ -2,7 +2,7 @@
 
 class Event_Model extends CI_Model {
 
-    private $columns =  array(
+    private $columns = array(
 
         'id' => '`events`.`id`',
         'title' => '`events`.`title`',
@@ -16,6 +16,7 @@ class Event_Model extends CI_Model {
         'longitude' => 'y(`events`.`geolocation`) as longitude'
 
     );
+    private $date_today = "'Nov 28, 2014'";
 
     public function __construct(){
 
@@ -186,7 +187,16 @@ class Event_Model extends CI_Model {
                 ".$this->columns['time end']."
 
             FROM
-                (SELECT `invites`.`event_id`, `invites`.`status` FROM `invites` WHERE `invites`.`user_id` = ".$user->id.") AS `invites`
+                (
+                    SELECT
+                        `invites`.`event_id`,
+                        `invites`.`status`
+                    FROM
+                        `invites`
+                    WHERE
+                        `invites`.`user_id` = ".$user->id."
+
+                ) AS `invites`
                 ,`events`
 
             JOIN
@@ -196,7 +206,10 @@ class Event_Model extends CI_Model {
 
             WHERE
                 `invites`.`event_id` = `events`.`id` and
-                `invites`.`status` = 2
+                (
+                    `invites`.`status` = 2 or
+                    DATE(`events`.`date_end`) <= STR_TO_DATE(".$this->date_today.",'%M %d,%Y')
+                )
 
             ORDER by
                 `events`.`date_start` ASC,
@@ -220,6 +233,7 @@ class Event_Model extends CI_Model {
     public function get_finished_events(){
 
         $user = $this->ion_auth->user()->row();
+        //".$user->id."
         $query = $this->db->query("
 
             SELECT
@@ -232,7 +246,17 @@ class Event_Model extends CI_Model {
                 ".$this->columns['time end']."
 
             FROM
-                (SELECT `invites`.`event_id`, `invites`.`status` FROM `invites` WHERE `invites`.`user_id` = ".$user->id.") AS `invites`
+                (
+                    SELECT
+                        `invites`.`event_id`,
+                        `invites`.`status`
+                    FROM
+                        `invites`
+                    WHERE
+                        `invites`.`user_id` = 1
+
+                ) AS `invites`
+
                 ,`events`
 
             JOIN
@@ -242,8 +266,8 @@ class Event_Model extends CI_Model {
 
             WHERE
                 `invites`.`event_id` = `events`.`id` and
-                `invites`.`status` = 'going' and
-                DATE(`events`.`date_end`) <= STR_TO_DATE("."'Nov 6, 2014'".",'%M %d,%Y')
+                `invites`.`status` = 1 and
+                DATE(`events`.`date_end`) <= STR_TO_DATE(".$this->date_today.",'%M %d,%Y')
 
             ORDER by
                 `events`.`date_start` ASC,
@@ -267,6 +291,8 @@ class Event_Model extends CI_Model {
     public function get_invited_events(){
 
         $user = $this->ion_auth->user()->row();
+
+        //".$user->id."
         $query = $this->db->query("
 
             SELECT
@@ -279,7 +305,18 @@ class Event_Model extends CI_Model {
                 ".$this->columns['time end']."
 
             FROM
-                (SELECT `invites`.`event_id`, `invites`.`status` FROM `invites` WHERE `invites`.`user_id` = ".$user->id.") AS `invites`
+                (
+                    SELECT
+                        `invites`.`event_id`,
+                        `invites`.`status`
+                    FROM
+                        `invites`
+                    WHERE
+                        `invites`.`user_id` = 1
+
+                )
+                AS `invites`
+
                 ,`events`
 
             JOIN
@@ -289,7 +326,8 @@ class Event_Model extends CI_Model {
 
             WHERE
                 `invites`.`event_id` = `events`.`id` and
-                `invites`.`status` = 'invited'
+                `invites`.`status` = 0 and
+                DATE(`events`.`date_end`) >= STR_TO_DATE(".$this->date_today.",'%M %d,%Y')
 
             ORDER by
                 `events`.`date_start` ASC,
@@ -326,7 +364,16 @@ class Event_Model extends CI_Model {
                 ".$this->columns['time end']."
 
             FROM
-                (SELECT `invites`.`event_id`, `invites`.`status` FROM `invites` WHERE `invites`.`user_id` = 1) AS `invites`
+                (
+                    SELECT
+                        `invites`.`event_id`,
+                        `invites`.`status`
+                    FROM
+                        `invites`
+                    WHERE
+                        `invites`.`user_id` = 1
+
+                ) AS `invites`
                 ,`events`
 
             JOIN
@@ -337,7 +384,7 @@ class Event_Model extends CI_Model {
             WHERE
                 `invites`.`event_id` = `events`.`id` and
                 `invites`.`status` = 1 and
-                DATE(`events`.`date_end`) >= STR_TO_DATE("."'Oct 24, 2014'".",'%M %d,%Y')
+                DATE(`events`.`date_end`) >= STR_TO_DATE(".$this->date_today.",'%M %d,%Y')
 
             ORDER by
                 `events`.`date_start` ASC,
