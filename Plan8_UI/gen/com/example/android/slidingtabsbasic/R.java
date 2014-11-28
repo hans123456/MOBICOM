@@ -8,27 +8,27 @@ package com.example.android.slidingtabsbasic;
 
 public final class R {
 	public static final class dimen {
-		public static final int horizontal_page_margin = 0x7f090039;
-		public static final int margin_huge = 0x7f090038;
-		public static final int margin_large = 0x7f090037;
-		public static final int margin_medium = 0x7f090036;
-		public static final int margin_small = 0x7f090035;
-		public static final int margin_tiny = 0x7f090034;
-		public static final int vertical_page_margin = 0x7f09003a;
+		public static final int horizontal_page_margin = 0x7f0b0039;
+		public static final int margin_huge = 0x7f0b0038;
+		public static final int margin_large = 0x7f0b0037;
+		public static final int margin_medium = 0x7f0b0036;
+		public static final int margin_small = 0x7f0b0035;
+		public static final int margin_tiny = 0x7f0b0034;
+		public static final int vertical_page_margin = 0x7f0b003a;
 	}
 	public static final class drawable {
 		public static final int ic_launcher = 0x7f020061;
 		public static final int tile = 0x7f020076;
 	}
 	public static final class id {
-		public static final int item_subtitle = 0x7f0c00af;
-		public static final int item_title = 0x7f0c00b0;
+		public static final int item_subtitle = 0x7f0c00b0;
+		public static final int item_title = 0x7f0c00b1;
 		public static final int log_fragment = 0x7f0c0089;
 		public static final int sample_content_fragment = 0x7f0c008a;
 		public static final int sample_main_layout = 0x7f0c0087;
 		public static final int sample_output = 0x7f0c0088;
-		public static final int sliding_tabs = 0x7f0c00a7;
-		public static final int viewpager = 0x7f0c00a8;
+		public static final int sliding_tabs = 0x7f0c00a8;
+		public static final int viewpager = 0x7f0c00a9;
 	}
 	public static final class layout {
 		public static final int activity_main = 0x7f03001d;
@@ -39,18 +39,18 @@ public final class R {
 		public static final int main = 0x7f0d0008;
 	}
 	public static final class string {
-		public static final int app_name = 0x7f070000;
-		public static final int intro_message = 0x7f07003d;
-		public static final int sample_hide_log = 0x7f07003f;
-		public static final int sample_show_log = 0x7f07003e;
+		public static final int app_name = 0x7f060023;
+		public static final int intro_message = 0x7f06003d;
+		public static final int sample_hide_log = 0x7f06003f;
+		public static final int sample_show_log = 0x7f06003e;
 	}
 	public static final class style {
-		public static final int AppBaseTheme = 0x7f080000;
-		public static final int AppTheme = 0x7f080001;
-		public static final int Theme_Base = 0x7f0800f5;
-		public static final int Theme_Sample = 0x7f0800f6;
-		public static final int Widget = 0x7f0800f7;
-		public static final int Widget_SampleMessage = 0x7f0800f8;
-		public static final int Widget_SampleMessageTile = 0x7f0800f9;
+		public static final int AppBaseTheme = 0x7f050005;
+		public static final int AppTheme = 0x7f050006;
+		public static final int Theme_Base = 0x7f0500f5;
+		public static final int Theme_Sample = 0x7f0500f6;
+		public static final int Widget = 0x7f0500f7;
+		public static final int Widget_SampleMessage = 0x7f0500f8;
+		public static final int Widget_SampleMessageTile = 0x7f0500f9;
 	}
 }

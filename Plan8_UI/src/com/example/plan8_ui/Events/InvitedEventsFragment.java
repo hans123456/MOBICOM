@@ -2,13 +2,20 @@ package com.example.plan8_ui.Events;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.AsyncTasks.FetchInvitedEvents;
 import com.example.plan8_ui.Interfaces.AsyncFetchListTaskCompleteListener;
 import com.example.plan8_ui.Model.Event;
 
@@ -61,18 +68,54 @@ public class InvitedEventsFragment extends Fragment implements AsyncFetchListTas
 		}
 	}
 
+	// lazy to find view by id 
+	@InjectView(R.id.invited_events_fragment_list_view) ListView events_list_view;
+	
+	EventsAdapter eventsAdapter;
+	View InvitedEventsFragmentView;
+	ArrayList<Event> events;
+	FetchInvitedEvents fetchInvitedEvents;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_invited_events, container,
-				false);
-	}
 
+		super.onCreateView(inflater, container, savedInstanceState);
+		InvitedEventsFragmentView = inflater.inflate(R.layout.fragment_invited_events, container, false);
+		ButterKnife.inject(this, InvitedEventsFragmentView);
+		
+		events = new ArrayList<Event>();
+		eventsAdapter = new EventsAdapter(getActivity().getBaseContext(), R.layout.event_item, events);
+
+		events_list_view.setAdapter(eventsAdapter);
+
+		fetchInvitedEvents = new FetchInvitedEvents(this);
+		fetchInvitedEvents.execute();
+		
+		return InvitedEventsFragmentView;
+
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		fetchInvitedEvents.cancel(true);
+	}
+	
+	@OnItemClick (R.id.invited_events_fragment_list_view)
+	public void onItemClick(int position){
+
+		Intent i = new Intent();
+		i.setClass(getActivity().getBaseContext(), EventProfileActivity.class);
+		startActivityForResult(i, 1);
+		
+	}
+	
 	@Override
 	public void update_list(ArrayList<Event> result) {
-		// TODO Auto-generated method stub
-		
+		events.clear();
+		events.addAll(result);
+		eventsAdapter.notifyDataSetChanged();
 	}
 
 }

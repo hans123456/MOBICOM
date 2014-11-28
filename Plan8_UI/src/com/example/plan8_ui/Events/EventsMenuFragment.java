@@ -3,9 +3,14 @@ package com.example.plan8_ui.Events;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 import com.example.android.common.view.SlidingTabLayout;
 import com.example.plan8_ui.R;
@@ -59,29 +64,27 @@ public class EventsMenuFragment extends Fragment {
 		}
 	}
 
-	private View EventsFragmentView;
-	private ViewPager events_view_pager;
-	private EventsStatePagerAdapter events_state_pager_adapter; 
+	@InjectView(R.id.events_pager) ViewPager events_view_pager;
+	@InjectView(R.id.events_sliding_tabs) SlidingTabLayout tabLayout;
+	
+	View EventsFragmentView;
+	EventsStatePagerAdapter events_state_pager_adapter;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
 		super.onCreateView(inflater, container, savedInstanceState);
-		
 		EventsFragmentView = inflater.inflate(R.layout.fragment_events_menu, container, false);
+		ButterKnife.inject(this, EventsFragmentView);
 		
 		events_state_pager_adapter = new EventsStatePagerAdapter(getFragmentManager());
-		
-		events_view_pager = (ViewPager) EventsFragmentView.findViewById(R.id.events_pager);
 		events_view_pager.setAdapter(events_state_pager_adapter);
-		
-		SlidingTabLayout tabLayout = (SlidingTabLayout) EventsFragmentView.findViewById(R.id.events_sliding_tabs);
 		
 		tabLayout.setViewPager(events_view_pager);
 		
 		return EventsFragmentView;
 		
 	}
-
+	
 }

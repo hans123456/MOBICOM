@@ -2,13 +2,20 @@ package com.example.plan8_ui.Events;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.AsyncTasks.FetchFinishedEvents;
 import com.example.plan8_ui.Interfaces.AsyncFetchListTaskCompleteListener;
 import com.example.plan8_ui.Model.Event;
 
@@ -61,25 +68,54 @@ public class FinishedEventsFragment extends Fragment implements AsyncFetchListTa
 		}
 	}
 
-	private View InvitedEventsFragmentView;
+	// lazy to find view by id
+	@InjectView(R.id.finished_events_fragment_list_view) ListView events_list_view;
+	
+	EventsAdapter eventsAdapter;
+	View FinishedEventsFragmentView;
+	ArrayList<Event> events;
+	FetchFinishedEvents fetchFinishedEvents;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
 
 		super.onCreateView(inflater, container, savedInstanceState);
+		FinishedEventsFragmentView = inflater.inflate(R.layout.fragment_finished_events, container, false);
+		ButterKnife.inject(this, FinishedEventsFragmentView);
 		
-		InvitedEventsFragmentView = inflater.inflate(R.layout.fragment_finished_events, container, false);
+		events = new ArrayList<Event>();
+		eventsAdapter = new EventsAdapter(getActivity().getBaseContext(), R.layout.event_item, events);
+
+		events_list_view.setAdapter(eventsAdapter);
+
+		fetchFinishedEvents = new FetchFinishedEvents(this);
+		fetchFinishedEvents.execute();
 		
-		return InvitedEventsFragmentView;
-		
+		return FinishedEventsFragmentView;
+
 	}
 
 	@Override
-	public void update_list(ArrayList<Event> result) {
-		// TODO Auto-generated method stub
+	public void onDestroy() {
+		super.onDestroy();
+		fetchFinishedEvents.cancel(true);
+	}
+	
+	@OnItemClick (R.id.finished_events_fragment_list_view)
+	public void onItemClick(int position){
+
+		Intent i = new Intent();
+		i.setClass(getActivity().getBaseContext(), EventProfileActivity.class);
+		startActivityForResult(i, 1);
 		
+	}
+	
+	@Override
+	public void update_list(ArrayList<Event> result) {
+		events.clear();
+		events.addAll(result);
+		eventsAdapter.notifyDataSetChanged();
 	}
 
 }

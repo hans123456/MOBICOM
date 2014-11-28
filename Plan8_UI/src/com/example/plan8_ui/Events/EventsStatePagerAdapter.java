@@ -14,6 +14,8 @@ public class EventsStatePagerAdapter extends FragmentStatePagerAdapter{
 		super(fm);
 	}
 
+	Fragment up = new UpcomingEventsFragment(), de = new DeclinedEventsFragment(), in = new InvitedEventsFragment(), fi = new FinishedEventsFragment();
+	
 	@Override
 	public Fragment getItem(int position) {
 

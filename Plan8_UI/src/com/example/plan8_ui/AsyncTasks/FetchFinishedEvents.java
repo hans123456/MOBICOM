@@ -32,28 +32,34 @@ public class FetchFinishedEvents extends AsyncTask<Void, Void, ArrayList<Event>>
 		
 		try {
 			
-			Document doc = Jsoup.connect(HTML.website + HTML.finished_events).userAgent(HTML.user_agent).get();
+			Document doc = Jsoup.connect(HTML.website + HTML.finished_events)
+								.userAgent(HTML.user_agent)
+								.get();
 			Element json_element = doc.getElementById(HTML.element_id);
 			
-			JSONArray json_array = new JSONArray(json_element.text());
-			int length = json_array.length();
+			if(json_element.text().equals("empty") == false){
 			
-			for(int j=0; j<length; j++){
+				JSONArray json_array = new JSONArray(json_element.text());
+				int length = json_array.length();
 				
-				JSONObject o = json_array.getJSONObject(j);
-				Event event = new Event();
-				Iterator<String> i = o.keys();
-				
-				while(i.hasNext()){
-					String key = i.next();
-					String value = o.getString(key);
-					event.put_information(key, value);					
+				for(int j=0; j<length; j++){
+					
+					JSONObject o = json_array.getJSONObject(j);
+					Event event = new Event();
+					Iterator<String> i = o.keys();
+					
+					while(i.hasNext()){
+						String key = i.next();
+						String value = o.getString(key);
+						event.put_information(key, value);					
+					}
+					
+					events.add(event);
+					
 				}
-				
-				events.add(event);
-				
-			}
 			
+			}
+				
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage());
 		}

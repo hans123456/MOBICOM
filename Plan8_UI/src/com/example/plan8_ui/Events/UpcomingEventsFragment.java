@@ -98,8 +98,17 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 		events_list_view.setAdapter(eventsAdapter);
 		create_button.attachToListView(events_list_view);
 
+		fetchUpcomingEvents = new FetchUpcomingEvents(this);
+		fetchUpcomingEvents.execute();
+		
 		return UpcomingEventsFragmentView;
 
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		fetchUpcomingEvents.cancel(true);
 	}
 	
 	@OnClick (R.id.upcoming_events_fragment_fab)
@@ -120,29 +129,11 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 		
 	}
 
-	@Override 
-	public void onResume() {
-		
-		super.onResume();
-		
-		if(fetchUpcomingEvents != null){
-			if(fetchUpcomingEvents.isCancelled() == false){
-				fetchUpcomingEvents.cancel(true);
-			}
-		}
-		
-		fetchUpcomingEvents = new FetchUpcomingEvents(this);
-		fetchUpcomingEvents.execute();
-		
-	}
-	
 	@Override
 	public void update_list(ArrayList<Event> result) {
-		
 		events.clear();
 		events.addAll(result);
 		eventsAdapter.notifyDataSetChanged();
-		
 	}
 	
 }

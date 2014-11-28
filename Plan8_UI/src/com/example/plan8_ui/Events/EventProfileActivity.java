@@ -23,6 +23,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.example.plan8_ui.R;
 import com.example.plan8_ui.Friends.EventAttendeesActivity;
@@ -38,18 +41,28 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class EventProfileActivity extends ActionBarActivity {
 
-	private EditText title_et, start_date_et, start_time_et, end_date_et, end_time_et, location_et, description_et;
+	@InjectView(R.id.event_profile_title_edit_text) EditText title_et;
+	@InjectView(R.id.event_profile_date_start_edit_text) EditText start_date_et;
+	@InjectView(R.id.event_profile_time_start_edit_text) EditText start_time_et;
+	@InjectView(R.id.event_profile_date_end_edit_text) EditText end_date_et;
+	@InjectView(R.id.event_profile_time_end_edit_text) EditText end_time_et;
+	@InjectView(R.id.event_profile_location_edit_text) EditText location_et;
+	@InjectView(R.id.event_profile_description_edit_text) EditText description_et;
+	
+	@InjectView(R.id.event_profile_invite_button) Button inviteButton;
+	@InjectView(R.id.event_profile_attendees_button) Button attendeesButton;
+	
 	private GoogleMap googleMap;
 	private MarkerOptions markerOptions;
 	private Marker marker;
 	private EditText tempET;
 	private SimpleDateFormat dateFormatter, timeFormatter;
-	private Button inviteButton, attendeesButton;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_profile);
+		ButterKnife.inject(this);
 		
 		InputMethodManager im = (InputMethodManager) this.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 		im.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
@@ -62,20 +75,6 @@ public class EventProfileActivity extends ActionBarActivity {
 		dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
 		timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
 
-		title_et = (EditText) findViewById(R.id.event_profile_title_edit_text);
-		start_date_et = (EditText) findViewById(R.id.event_profile_date_start_edit_text);
-		start_time_et = (EditText) findViewById(R.id.event_profile_time_start_edit_text);
-		end_date_et = (EditText) findViewById(R.id.event_profile_date_end_edit_text);
-		end_time_et = (EditText) findViewById(R.id.event_profile_time_end_edit_text);
-		location_et = (EditText) findViewById(R.id.event_profile_location_edit_text);
-		description_et = (EditText) findViewById(R.id.event_profile_description_edit_text);
-		
-		inviteButton = (Button) findViewById(R.id.event_profile_invite_button);
-		inviteButton.setOnClickListener(inviteButtonOCL);
-		
-		attendeesButton = (Button) findViewById(R.id.event_profile_attendees_button);
-		attendeesButton.setOnClickListener(attendeesButtonOCL);
-		
 		initializeMap();
         
 	}
@@ -113,44 +112,28 @@ public class EventProfileActivity extends ActionBarActivity {
 		
 	};
 	
-	private OnClickListener inviteButtonOCL = new OnClickListener() {
+	@OnClick(R.id.event_profile_invite_button)
+	public void onClickInvite(View v) {
+		// TODO Auto-generated method stub
 		
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			
-			Intent i = new Intent();
-			i.setClass(getBaseContext(), InviteFriendsActivity.class);
-			//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivityForResult(i, 0);
-			
-		}
+		Intent i = new Intent();
+		i.setClass(getBaseContext(), InviteFriendsActivity.class);
+		//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+		startActivityForResult(i, 0);
 		
-	};
+	}
 	
-	private OnClickListener attendeesButtonOCL = new OnClickListener() {
-		
-		@Override
-		public void onClick(View arg0) {
+	@OnClick(R.id.event_profile_attendees_button)
+	public void onClickAttendees(View v) {
 
-			Intent i = new Intent();
-			i.setClass(getBaseContext(), EventAttendeesActivity.class);
-			//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivity(i);
-			
-		}
+		Intent i = new Intent();
+		i.setClass(getBaseContext(), EventAttendeesActivity.class);
+		//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+		startActivity(i);
 		
-	};
-	
+	}
+
 	private Menu menu;
-	private OnClickListener event_fab_OCL = new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			
-		}
-		
-	};
 	
 	private OnClickListener startDateOCL = new OnClickListener(){
 
