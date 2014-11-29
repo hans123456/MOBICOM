@@ -15,10 +15,8 @@ import butterknife.OnItemClick;
 
 import com.example.plan8_ui.R;
 import com.example.plan8_ui.AsyncTasks.FetchDeclinedEvents;
-import com.example.plan8_ui.AsyncTasks.FetchUpcomingEvents;
 import com.example.plan8_ui.Interfaces.AsyncFetchListTaskCompleteListener;
 import com.example.plan8_ui.Model.Event;
-import com.melnykov.fab.FloatingActionButton;
 
 /**
  * A simple {@link Fragment} subclass. Use the

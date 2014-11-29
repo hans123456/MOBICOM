@@ -7,17 +7,7 @@ import butterknife.ButterKnife.Finder;
 public class FriendsFragment$$ViewInjector {
   public static void inject(Finder finder, final com.example.plan8_ui.Friends.FriendsFragment target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131493028, "field 'addFriends' and method 'onClick'");
-    target.addFriends = (com.melnykov.fab.FloatingActionButton) view;
-    view.setOnClickListener(
-      new butterknife.internal.DebouncingOnClickListener() {
-        @Override public void doClick(
-          android.view.View p0
-        ) {
-          target.onClick();
-        }
-      });
-    view = finder.findRequiredView(source, 2131493027, "field 'friends_list_view' and method 'onItemClick'");
+    view = finder.findRequiredView(source, 2131493033, "field 'friends_list_view' and method 'onItemClick'");
     target.friends_list_view = (android.widget.ListView) view;
     ((android.widget.AdapterView<?>) view).setOnItemClickListener(
       new android.widget.AdapterView.OnItemClickListener() {
@@ -30,10 +20,20 @@ public class FriendsFragment$$ViewInjector {
           target.onItemClick(p2);
         }
       });
+    view = finder.findRequiredView(source, 2131493034, "field 'addFriends' and method 'onClick'");
+    target.addFriends = (com.melnykov.fab.FloatingActionButton) view;
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.onClick();
+        }
+      });
   }
 
   public static void reset(com.example.plan8_ui.Friends.FriendsFragment target) {
-    target.addFriends = null;
     target.friends_list_view = null;
+    target.addFriends = null;
   }
 }

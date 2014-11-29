@@ -9,18 +9,21 @@ public class FriendProfileActivity$$ViewInjector {
     View view;
     view = finder.findRequiredView(source, 2131492987, "field 'pic_image_view'");
     target.pic_image_view = (android.widget.ImageView) view;
+    view = finder.findRequiredView(source, 2131492988, "field 'first_name_text_view'");
+    target.first_name_text_view = (android.widget.TextView) view;
     view = finder.findRequiredView(source, 2131492986, "field 'unique_id_text_view'");
     target.unique_id_text_view = (android.widget.TextView) view;
     view = finder.findRequiredView(source, 2131492989, "field 'last_name_text_view'");
     target.last_name_text_view = (android.widget.TextView) view;
-    view = finder.findRequiredView(source, 2131492988, "field 'first_name_text_view'");
-    target.first_name_text_view = (android.widget.TextView) view;
+    view = finder.findRequiredView(source, 2131492985, "field 'toolbar'");
+    target.toolbar = (android.support.v7.widget.Toolbar) view;
   }
 
   public static void reset(com.example.plan8_ui.Friends.FriendProfileActivity target) {
     target.pic_image_view = null;
+    target.first_name_text_view = null;
     target.unique_id_text_view = null;
     target.last_name_text_view = null;
-    target.first_name_text_view = null;
+    target.toolbar = null;
   }
 }

@@ -15,7 +15,6 @@ import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 import com.example.plan8_ui.R;
-import com.example.plan8_ui.AsyncTasks.FetchFriends;
 import com.example.plan8_ui.AsyncTasks.FetchSentFriendRequests;
 import com.example.plan8_ui.Interfaces.AsyncFetchListTaskCompleteListener;
 import com.example.plan8_ui.Model.Friend;

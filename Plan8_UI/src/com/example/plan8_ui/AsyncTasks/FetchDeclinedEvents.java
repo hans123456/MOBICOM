@@ -35,6 +35,7 @@ public class FetchDeclinedEvents extends AsyncTask<Void, Void, ArrayList<Event>>
 			Document doc = Jsoup.connect(HTML.website + HTML.declined_events)
 								.userAgent(HTML.user_agent)
 								.get();
+			
 			Element json_element = doc.getElementById(HTML.element_id);
 			
 			if(json_element.text().equals("empty") == false){

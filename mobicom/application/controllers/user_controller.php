@@ -45,9 +45,9 @@ class User_Controller extends CI_Controller {
 		$valid_register = true;
 
 		$username = $this->input->post('username');
+		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 		$confirm_password = $this->input->post('confirm_password');
-		$email = $this->input->post('email');
 		$additional_data = array(
 
 			'first_name' => $this->input->post('first_name'),

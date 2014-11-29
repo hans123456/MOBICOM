@@ -17,13 +17,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ScrollView;
 import android.widget.TimePicker;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.example.plan8_ui.R;
 import com.example.plan8_ui.Friends.InviteFriendsActivity;
@@ -38,42 +39,36 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class CreateEventActivity extends ActionBarActivity {
 
-	private EditText startDate, endDate, startTime, endTime;
+	@InjectView(R.id.create_event_activity_title_edit_text) EditText title_edit_text;
+	@InjectView(R.id.create_event_activity_location_edit_text) EditText location_edit_text;
+	@InjectView(R.id.create_event_activity_description_edit_text) EditText description_edit_text;
+	@InjectView(R.id.create_event_activity_date_start_edit_text) EditText date_start_edit_text;
+	@InjectView(R.id.create_event_activity_time_start_edit_text) EditText time_start_edit_text;
+	@InjectView(R.id.create_event_activity_date_end_edit_text) EditText date_end_edit_text;
+	@InjectView(R.id.create_event_activity_time_end_edit_text) EditText time_end_edit_text;
+	
+	@InjectView(R.id.create_event_activity_invite_button) Button inviteButton;
+	
+	@InjectView(R.id.create_event_activity_activity_toolbar) Toolbar toolbar;
+	
 	private SimpleDateFormat dateFormatter, timeFormatter;
 	private EditText tempET;
 	private GoogleMap googleMap;
 	private MarkerOptions markerOptions;
 	private Marker marker;
-	private ScrollView sv;
-	private Button inviteButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_event);
+		ButterKnife.inject(this);
 		
-		Toolbar toolbar = (Toolbar) findViewById(R.id.create_event_activity_toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
         }
         
         dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
         timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
-        
-        startDate = (EditText) findViewById(R.id.create_event_date_start_edit_text);
-        startDate.setOnClickListener(startDateOCL);
-        
-        endDate = (EditText) findViewById(R.id.create_event_date_end_edit_text);
-        endDate.setOnClickListener(endDateOCL);
-        
-        startTime = (EditText) findViewById(R.id.create_event_time_start_edit_text);
-        startTime.setOnClickListener(startTimeOCL);
-        
-        endTime = (EditText) findViewById(R.id.create_event_time_end_edit_text);
-        endTime.setOnClickListener(endTimeOCL);
-        
-        inviteButton = (Button) findViewById(R.id.create_event_invite_button);
-		inviteButton.setOnClickListener(inviteButtonOCL);
         
         initializeMap();
         
@@ -84,7 +79,7 @@ public class CreateEventActivity extends ActionBarActivity {
 		if (googleMap == null) {
 
             googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(
-                    R.id.create_event_map_fragment)).getMap();
+                    R.id.create_event_activity_map_fragment)).getMap();
             
             markerOptions = new MarkerOptions().draggable(true);
             
@@ -113,20 +108,15 @@ public class CreateEventActivity extends ActionBarActivity {
 		
 	};
 	
-	private OnClickListener inviteButtonOCL = new OnClickListener() {
+	@OnClick(R.id.create_event_activity_invite_button)
+	public void onClickInvite(View v) {
+		// TODO Auto-generated method stub
 		
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			
-			Intent i = new Intent();
-			i.setClass(getBaseContext(), InviteFriendsActivity.class);
-			//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivityForResult(i, 0);
-			
-		}
+		Intent i = new Intent();
+		i.setClass(getBaseContext(), InviteFriendsActivity.class);
+		startActivityForResult(i, 0);
 		
-	};
+	}
 	
 	private void showDatePicker(){
 		
@@ -165,50 +155,34 @@ public class CreateEventActivity extends ActionBarActivity {
 		
 	}
 	
-	private OnClickListener startDateOCL = new OnClickListener(){
-
-		@Override
-		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
-			tempET = startDate;
-			showDatePicker();
-		}
-		
-	};
-
-	private OnClickListener endDateOCL = new OnClickListener(){
-
-		@Override
-		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
-			tempET = endDate;
-			showDatePicker();
-		}
-		
-	};
+	@OnClick(R.id.create_event_activity_date_start_edit_text)
+	public void onClickDateStart(View v) {
+		// TODO Auto-generated method stub
+		tempET = date_start_edit_text;
+		showDatePicker();
+	}
 	
-	private OnClickListener startTimeOCL = new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			tempET = startTime;
-			showTimePicker();
-		}
-		
-	};
+	@OnClick(R.id.create_event_activity_date_end_edit_text)
+	public void onClickDateEnd(View arg0) {
+		// TODO Auto-generated method stub
+		tempET = date_end_edit_text;
+		showDatePicker();
+	}
 	
-	private OnClickListener endTimeOCL = new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			tempET = endTime;
-			showTimePicker();
-		}
-		
-	};
+	@OnClick(R.id.create_event_activity_time_start_edit_text)
+	public void onClickTimeStart(View v) {
+		// TODO Auto-generated method stub
+		tempET = time_start_edit_text;
+		showTimePicker();
+	}
 	
+	@OnClick(R.id.create_event_activity_time_end_edit_text)
+	public void onClickTimeEnd(View v) {
+		// TODO Auto-generated method stub
+		tempET = time_end_edit_text;
+		showTimePicker();
+	}
+		
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

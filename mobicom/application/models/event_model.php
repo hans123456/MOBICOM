@@ -175,6 +175,7 @@ class Event_Model extends CI_Model {
     public function get_declined_events(){
 
         $user = $this->ion_auth->user()->row();
+        //".$user->id."
         $query = $this->db->query("
 
             SELECT
@@ -194,7 +195,7 @@ class Event_Model extends CI_Model {
                     FROM
                         `invites`
                     WHERE
-                        `invites`.`user_id` = ".$user->id."
+                        `invites`.`user_id` = 1
 
                 ) AS `invites`
                 ,`events`
@@ -208,7 +209,10 @@ class Event_Model extends CI_Model {
                 `invites`.`event_id` = `events`.`id` and
                 (
                     `invites`.`status` = 2 or
-                    DATE(`events`.`date_end`) <= STR_TO_DATE(".$this->date_today.",'%M %d,%Y')
+                    (
+                        DATE(`events`.`date_end`) <= STR_TO_DATE(".$this->date_today.",'%M %d,%Y') and
+                        `invites`.`status` = 0
+                    )
                 )
 
             ORDER by

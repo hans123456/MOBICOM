@@ -29,6 +29,7 @@
 		    android:paddingTop="@dimen/activity_vertical_margin" >
 		
 		    <EditText
+		        android:id="@+id/register_activity_username_edit_text"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="5dp"
@@ -42,6 +43,7 @@
 		        android:layout_marginBottom="5dp" >
 		    
 			    <EditText
+			        android:id="@+id/register_activity_first_name_edit_text"
 			        android:layout_width="0dp"
 			        android:layout_height="wrap_content"
 			        android:layout_weight="1"
@@ -49,6 +51,7 @@
 			        android:inputType="text" />
 			    
 			    <EditText
+			        android:id="@+id/register_activity_last_name_edit_text"
 			        android:layout_width="0dp"
 			        android:layout_height="wrap_content"
 			        android:layout_weight="1"
@@ -58,6 +61,7 @@
 		    </TableRow>
 		    
 		    <EditText
+		        android:id="@+id/register_activity_email_edit_text"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="5dp"
@@ -67,6 +71,7 @@
 		        android:inputType="textEmailAddress" />
 		    
 		    <EditText
+		        android:id="@+id/register_activity_password_edit_text"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="5dp"
@@ -76,6 +81,7 @@
 		        android:inputType="textPassword" />
 		    
 		    <EditText
+		        android:id="@+id/register_activity_confirm_password_edit_text"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_marginBottom="5dp"

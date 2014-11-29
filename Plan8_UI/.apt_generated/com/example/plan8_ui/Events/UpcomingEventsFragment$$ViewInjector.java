@@ -7,7 +7,7 @@ import butterknife.ButterKnife.Finder;
 public class UpcomingEventsFragment$$ViewInjector {
   public static void inject(Finder finder, final com.example.plan8_ui.Events.UpcomingEventsFragment target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131493035, "field 'events_list_view' and method 'onItemClick'");
+    view = finder.findRequiredView(source, 2131493041, "field 'events_list_view' and method 'onItemClick'");
     target.events_list_view = (android.widget.ListView) view;
     ((android.widget.AdapterView<?>) view).setOnItemClickListener(
       new android.widget.AdapterView.OnItemClickListener() {
@@ -20,7 +20,7 @@ public class UpcomingEventsFragment$$ViewInjector {
           target.onItemClick(p2);
         }
       });
-    view = finder.findRequiredView(source, 2131493036, "field 'create_button' and method 'onClick'");
+    view = finder.findRequiredView(source, 2131493042, "field 'create_button' and method 'onClick'");
     target.create_button = (com.melnykov.fab.FloatingActionButton) view;
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {

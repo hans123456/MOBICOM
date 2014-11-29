@@ -38,14 +38,13 @@ public class RegisterUser extends AsyncTask<String, Void, RegisterResult>{
 						  .data(HTML.post_first_name, arg[2])
 						  .data(HTML.post_last_name, arg[3])
 						  .data(HTML.post_password, arg[4])
-						  .data(HTML.post_email_address, arg[5])
+						  .data(HTML.post_confirm_password, arg[5])
 						  .userAgent(HTML.user_agent)
 						  .post();
 			
 			Element json_element = doc.getElementById(HTML.element_id);
 			
-			JSONArray json_array = new JSONArray(json_element.text());
-			JSONObject json_object = json_array.getJSONObject(0);
+			JSONObject json_object = new JSONObject(json_element.text());
 			Iterator<String> i = json_object.keys();
 			result = new RegisterResult();
 			

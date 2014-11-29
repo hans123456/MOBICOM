@@ -41,16 +41,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class EventProfileActivity extends ActionBarActivity {
 
-	@InjectView(R.id.event_profile_title_edit_text) EditText title_et;
-	@InjectView(R.id.event_profile_date_start_edit_text) EditText start_date_et;
-	@InjectView(R.id.event_profile_time_start_edit_text) EditText start_time_et;
-	@InjectView(R.id.event_profile_date_end_edit_text) EditText end_date_et;
-	@InjectView(R.id.event_profile_time_end_edit_text) EditText end_time_et;
-	@InjectView(R.id.event_profile_location_edit_text) EditText location_et;
-	@InjectView(R.id.event_profile_description_edit_text) EditText description_et;
+	@InjectView(R.id.event_profile_activity_title_edit_text) EditText title_edit_text;
+	@InjectView(R.id.event_profile_activity_date_start_edit_text) EditText date_start_edit_text;
+	@InjectView(R.id.event_profile_activity_time_start_edit_text) EditText time_start_edit_text;
+	@InjectView(R.id.event_profile_activity_date_end_edit_text) EditText date_end_edit_text;
+	@InjectView(R.id.event_profile_activity_time_end_edit_text) EditText time_end_edit_text;
+	@InjectView(R.id.event_profile_activity_location_edit_text) EditText location_edit_text;
+	@InjectView(R.id.event_profile_activity_description_edit_text) EditText description_edit_text;
 	
-	@InjectView(R.id.event_profile_invite_button) Button inviteButton;
-	@InjectView(R.id.event_profile_attendees_button) Button attendeesButton;
+	@InjectView(R.id.event_profile_activity_invite_button) Button invite_button;
+	@InjectView(R.id.event_profile_activity_attendees_button) Button attendees_button;
+	
+	@InjectView(R.id.event_profile_activity_activity_toolbar) Toolbar toolbar;
 	
 	private GoogleMap googleMap;
 	private MarkerOptions markerOptions;
@@ -67,7 +69,6 @@ public class EventProfileActivity extends ActionBarActivity {
 		InputMethodManager im = (InputMethodManager) this.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 		im.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
 		
-		Toolbar toolbar = (Toolbar) findViewById(R.id.event_profile_activity_toolbar);
 		if (toolbar != null) {
 		    setSupportActionBar(toolbar);
 		}
@@ -84,7 +85,7 @@ public class EventProfileActivity extends ActionBarActivity {
 		if (googleMap == null) {
 
             googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(
-                    R.id.event_profile_map_fragment)).getMap();
+                    R.id.event_profile_activity_map_fragment)).getMap();
             
             markerOptions = new MarkerOptions();
             
@@ -112,7 +113,7 @@ public class EventProfileActivity extends ActionBarActivity {
 		
 	};
 	
-	@OnClick(R.id.event_profile_invite_button)
+	@OnClick(R.id.event_profile_activity_invite_button)
 	public void onClickInvite(View v) {
 		// TODO Auto-generated method stub
 		
@@ -123,12 +124,11 @@ public class EventProfileActivity extends ActionBarActivity {
 		
 	}
 	
-	@OnClick(R.id.event_profile_attendees_button)
+	@OnClick(R.id.event_profile_activity_attendees_button)
 	public void onClickAttendees(View v) {
 
 		Intent i = new Intent();
 		i.setClass(getBaseContext(), EventAttendeesActivity.class);
-		//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 		startActivity(i);
 		
 	}
@@ -140,7 +140,7 @@ public class EventProfileActivity extends ActionBarActivity {
 		@Override
 		public void onClick(View arg0) {
 			// TODO Auto-generated method stub
-			tempET = start_date_et;
+			tempET = date_start_edit_text;
 			showDatePicker();
 		}
 		
@@ -151,7 +151,7 @@ public class EventProfileActivity extends ActionBarActivity {
 		@Override
 		public void onClick(View arg0) {
 			// TODO Auto-generated method stub
-			tempET = end_date_et;
+			tempET = date_end_edit_text;
 			showDatePicker();
 		}
 		
@@ -162,7 +162,7 @@ public class EventProfileActivity extends ActionBarActivity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			tempET = start_time_et;
+			tempET = time_start_edit_text;
 			showTimePicker();
 		}
 		
@@ -173,7 +173,7 @@ public class EventProfileActivity extends ActionBarActivity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			tempET = end_time_et;
+			tempET = time_end_edit_text;
 			showTimePicker();
 		}
 		
@@ -255,13 +255,13 @@ public class EventProfileActivity extends ActionBarActivity {
 			
 			back.setVisible(false);
 			edit.setVisible(false);
-			title_et.setFocusableInTouchMode(true);
-			start_date_et.setOnClickListener(startDateOCL);
-			start_time_et.setOnClickListener(startTimeOCL);
-			end_date_et.setOnClickListener(endDateOCL);
-			end_time_et.setOnClickListener(endTimeOCL);
-			location_et.setFocusableInTouchMode(true);
-			description_et.setFocusableInTouchMode(true);
+			title_edit_text.setFocusableInTouchMode(true);
+			date_start_edit_text.setOnClickListener(startDateOCL);
+			time_start_edit_text.setOnClickListener(startTimeOCL);
+			date_end_edit_text.setOnClickListener(endDateOCL);
+			time_end_edit_text.setOnClickListener(endTimeOCL);
+			location_edit_text.setFocusableInTouchMode(true);
+			description_edit_text.setFocusableInTouchMode(true);
 			
 			cancel.setVisible(true);
 	        save.setVisible(true);
@@ -279,13 +279,13 @@ public class EventProfileActivity extends ActionBarActivity {
             
 			back.setVisible(true);
 			edit.setVisible(true);
-			title_et.setFocusable(false);
-			start_date_et.setOnClickListener(null);
-			start_time_et.setOnClickListener(null);
-			end_date_et.setOnClickListener(null);
-			end_time_et.setOnClickListener(null);
-			location_et.setFocusable(false);
-			description_et.setFocusable(false);
+			title_edit_text.setFocusable(false);
+			date_start_edit_text.setOnClickListener(null);
+			time_start_edit_text.setOnClickListener(null);
+			date_end_edit_text.setOnClickListener(null);
+			time_end_edit_text.setOnClickListener(null);
+			location_edit_text.setFocusable(false);
+			description_edit_text.setFocusable(false);
 			
 		}
 		

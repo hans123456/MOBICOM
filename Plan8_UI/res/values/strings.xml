@@ -6,7 +6,7 @@
     <string name="title_activity_create_event">Create Event</string>
     <string name="title_activity_register">New Account</string>
     <string name="title_activity_send_friend_request">Send Friend Request</string>
-    <string name="title_activity_friend_profile">Moira\'s Profile</string>
+    <string name="title_activity_friend_profile">Friend Profile</string>
     <string name="title_activity_event_profile">Mobicom Wireframe Presentation</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

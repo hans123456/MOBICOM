@@ -124,7 +124,6 @@ public class FriendsFragment extends Fragment implements AsyncFetchListTaskCompl
 	@OnItemClick (R.id.friends_fragment_list_view)
 	public void onItemClick(int position) {
 		
-		Log.wtf("tag", "in");
 		Friend f = friends.get(position);
 		Intent i = new Intent();
 		i.setClass(getActivity().getBaseContext(), FriendProfileActivity.class);
