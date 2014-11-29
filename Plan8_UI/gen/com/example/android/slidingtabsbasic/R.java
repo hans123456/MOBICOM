@@ -21,14 +21,14 @@ public final class R {
 		public static final int tile = 0x7f020076;
 	}
 	public static final class id {
-		public static final int item_subtitle = 0x7f0c00b6;
-		public static final int item_title = 0x7f0c00b7;
-		public static final int log_fragment = 0x7f0c0089;
-		public static final int sample_content_fragment = 0x7f0c008a;
-		public static final int sample_main_layout = 0x7f0c0087;
-		public static final int sample_output = 0x7f0c0088;
-		public static final int sliding_tabs = 0x7f0c00ae;
-		public static final int viewpager = 0x7f0c00af;
+		public static final int item_subtitle = 0x7f0c00bc;
+		public static final int item_title = 0x7f0c00bd;
+		public static final int log_fragment = 0x7f0c008f;
+		public static final int sample_content_fragment = 0x7f0c0090;
+		public static final int sample_main_layout = 0x7f0c008d;
+		public static final int sample_output = 0x7f0c008e;
+		public static final int sliding_tabs = 0x7f0c00b4;
+		public static final int viewpager = 0x7f0c00b5;
 	}
 	public static final class layout {
 		public static final int activity_main = 0x7f03001d;

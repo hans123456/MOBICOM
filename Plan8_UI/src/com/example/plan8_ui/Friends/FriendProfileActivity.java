@@ -49,8 +49,9 @@ public class FriendProfileActivity extends ActionBarActivity {
         
         if (toolbar != null) {
             setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-		
+
         unique_id_text_view.setText(friend.get_information(Friend.id_unique_id));
         first_name_text_view.setText(friend.get_information(Friend.id_first_name));
         last_name_text_view.setText(friend.get_information(Friend.id_last_name));
@@ -76,7 +77,7 @@ public class FriendProfileActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.friend_profile_cancel) {
+		if (android.R.id.home == id) {
 			finish();
 			return true;
 		}

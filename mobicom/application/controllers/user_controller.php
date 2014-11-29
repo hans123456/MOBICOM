@@ -114,20 +114,29 @@ class User_Controller extends CI_Controller {
 
 			$unique_id = uniqid();
 
-			while($this->user_model->get_profile_by_unique_id($unique_id) != ''){
+			while($this->user_model->get_profile_unique_id($unique_id) != ''){
 
 				$unique_id = uniqid();
 
 			}
 
 			$additional_data['unique_id'] = $unique_id;
-			$additional_data['pic'] = 'moiradenise.paguiligan';
 
-			$this->ion_auth->register($username, $password, $email, $additional_data, $group);
+			if(true == $this->ion_auth->register($username, $password, $email, $additional_data, $group)){
+
+				$data['data'] = 'success';
+
+			}else{
+
+				$data['data'] = 'something went wrong';
+
+			}
+
+		}else {
+
+			$data['data'] = json_encode($result);
 
 		}
-
-		$data['data'] = json_encode($result);
 
 		$this->load->view('register_view', $data);
 

@@ -28,10 +28,24 @@
     <string name="register_save">Create Account</string>
     <string name="send_friend_request_cancel">Cancel</string>
     <string name="send_friend_request_save">Send Friend Request</string>
-    <string name="title_activity_event_attendees">EventAttendeesActivity</string>
-    <string name="title_activity_attendee_location">AttendeeLocationActivity</string>
-    <string name="title_activity_invite_friends">InviteFriendsActivity</string>
+    <string name="title_activity_event_attendees">Event Attendees</string>
+    <string name="title_activity_attendee_location">Attendee\'s Location</string>
+    <string name="title_activity_invite_friends">Invite Friends</string>
 	<string name="invite_friends_cancel">Cancel</string>
     <string name="invite_friends_save">Send Invites</string>
+	
+    <string name="title">Title :</string>
+    <string name="title_hint">Title of Activity</string>
+    <string name="to">To :</string>
+    <string name="from">From :</string>
+    <string name="date_hint">Date</string>
+    <string name="time_hint">Time</string>
+    <string name="location">Location :</string>
+    <string name="location_hint">Location</string>
+    <string name="description">Description :</string>
+	<string name="description_hint">Description</string>
+    
+	<string name="invite_friends">Invite Friends</string>
+	<string name="view_attendees">View Attendees</string>
 	
 </resources>

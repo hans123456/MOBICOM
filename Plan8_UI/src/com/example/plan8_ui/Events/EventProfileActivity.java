@@ -17,18 +17,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TimePicker;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.example.plan8_ui.R;
-import com.example.plan8_ui.AsyncTasks.FetchEventInfo;
 import com.example.plan8_ui.Friends.EventAttendeesActivity;
 import com.example.plan8_ui.Friends.InviteFriendsActivity;
 import com.example.plan8_ui.Interfaces.AsyncResultTaskCompleteListener;
@@ -43,7 +42,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class EventProfileActivity extends ActionBarActivity implements AsyncResultTaskCompleteListener<Event> {
-
+	
 	@InjectView(R.id.event_profile_activity_title_edit_text) EditText title_edit_text;
 	@InjectView(R.id.event_profile_activity_date_start_edit_text) EditText date_start_edit_text;
 	@InjectView(R.id.event_profile_activity_time_start_edit_text) EditText time_start_edit_text;
@@ -57,6 +56,8 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncResu
 	
 	@InjectView(R.id.event_profile_activity_activity_toolbar) Toolbar toolbar;
 	
+	@InjectView(R.id.event_profile_scroll_view) ScrollView scroll_view;
+	
 	private GoogleMap googleMap;
 	private MarkerOptions markerOptions;
 	private Marker marker;
@@ -64,6 +65,8 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncResu
 	private SimpleDateFormat dateFormatter, timeFormatter;
 	private Event event;
 	private Menu menu;
+	private boolean first = true, editable = false;
+	private MenuItem edit, cancel, save, delete;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,120 +78,95 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncResu
 		im.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
 		
 		if (toolbar != null) {
-		    setSupportActionBar(toolbar);
+			setSupportActionBar(toolbar);
+		    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 		
 		dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
 		timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
-		
-		Intent i = getIntent();
-		Bundle b = i.getExtras();
-		
-		String id = b.getString(Event.id_id);
-		
-		new FetchEventInfo(this).execute(id);
-		
-		initializeMap();
-        
-	}
-	
-	private void initializeMap(){
 		
 		if (googleMap == null) {
 
             googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(
                     R.id.event_profile_activity_map_fragment)).getMap();
             
-            markerOptions = new MarkerOptions();
+            googleMap.setOnMapClickListener(map_OMCL);
             
-            LatLng latLng = new LatLng(14.566402, 120.993179);
-            markerOptions.position(latLng);
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
-            googleMap.moveCamera(cameraUpdate);
-            marker = googleMap.addMarker(markerOptions);
-
 		}
 
-	}
+		title_edit_text.setEnabled(false);
+		date_start_edit_text.setEnabled(false);
+		time_start_edit_text.setEnabled(false);
+		date_end_edit_text.setEnabled(false);
+		time_end_edit_text.setEnabled(false);
+		location_edit_text.setEnabled(false);
+		description_edit_text.setEnabled(false);
+		
+//		Intent i = getIntent();
+//		Bundle b = i.getExtras();
+//		
+//		String id = b.getString(Event.id_id);
+//		
+//		new FetchEventInfo(this).execute(id);
 
+	}
+	
 	OnMapClickListener map_OMCL = new OnMapClickListener() {
 		
 		@Override
 		public void onMapClick(LatLng point) {
 
-			marker.remove();
-			markerOptions.position(point);
-			marker = googleMap.addMarker(markerOptions.draggable(true));
-			googleMap.animateCamera(CameraUpdateFactory.newLatLng(point));
+			if(editable == true){
+			
+				marker.remove();
+				markerOptions.position(point);
+				marker = googleMap.addMarker(markerOptions.draggable(true));
+				googleMap.animateCamera(CameraUpdateFactory.newLatLng(point));
             
+			}
+				
 		}
 		
 	};
 	
 	@OnClick(R.id.event_profile_activity_invite_button)
 	public void onClickInvite(View v) {
-		// TODO Auto-generated method stub
-		
 		Intent i = new Intent();
 		i.setClass(getBaseContext(), InviteFriendsActivity.class);
 		startActivityForResult(i, 0);
-		
 	}
 	
 	@OnClick(R.id.event_profile_activity_attendees_button)
 	public void onClickAttendees(View v) {
-
 		Intent i = new Intent();
 		i.setClass(getBaseContext(), EventAttendeesActivity.class);
 		startActivity(i);
-		
 	}
 
+	@OnClick(R.id.event_profile_activity_date_start_edit_text)
+	public void onClickDateStart(View arg0) {
+		tempET = date_start_edit_text;
+		showDatePicker();
+	}
 	
-	private OnClickListener startDateOCL = new OnClickListener(){
+	@OnClick(R.id.event_profile_activity_time_start_edit_text)
+	public void onClickTimeStart(View v) {
+		tempET = time_start_edit_text;
+		showTimePicker();
+	}
 
-		@Override
-		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
-			tempET = date_start_edit_text;
-			showDatePicker();
-		}
-		
-	};
-
-	private OnClickListener endDateOCL = new OnClickListener(){
-
-		@Override
-		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
-			tempET = date_end_edit_text;
-			showDatePicker();
-		}
-		
-	};
-
-	private OnClickListener startTimeOCL = new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			tempET = time_start_edit_text;
-			showTimePicker();
-		}
-		
-	};
+	@OnClick(R.id.event_profile_activity_date_end_edit_text)
+	public void onClickDateEnd(View arg0) {
+		tempET = date_end_edit_text;
+		showDatePicker();
+	}
 	
-	private OnClickListener endTimeOCL = new OnClickListener() {
+	@OnClick(R.id.event_profile_activity_time_end_edit_text)
+	public void onClickTimeEnd(View v) {
+		tempET = time_end_edit_text;
+		showTimePicker();
+	}
 		
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			tempET = time_end_edit_text;
-			showTimePicker();
-		}
-		
-	};
-	
 	private void showDatePicker(){
 		
 		Calendar newCalendar = Calendar.getInstance();
@@ -234,9 +212,6 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncResu
 		return true;
 	}
 
-	private boolean first = true;
-	private MenuItem back, edit, cancel, save, delete;
-	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -248,7 +223,6 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncResu
 		im.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
 		
 		if(true == first){
-			back = menu.findItem(R.id.event_profile_back);
 			edit = menu.findItem(R.id.event_profile_edit);
 			cancel = menu.findItem(R.id.event_profile_cancel);
 			save = menu.findItem(R.id.event_profile_save);
@@ -256,27 +230,26 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncResu
 			first = false;
 		}
 		
-		if (R.id.event_profile_back == id) {
+		if(android.R.id.home == id) {
 			finish();
 			return true;
 		}
 
 		if(R.id.event_profile_edit == id){
 			
-			back.setVisible(false);
 			edit.setVisible(false);
-			title_edit_text.setFocusableInTouchMode(true);
-			date_start_edit_text.setOnClickListener(startDateOCL);
-			time_start_edit_text.setOnClickListener(startTimeOCL);
-			date_end_edit_text.setOnClickListener(endDateOCL);
-			time_end_edit_text.setOnClickListener(endTimeOCL);
-			location_edit_text.setFocusableInTouchMode(true);
-			description_edit_text.setFocusableInTouchMode(true);
+			title_edit_text.setEnabled(true);
+			date_start_edit_text.setEnabled(true);
+			time_start_edit_text.setEnabled(true);
+			date_end_edit_text.setEnabled(true);
+			time_end_edit_text.setEnabled(true);
+			location_edit_text.setEnabled(true);
+			description_edit_text.setEnabled(true);
 			
 			cancel.setVisible(true);
 	        save.setVisible(true);
 	        delete.setVisible(true);
-            googleMap.setOnMapClickListener(map_OMCL);
+	        editable = true;
             
 		}
 		
@@ -285,17 +258,16 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncResu
 			cancel.setVisible(false);
 	        save.setVisible(false);
 	        delete.setVisible(false);
-            googleMap.setOnMapClickListener(null);
-            
-			back.setVisible(true);
 			edit.setVisible(true);
-			title_edit_text.setFocusable(false);
-			date_start_edit_text.setOnClickListener(null);
-			time_start_edit_text.setOnClickListener(null);
-			date_end_edit_text.setOnClickListener(null);
-			time_end_edit_text.setOnClickListener(null);
-			location_edit_text.setFocusable(false);
-			description_edit_text.setFocusable(false);
+			
+			title_edit_text.setEnabled(false);
+			date_start_edit_text.setEnabled(false);
+			time_start_edit_text.setEnabled(false);
+			date_end_edit_text.setEnabled(false);
+			time_end_edit_text.setEnabled(false);
+			location_edit_text.setEnabled(false);
+			description_edit_text.setEnabled(false);
+			editable = false;
 			
 		}
 		
@@ -305,7 +277,29 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncResu
 
 	@Override
 	public void display_result(Event result) {
-		event = result;
+		
+		this.event = result;
+		
+		title_edit_text.setText(result.get_information(Event.id_title));
+		location_edit_text.setText(result.get_information(Event.id_location));
+		description_edit_text.setText(result.get_information(Event.id_description));
+		date_start_edit_text.setText(result.get_information(Event.id_date_start));
+		time_start_edit_text.setText(result.get_information(Event.id_time_start));
+		date_end_edit_text.setText(result.get_information(Event.id_date_end));
+		time_end_edit_text.setText(result.get_information(Event.id_time_end));
+		
+        markerOptions = new MarkerOptions();
+        
+        double latitude = Double.parseDouble(result.get_information(Event.id_latitude));
+        double longitude = Double.parseDouble(result.get_information(Event.id_longitude));
+        
+        LatLng latLng = new LatLng(latitude, longitude);
+        
+        markerOptions.position(latLng);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
+        googleMap.moveCamera(cameraUpdate);
+        marker = googleMap.addMarker(markerOptions);
+		
 	}
 	
 }

@@ -3,13 +3,6 @@
     tools:context="com.example.plan8_ui.EventProfileActivity" >
 
     <item
-        android:id="@+id/event_profile_back"
-        android:orderInCategory="1"
-        android:showAsAction="ifRoom"
-        android:title="@string/event_profile_back"
-        android:icon="@drawable/ic_arrow_back_white_36dp"/>
-    
-    <item
         android:id="@+id/event_profile_edit"
         android:orderInCategory="2"
         android:showAsAction="ifRoom"

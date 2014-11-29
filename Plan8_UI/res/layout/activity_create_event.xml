@@ -2,6 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
    	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -21,6 +22,27 @@
 		android:layout_height="200dp"
 		class="com.google.android.gms.maps.SupportMapFragment" />
 
+	<TableRow
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+	    
+		<com.cengalabs.flatui.views.FlatButton
+			android:id="@+id/create_event_activity_invite_button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:layout_marginLeft="4dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginRight="2dp"
+			android:layout_marginEnd="2dp"
+			flatui:fl_textAppearance="fl_none"
+			flatui:fl_theme="@array/dark"
+			android:text="@string/invite_friends" />
+
+	</TableRow>
+	        
     <ScrollView
         android:id="@+id/create_event_activity_scrollview"
 		android:layout_width="match_parent"
@@ -116,17 +138,6 @@
 		        android:hint="Description"
 		        android:inputType="textMultiLine" />
 		    
-	        <TableRow>
-	            
-		        <Button
-		            android:id="@+id/create_event_activity_invite_button"
-		            android:layout_width="0dp"
-		            android:layout_height="wrap_content"
-		            android:layout_weight="1"
-		            android:text="Invite Friends" />
-		        
-	        </TableRow>
-	        
 		</TableLayout>
 		
 	</ScrollView>
