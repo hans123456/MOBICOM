@@ -1,8 +1,10 @@
 package com.example.plan8_ui.AsyncTasks;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,7 +33,6 @@ public class RegisterUser extends AsyncTask<String, Void, RegisterResult>{
 		RegisterResult result = null;
 		
 		try {
-			
 			doc = Jsoup.connect(HTML.website + HTML.register)
 						  .data(HTML.post_username, arg[0])
 						  .data(HTML.post_email_address, arg[1])
@@ -54,10 +55,12 @@ public class RegisterUser extends AsyncTask<String, Void, RegisterResult>{
 				result.put_result(key, value);
 			}
 			
-		} catch (Exception e) {
+		} catch (JSONException je){
+			Log.e(TAG, je.getMessage());
+		} catch (IOException e) {
 			Log.e(TAG, e.getMessage());
 		}
-		
+			
 		return result;
 		
 	}

@@ -28,8 +28,11 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.AsyncTasks.FetchEventInfo;
 import com.example.plan8_ui.Friends.EventAttendeesActivity;
 import com.example.plan8_ui.Friends.InviteFriendsActivity;
+import com.example.plan8_ui.Interfaces.AsyncResultTaskCompleteListener;
+import com.example.plan8_ui.Model.Event;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,7 +42,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class EventProfileActivity extends ActionBarActivity {
+public class EventProfileActivity extends ActionBarActivity implements AsyncResultTaskCompleteListener<Event> {
 
 	@InjectView(R.id.event_profile_activity_title_edit_text) EditText title_edit_text;
 	@InjectView(R.id.event_profile_activity_date_start_edit_text) EditText date_start_edit_text;
@@ -59,7 +62,9 @@ public class EventProfileActivity extends ActionBarActivity {
 	private Marker marker;
 	private EditText tempET;
 	private SimpleDateFormat dateFormatter, timeFormatter;
-
+	private Event event;
+	private Menu menu;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -75,7 +80,14 @@ public class EventProfileActivity extends ActionBarActivity {
 		
 		dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
 		timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
-
+		
+		Intent i = getIntent();
+		Bundle b = i.getExtras();
+		
+		String id = b.getString(Event.id_id);
+		
+		new FetchEventInfo(this).execute(id);
+		
 		initializeMap();
         
 	}
@@ -119,7 +131,6 @@ public class EventProfileActivity extends ActionBarActivity {
 		
 		Intent i = new Intent();
 		i.setClass(getBaseContext(), InviteFriendsActivity.class);
-		//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 		startActivityForResult(i, 0);
 		
 	}
@@ -133,7 +144,6 @@ public class EventProfileActivity extends ActionBarActivity {
 		
 	}
 
-	private Menu menu;
 	
 	private OnClickListener startDateOCL = new OnClickListener(){
 
@@ -292,4 +302,10 @@ public class EventProfileActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 		
 	}
+
+	@Override
+	public void display_result(Event result) {
+		event = result;
+	}
+	
 }

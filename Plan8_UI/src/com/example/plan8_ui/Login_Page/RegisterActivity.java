@@ -86,6 +86,13 @@ public class RegisterActivity extends ActionBarActivity implements AsyncResultTa
 
 	@Override
 	public void display_result(RegisterResult result) {
-		Toast.makeText(getBaseContext(), result.get_invalids(), Toast.LENGTH_LONG).show();;
+		
+		String r = result.get_result();
+		Toast.makeText(getBaseContext(), r, Toast.LENGTH_LONG).show();;
+		
+		if(r.equals(RegisterResult.SUCCESS)){
+			finish();
+		}
+		
 	}
 }

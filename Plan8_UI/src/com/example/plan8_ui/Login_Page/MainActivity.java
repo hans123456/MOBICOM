@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,7 +44,6 @@ public class MainActivity extends ActionBarActivity {
 			
 			Intent i = new Intent();
 			i.setClass(getBaseContext(), MainMenuActivity.class);
-			//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(i);
 			
 		}
@@ -57,7 +57,6 @@ public class MainActivity extends ActionBarActivity {
 			
 			Intent i = new Intent();
 			i.setClass(getBaseContext(), RegisterActivity.class);
-			//i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivityForResult(i, 0);
 			
 		}
@@ -67,7 +66,7 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.main, menu);
+		new MenuInflater(getApplication()).inflate(R.menu.main, menu);
 		return true;
 	}
 

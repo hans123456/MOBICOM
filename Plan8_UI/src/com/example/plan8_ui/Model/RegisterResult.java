@@ -12,6 +12,8 @@ public class RegisterResult {
 	public static final String id_password = "password";
 	public static final String id_confirm_password = "confirm_password";
 
+	public static final String SUCCESS = "Registered Successfully";
+	
 	private Map<String, Boolean> results;
 	
 	public RegisterResult() {
@@ -26,7 +28,7 @@ public class RegisterResult {
 		return results.get(key);
 	}
 	
-	public String get_invalids(){
+	public String get_result(){
 		
 		StringBuilder sb = new StringBuilder();
 
@@ -44,6 +46,10 @@ public class RegisterResult {
 				
 			}
 			
+		}
+		
+		if(sb.toString().equals("")){
+			sb.append(SUCCESS);
 		}
 		
 //		sb.append( (results.get(id_username) == false) ? "Invalid Username" : "" );
