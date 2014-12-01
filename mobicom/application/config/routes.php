@@ -54,13 +54,16 @@ $route['create_event'] = 'event_controller/create_event';
 $route['invite_friends'] = 'event_controller/invite_friends_to_event';
 $route['event_attendees'] = 'event_controller/event_attendees';
 $route['attendee_location'] = 'event_controller/attendee_location';
+$route['invite_friends_to_event'] = 'event_controller/invite_friends_to_event';
+$route['friends_not_yet_invited'] = 'event_controller/friends_not_yet_invited';
+$route['invitation_status'] = 'event_controller/invitation_status';
 
 $route['friends'] = 'friend_controller/friends';
 $route['friend_requests'] = 'friend_controller/friend_requests';
 $route['sent_friend_requests'] = 'friend_controller/sent_friend_requests';
+$route['send_friend_request'] = 'friend_controller/send_friend_request';
 $route['accept_friend_request'] = 'friend_controller/accept_friend_request';
-$route['unfriend'] = 'friend_controller/unfriend';
-$route['delete_friend_request'] = 'friend_controller/delete_friend_request';
+$route['delete_friend'] = 'friend_controller/delete_friend';
 
 $route['404_override'] = '';
 

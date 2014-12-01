@@ -70,7 +70,7 @@ public class InvitedEventsFragment extends Fragment implements AsyncFetchListTas
 	// lazy to find view by id 
 	@InjectView(R.id.invited_events_fragment_list_view) ListView events_list_view;
 	
-	EventsAdapter eventsAdapter;
+	EventsListViewAdapter eventsAdapter;
 	View InvitedEventsFragmentView;
 	ArrayList<Event> events;
 	FetchInvitedEvents fetchInvitedEvents;
@@ -84,7 +84,7 @@ public class InvitedEventsFragment extends Fragment implements AsyncFetchListTas
 		ButterKnife.inject(this, InvitedEventsFragmentView);
 		
 		events = new ArrayList<Event>();
-		eventsAdapter = new EventsAdapter(getActivity().getBaseContext(), R.layout.event_item, events);
+		eventsAdapter = new EventsListViewAdapter(getActivity().getBaseContext(), R.layout.event_item, events);
 
 		events_list_view.setAdapter(eventsAdapter);
 
@@ -106,6 +106,7 @@ public class InvitedEventsFragment extends Fragment implements AsyncFetchListTas
 
 		Intent i = new Intent();
 		i.setClass(getActivity().getBaseContext(), EventProfileActivity.class);
+		i.putExtra(Event.id_id, events.get(position).get_information(Event.id_id));
 		startActivityForResult(i, 1);
 		
 	}
@@ -115,6 +116,12 @@ public class InvitedEventsFragment extends Fragment implements AsyncFetchListTas
 		events.clear();
 		events.addAll(result);
 		eventsAdapter.notifyDataSetChanged();
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
 	}
 
 }

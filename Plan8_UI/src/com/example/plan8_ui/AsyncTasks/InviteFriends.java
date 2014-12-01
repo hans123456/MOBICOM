@@ -5,13 +5,17 @@ import org.jsoup.Jsoup;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.plan8_ui.Interfaces.AsyncResultTaskCompleteListener;
+import com.example.plan8_ui.Interfaces.AsyncGetResultTaskCompleteListener;
 import com.example.plan8_ui.Model.HTML;
 
 public class InviteFriends extends AsyncTask<String, Void, String>{
 	
 	private final String TAG = "Invite Friends";
-	private AsyncResultTaskCompleteListener<String> listener;
+	private AsyncGetResultTaskCompleteListener<String> listener;
+	
+	public InviteFriends(AsyncGetResultTaskCompleteListener<String> listener) {
+		this.listener = listener;
+	}
 	
 	@Override
 	protected String doInBackground(String... arg) {
@@ -33,6 +37,7 @@ public class InviteFriends extends AsyncTask<String, Void, String>{
 			Jsoup.connect(HTML.website + HTML.invite_friends)
 				  .data(HTML.post_invited_friends, imploded_text.toString())
 				  .userAgent(HTML.user_agent)
+				  .cookie(HTML.session_id, HTML.SessionID)
 				  .post();
 
 			result = "Sucess";

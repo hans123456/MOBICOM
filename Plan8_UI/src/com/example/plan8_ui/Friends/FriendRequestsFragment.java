@@ -93,7 +93,6 @@ public class FriendRequestsFragment extends Fragment implements AsyncFetchListTa
 	@OnItemClick (R.id.friend_requests_fragment_list_view)
 	public void onItemClick(int position) {
 		
-		Log.wtf("tag", "in");
 		Friend f = friendRequests.get(position);
 		Intent i = new Intent();
 		i.setClass(getActivity().getBaseContext(), FriendProfileActivity.class);
@@ -102,6 +101,7 @@ public class FriendRequestsFragment extends Fragment implements AsyncFetchListTa
 		i.putExtra(Friend.id_pic, f.get_information(Friend.id_pic));
 		i.putExtra(Friend.id_first_name, f.get_information(Friend.id_first_name));
 		i.putExtra(Friend.id_last_name, f.get_information(Friend.id_last_name));
+		i.putExtra(FriendProfileActivity.TYPE, FriendProfileActivity.FRIEND_REQUEST);
 		startActivity(i);
 		
 	};

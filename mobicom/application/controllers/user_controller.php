@@ -121,13 +121,22 @@ class User_Controller extends CI_Controller {
 			}
 
 			$additional_data['unique_id'] = $unique_id;
-			$additional_data['pic'] = 'moiradenise.paguiligan';
 
-			$this->ion_auth->register($username, $password, $email, $additional_data, $group);
+			if(true == $this->ion_auth->register($username, $password, $email, $additional_data, $group)){
+
+				$data['data'] = 'success';
+
+			}else{
+
+				$data['data'] = 'something went wrong';
+
+			}
+
+		}else {
+
+			$data['data'] = json_encode($result);
 
 		}
-
-		$data['data'] = json_encode($result);
 
 		$this->load->view('register_view', $data);
 
@@ -141,15 +150,16 @@ class User_Controller extends CI_Controller {
 
 	public function search_profile_by_unique_id(){
 
-		$unique_id = $this->input->post('unique id');
+		//$this->input->post('unique id')
+		$unique_id = $this->input->post('unique_id'); //"ABECUAC3Z";
 
 		if(true == $this->ion_auth->logged_in()){
 
-			$data['data'] = $this->user_model->get_profile_unique_id($unique_id);
+			$data['data'] = $this->user_model->get_profile_by_unique_id($unique_id);
 
-		}else{
+		}else {
 
-			$data['data'] = '';
+		 	$data['data'] = '';
 
 		}
 

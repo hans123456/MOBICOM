@@ -35,6 +35,7 @@ public class FetchEventAttendees extends AsyncTask<String, Void, ArrayList<Frien
 			Document doc = Jsoup.connect(HTML.website + HTML.event_attendees)
 									.userAgent(HTML.user_agent)
 									.data(HTML.post_event_id, arg[0])
+									.cookie(HTML.session_id, HTML.SessionID)
 									.post();
 			
 			Element json_element = doc.getElementById(HTML.element_id);

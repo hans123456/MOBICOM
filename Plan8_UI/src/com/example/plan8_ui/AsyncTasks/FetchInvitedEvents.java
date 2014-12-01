@@ -28,11 +28,16 @@ public class FetchInvitedEvents extends AsyncTask<Void, Void, ArrayList<Event>> 
 	@Override
 	protected ArrayList<Event> doInBackground(Void... arg0) {
 
+		Document doc;
 		ArrayList<Event> events = new ArrayList<Event>();
 		
 		try {
 			
-			Document doc = Jsoup.connect(HTML.website + HTML.invited_events).userAgent(HTML.user_agent).get();
+			doc = Jsoup.connect(HTML.website + HTML.invited_events)
+						.userAgent(HTML.user_agent)
+						.cookie(HTML.session_id, HTML.SessionID)
+						.get();
+			
 			Element json_element = doc.getElementById(HTML.element_id);
 			
 			if(json_element.text().equals("empty") == false){

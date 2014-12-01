@@ -2,11 +2,4 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.plan8_ui.EventAttendeesActivity" >
     
-	<item
-        android:id="@+id/event_attendees_cancel"
-        android:orderInCategory="1"
-        android:showAsAction="ifRoom"
-        android:title="@string/event_profile_cancel"
-        android:icon="@drawable/ic_arrow_back_white_36dp"/>
-	
 </menu>

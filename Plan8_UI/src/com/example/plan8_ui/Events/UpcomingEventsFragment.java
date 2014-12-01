@@ -2,6 +2,7 @@ package com.example.plan8_ui.Events;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -36,6 +37,16 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 	private String mParam1;
 	private String mParam2;
 
+	// lazy to find view by id 
+	@InjectView(R.id.upcoming_events_fragment_fab) FloatingActionButton create_button;
+	@InjectView(R.id.upcoming_events_fragment_list_view) ListView events_list_view;
+	
+	private EventsListViewAdapter eventsAdapter;
+	private View UpcomingEventsFragmentView;
+	private ArrayList<Event> events;
+	private FetchUpcomingEvents fetchUpcomingEvents;
+	private final int REQUEST_CODE_CREATE_EVENT = 0;
+	
 	/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
@@ -71,15 +82,6 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 		
 	}
 	
-	// lazy to find view by id 
-	@InjectView(R.id.upcoming_events_fragment_fab) FloatingActionButton create_button;
-	@InjectView(R.id.upcoming_events_fragment_list_view) ListView events_list_view;
-	
-	EventsAdapter eventsAdapter;
-	View UpcomingEventsFragmentView;
-	ArrayList<Event> events;
-	FetchUpcomingEvents fetchUpcomingEvents;
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
 								ViewGroup container,
@@ -90,7 +92,7 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 		ButterKnife.inject(this, UpcomingEventsFragmentView);
 		
 		events = new ArrayList<Event>();
-		eventsAdapter = new EventsAdapter(getActivity().getBaseContext(), R.layout.event_item, events);
+		eventsAdapter = new EventsListViewAdapter(getActivity().getBaseContext(), R.layout.event_item, events);
 
 		events_list_view.setAdapter(eventsAdapter);
 		create_button.attachToListView(events_list_view);
@@ -109,11 +111,11 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 	}
 	
 	@OnClick (R.id.upcoming_events_fragment_fab)
-	public void onClick(){
+	public void onClickCreateEvent(){
 
 		Intent i = new Intent();
 		i.setClass(getActivity().getBaseContext(), CreateEventActivity.class);
-		startActivityForResult(i, 0);
+		startActivityForResult(i, REQUEST_CODE_CREATE_EVENT);
 		
 	}
 
@@ -122,6 +124,7 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 
 		Intent i = new Intent();
 		i.setClass(getActivity().getBaseContext(), EventProfileActivity.class);
+		i.putExtra(Event.id_id, events.get(position).get_information(Event.id_id));
 		startActivityForResult(i, 1);
 		
 	}
@@ -131,6 +134,19 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 		events.clear();
 		events.addAll(result);
 		eventsAdapter.notifyDataSetChanged();
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if(requestCode == REQUEST_CODE_CREATE_EVENT){
+			if(resultCode == Activity.RESULT_OK){
+				fetchUpcomingEvents = new FetchUpcomingEvents(this);
+				fetchUpcomingEvents.execute();
+			}
+		}
+		
 	}
 	
 }

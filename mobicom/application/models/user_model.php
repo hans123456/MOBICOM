@@ -26,12 +26,15 @@ class User_Model extends CI_Model {
 
     public function get_profile_by_unique_id($unique_id){
 
-        //$user = $this->ion_auth->user()->row();
-        //`users`.`id` != ".$user->id." and
+        $user = $this->ion_auth->user()->row();
+        //".$user->id."
+        //`users`.`id` != '".$user->id."'' and
         $query = $this->db->query("
 
             SELECT
+                `users`.`id`,
                 `users`.`pic`,
+                `users`.`unique_id`,
                 `users`.`first_name`,
                 `users`.`last_name`
 

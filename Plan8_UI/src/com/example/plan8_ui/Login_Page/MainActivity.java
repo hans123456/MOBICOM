@@ -8,61 +8,63 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.AsyncTasks.LoginUser;
+import com.example.plan8_ui.Interfaces.AsyncGetResultTaskCompleteListener;
 import com.example.plan8_ui.Main_Page.MainMenuActivity;
+import com.example.plan8_ui.Model.User;
 	
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements AsyncGetResultTaskCompleteListener<User>{
 
+	@InjectView(R.id.main_activity_toolbar) Toolbar toolbar;
+	@InjectView(R.id.main_activity_username_edit_text) EditText username_edit_text;
+	@InjectView(R.id.main_activity_password_edit_text) EditText password_edit_text;
+	
+	Intent i;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.activity_main);
+		ButterKnife.inject(this);
 		
-		// action bar
-		Toolbar toolbar = (Toolbar) findViewById(R.id.main_activity_toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
         }
-
-		Button login_button = (Button) findViewById(R.id.main_activity_login_button);
-		login_button.setOnClickListener(login_button_ocl);
+        
+        username_edit_text.setText("administrator");
+        password_edit_text.setText("password");
+        
+	}
+	
+	@OnClick(R.id.main_activity_login_button)
+	public void onClickLogin(View arg0) {
 		
-		Button register_button = (Button) findViewById(R.id.main_activity_register_button);
-		register_button.setOnClickListener(register_button_ocl);
+		i = new Intent();
+		i.setClass(getBaseContext(), MainMenuActivity.class);
+		
+		String username =  username_edit_text.getText().toString();
+		String password =  password_edit_text.getText().toString();
+		new LoginUser(this).execute(username, password);
 		
 	}
 	
-	private OnClickListener login_button_ocl = new OnClickListener(){
-
-		@Override
-		public void onClick(View arg0) {
-			
-			Intent i = new Intent();
-			i.setClass(getBaseContext(), MainMenuActivity.class);
-			startActivity(i);
-			
-		}
+	@OnClick(R.id.main_activity_register_button)
+	public void onClickRegister(View arg0) {
 		
-	};
+		i = new Intent();
+		i.setClass(getBaseContext(), RegisterActivity.class);
+		startActivityForResult(i, 0);
+		
+	}
 	
-	private OnClickListener register_button_ocl = new OnClickListener(){
-
-		@Override
-		public void onClick(View arg0) {
-			
-			Intent i = new Intent();
-			i.setClass(getBaseContext(), RegisterActivity.class);
-			startActivityForResult(i, 0);
-			
-		}
-		
-	};
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -80,6 +82,17 @@ public class MainActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+		
+	}
+
+	@Override
+	public void display_result(User result) {
+		
+		if(result.is_valid()){
+			startActivity(i);
+		}else{
+			Toast.makeText(getBaseContext(), "Invalid Login Credentials", Toast.LENGTH_LONG).show();
+		}
 		
 	}
 	

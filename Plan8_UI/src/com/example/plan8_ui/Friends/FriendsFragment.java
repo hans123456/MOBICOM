@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,6 +131,7 @@ public class FriendsFragment extends Fragment implements AsyncFetchListTaskCompl
 		i.putExtra(Friend.id_pic, f.get_information(Friend.id_pic));
 		i.putExtra(Friend.id_first_name, f.get_information(Friend.id_first_name));
 		i.putExtra(Friend.id_last_name, f.get_information(Friend.id_last_name));
+		i.putExtra(FriendProfileActivity.TYPE, FriendProfileActivity.FRIEND);
 		startActivity(i);
 		
 	};

@@ -12,6 +12,7 @@ public class Friend {
 	public static final String id_latitude = "latitude";
 	public static final String id_longitude = "longitude";
 	
+	private boolean empty = true;
 	private HashMap<String, String> info;
 	
 	public Friend() {
@@ -27,10 +28,15 @@ public class Friend {
 	
 	public void put_information(String key, String value){
 		info.put(key, value);
+		empty = false;
 	}
 	
 	public String get_information(String key){
 		return info.get(key);
+	}
+	
+	public boolean isEmpty(){
+		return empty;
 	}
 
 }

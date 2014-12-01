@@ -3,7 +3,6 @@ package com.example.plan8_ui.AsyncTasks;
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -13,16 +12,16 @@ import org.jsoup.nodes.Element;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.plan8_ui.Interfaces.AsyncResultTaskCompleteListener;
+import com.example.plan8_ui.Interfaces.AsyncGetResultTaskCompleteListener;
 import com.example.plan8_ui.Model.HTML;
 import com.example.plan8_ui.Model.RegisterResult;
 
 public class RegisterUser extends AsyncTask<String, Void, RegisterResult>{
 	
 	private final String TAG = "Register User";
-	private AsyncResultTaskCompleteListener<RegisterResult> listener;
+	private AsyncGetResultTaskCompleteListener<RegisterResult> listener;
 	
-	public RegisterUser(AsyncResultTaskCompleteListener<RegisterResult> listener) {
+	public RegisterUser(AsyncGetResultTaskCompleteListener<RegisterResult> listener) {
 		this.listener = listener;
 	}
 	
@@ -30,9 +29,10 @@ public class RegisterUser extends AsyncTask<String, Void, RegisterResult>{
 	protected RegisterResult doInBackground(String... arg) {
 		
 		Document doc;
-		RegisterResult result = null;
+		RegisterResult result = new RegisterResult();
 		
 		try {
+			
 			doc = Jsoup.connect(HTML.website + HTML.register)
 						  .data(HTML.post_username, arg[0])
 						  .data(HTML.post_email_address, arg[1])
@@ -45,16 +45,19 @@ public class RegisterUser extends AsyncTask<String, Void, RegisterResult>{
 			
 			Element json_element = doc.getElementById(HTML.element_id);
 			
-			JSONObject json_object = new JSONObject(json_element.text());
-			Iterator<String> i = json_object.keys();
-			result = new RegisterResult();
+			if(json_element.text().equals("success") == false){
 			
-			while(i.hasNext()){
-				String key = i.next();
-				Boolean value = json_object.getString(key).equals("valid") ? true : false;
-				result.put_result(key, value);
+				JSONObject json_object = new JSONObject(json_element.text());
+				Iterator<String> i = json_object.keys();
+				
+				while(i.hasNext()){
+					String key = i.next();
+					Boolean value = json_object.getString(key).equals("valid") ? true : false;
+					result.put_result(key, value);
+				}
+			
 			}
-			
+				
 		} catch (JSONException je){
 			Log.e(TAG, je.getMessage());
 		} catch (IOException e) {

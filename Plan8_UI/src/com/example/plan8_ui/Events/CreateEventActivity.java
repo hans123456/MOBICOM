@@ -22,12 +22,17 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.AsyncTasks.CreateEvent;
 import com.example.plan8_ui.Friends.InviteFriendsActivity;
+import com.example.plan8_ui.Interfaces.AsyncGetResultTaskCompleteListener;
+import com.example.plan8_ui.Model.CreateEventResult;
+import com.example.plan8_ui.Model.Event;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -37,7 +42,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class CreateEventActivity extends ActionBarActivity {
+public class CreateEventActivity extends ActionBarActivity implements AsyncGetResultTaskCompleteListener<CreateEventResult>{
 
 	@InjectView(R.id.create_event_activity_title_edit_text) EditText title_edit_text;
 	@InjectView(R.id.create_event_activity_location_edit_text) EditText location_edit_text;
@@ -110,12 +115,9 @@ public class CreateEventActivity extends ActionBarActivity {
 	
 	@OnClick(R.id.create_event_activity_invite_button)
 	public void onClickInvite(View v) {
-		// TODO Auto-generated method stub
-		
 		Intent i = new Intent();
 		i.setClass(getBaseContext(), InviteFriendsActivity.class);
 		startActivityForResult(i, 0);
-		
 	}
 	
 	private void showDatePicker(){
@@ -131,6 +133,7 @@ public class CreateEventActivity extends ActionBarActivity {
             }
  
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
 		dpd.show();
 		
 	}
@@ -144,7 +147,7 @@ public class CreateEventActivity extends ActionBarActivity {
 			@Override
 			public void onTimeSet(TimePicker view, int hour, int minute) {
 				Calendar newDate = Calendar.getInstance();
-				newDate.set(Calendar.HOUR, hour);
+				newDate.set(Calendar.HOUR_OF_DAY, hour);
 				newDate.set(Calendar.MINUTE, minute);
                 tempET.setText(timeFormatter.format(newDate.getTime()));
 			}
@@ -203,10 +206,40 @@ public class CreateEventActivity extends ActionBarActivity {
 		if (id == R.id.create_event_cancel) {
 			finish();
 			return true;
+		}else if(id == R.id.create_event_save){
+			
+			String[] inputs = {
+					title_edit_text.getText().toString(),
+					description_edit_text.getText().toString(),
+					location_edit_text.getText().toString(),
+					date_start_edit_text.getText().toString(),
+					time_start_edit_text.getText().toString(),
+					date_end_edit_text.getText().toString(),
+					time_end_edit_text.getText().toString(),
+					String.valueOf(marker.getPosition().latitude),
+					String.valueOf(marker.getPosition().longitude)
+				};
+
+			new CreateEvent(this).execute(inputs);
+						
 		}
 		
 		return super.onOptionsItemSelected(item);
 		
+	}
+
+	@Override
+	public void display_result(CreateEventResult result) {
+		
+		if(result.isSuccessful()){
+			Intent i = new Intent();
+			setResult(RESULT_OK, i);
+			Toast.makeText(getBaseContext(), "Event Created Successfully", Toast.LENGTH_LONG).show();
+			finish();
+		}else{
+			Toast.makeText(getBaseContext(), result.get_result(), Toast.LENGTH_LONG).show();
+		}
+	
 	}
 
 }

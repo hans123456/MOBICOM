@@ -6,6 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 import com.example.plan8_ui.R;
 import com.google.android.gms.maps.CameraUpdate;
@@ -20,6 +22,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class AttendeeLocationActivity extends ActionBarActivity {
 	
+	@InjectView(R.id.event_attendees_toolbar) Toolbar toolbar;
+	
 	private GoogleMap googleMap;
 	private MarkerOptions markerOptions1, markerOptions2;
 	private Marker marker1, marker2;
@@ -31,10 +35,11 @@ public class AttendeeLocationActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_attendee_location);
+		ButterKnife.inject(this);
 		
-		Toolbar toolbar = (Toolbar) findViewById(R.id.event_attendees_toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         
         initializeMap();
@@ -94,7 +99,7 @@ public class AttendeeLocationActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (R.id.attendee_location_cancel == id) {
+		if (android.R.id.home == id) {
 			finish();
 			return true;
 		}

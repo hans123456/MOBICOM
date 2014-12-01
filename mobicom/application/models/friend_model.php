@@ -34,7 +34,7 @@ class Friend_Model extends CI_Model {
 						`friends`
 
 					WHERE
-						`friends`.`user_a_id` = 1 and
+						`friends`.`user_a_id` = ".$user->id." and
 						`friends`.`status` = 1
 
 				) as `friends`
@@ -74,7 +74,7 @@ class Friend_Model extends CI_Model {
 				`users`, `friends`
 
 			WHERE
-				`friends`.`user_b_id` = 1 and
+				`friends`.`user_b_id` = ".$user->id." and
 				`users`.`id` = `friends`.`user_a_id` and
 				`friends`.`status` = 0
 
@@ -110,7 +110,7 @@ class Friend_Model extends CI_Model {
 				`users`, `friends`
 
 			WHERE
-				`friends`.`user_a_id` = 1 and
+				`friends`.`user_a_id` = ".$user->id." and
 				`users`.`id` = `friends`.`user_b_id` and
 				`friends`.`status` = 0
 
@@ -193,10 +193,11 @@ class Friend_Model extends CI_Model {
 
 	}
 
-	public function unfriend($friend_id){
+	public function delete_friend($friend_id){
 
 		$user = $this->ion_auth->user()->row();
 
+		//".$user->id."
 		$this->db->trans_start();
 
 			$this->db->query("
@@ -206,10 +207,9 @@ class Friend_Model extends CI_Model {
 				    `friends`
 
 				WHERE
-			        `user_a_id` = ".$user->id." and
-			        `user_b_id` = ".$friend_id."
+			       	`friends`.`user_a_id` = ".$user->id." and
+			        `friends`.`user_b_id` = ".$friend_id."
 
-				;
 
 			");
 
@@ -220,10 +220,8 @@ class Friend_Model extends CI_Model {
 				    `friends`
 
 				WHERE
-			        `user_a_id` = ".$friend_id." and
-			        `user_b_id` = ".$user->id."
-
-				;
+					`friends`.`user_a_id` = ".$friend_id." and
+			        `friends`.`user_b_id` = ".$user->id."
 
 			");
 
@@ -231,45 +229,27 @@ class Friend_Model extends CI_Model {
 
 	}
 
-	public function delete_friend_request($friend_id){
+	public function send_friend_request($friend_id){
 
 		$user = $this->ion_auth->user()->row();
+		$this->db->query("
 
-		$this->db->trans_start();
+			INSERT INTO
+			    `friends`
+			    (
+			        `user_a_id`,
+			        `user_b_id`,
+			        `status`
+			    )
 
-			$this->db->query("
+			    VALUES
+			    (
+			       	".$user->id.",
+			        ".$friend_id.",
+			        0
+			    )
 
-				DELETE
-					FROM
-				    	`friends`
-
-				WHERE
-			        (
-				       	`user_a_id` = ".$user->id." and
-				        `user_b_id` = ".$friend_id."
-				    )
-
-				;
-
-			");
-
-			$this->db->query("
-
-				DELETE
-					FROM
-				    	`friends`
-
-				WHERE
-			        {
-						`user_a_id` = ".$friend_id." and
-				        `user_b_id` = ".$user->id."
-					}
-
-				;
-
-			");
-
-		$this->db->trans_complete();
+		");
 
 	}
 

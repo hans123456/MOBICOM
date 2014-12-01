@@ -34,6 +34,7 @@ public class FetchDeclinedEvents extends AsyncTask<Void, Void, ArrayList<Event>>
 			
 			Document doc = Jsoup.connect(HTML.website + HTML.declined_events)
 								.userAgent(HTML.user_agent)
+								.cookie(HTML.session_id, HTML.SessionID)
 								.get();
 			
 			Element json_element = doc.getElementById(HTML.element_id);

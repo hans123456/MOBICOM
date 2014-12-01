@@ -1,8 +1,9 @@
 package com.example.plan8_ui.AsyncTasks;
 
+import java.io.IOException;
 import java.util.Iterator;
 
-import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,19 +12,24 @@ import org.jsoup.nodes.Element;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.plan8_ui.Interfaces.AsyncResultTaskCompleteListener;
+import com.example.plan8_ui.Interfaces.AsyncGetResultTaskCompleteListener;
+import com.example.plan8_ui.Model.CreateEventResult;
 import com.example.plan8_ui.Model.HTML;
 
-public class CreateEvent extends AsyncTask<String, Void, String>{
+public class CreateEvent extends AsyncTask<String, Void, CreateEventResult>{
 
 	private final String TAG = "Create Event";
-	private AsyncResultTaskCompleteListener<String> listener;
+	private AsyncGetResultTaskCompleteListener<CreateEventResult> listener;
+	
+	public CreateEvent(AsyncGetResultTaskCompleteListener<CreateEventResult> listener) {
+		this.listener = listener;
+	}
 	
 	@Override
-	protected String doInBackground(String... arg) {
+	protected CreateEventResult doInBackground(String... arg) {
 
 		Document doc;
-		String result = null;
+		CreateEventResult result = new CreateEventResult();
 		
 		try {
 			
@@ -38,21 +44,29 @@ public class CreateEvent extends AsyncTask<String, Void, String>{
 						  .data(HTML.post_latitude, arg[7])
 						  .data(HTML.post_longitude, arg[8])
 						  .userAgent(HTML.user_agent)
+						  .cookie(HTML.session_id, HTML.SessionID)
 						  .post();
 			
 			Element json_element = doc.getElementById(HTML.element_id);
 			
-			JSONArray json_array = new JSONArray(json_element.text());
-			JSONObject json_object = json_array.getJSONObject(0);
-			Iterator<String> i = json_object.keys();
-			
-			while(i.hasNext()){
-				String key = i.next();
-				Boolean value = json_object.getString(key).equals("valid") ? true : false;
-				json_object.put(key, value);
+			if(json_element != null){
+				if(json_element.text().equals("success") == false){
+					
+					JSONObject json_object = new JSONObject(json_element.text());
+					Iterator<String> i = json_object.keys();
+					
+					while(i.hasNext()){
+						String key = i.next();
+						Boolean value = json_object.getString(key).equals("valid") ? true : false;
+						result.put_result(key, value);
+					}
+				
+				}
 			}
 			
-		} catch (Exception e) {
+		} catch (IOException e) {
+			Log.e(TAG, e.getMessage());
+		} catch (JSONException e) {
 			Log.e(TAG, e.getMessage());
 		}
 		
@@ -61,7 +75,7 @@ public class CreateEvent extends AsyncTask<String, Void, String>{
 	}
 	
 	@Override
-	protected void onPostExecute(String result) {
+	protected void onPostExecute(CreateEventResult result) {
 		super.onPostExecute(result);
 		listener.display_result(result);
 	}

@@ -52,13 +52,6 @@ public class RegisterResult {
 			sb.append(SUCCESS);
 		}
 		
-//		sb.append( (results.get(id_username) == false) ? "Invalid Username" : "" );
-//		sb.append( (results.get(id_email_address) == false) ? "Invalid Email Address" : "" );
-//		sb.append( (results.get(id_password) == false) ? "Invalid Password" : "" );
-//		sb.append( (results.get(id_confirm_password) == false) ? "Invalid Confirm Password" : "" );
-//		sb.append( (results.get(id_first_name) == false) ? "Invalid First Name" : "" );
-//		sb.append( (results.get(id_last_name) == false) ? "Invalid Last Name" : "" );
-		
 		return sb.toString();
 		
 	}

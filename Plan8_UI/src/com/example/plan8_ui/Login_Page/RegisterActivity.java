@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,17 +15,19 @@ import butterknife.InjectView;
 
 import com.example.plan8_ui.R;
 import com.example.plan8_ui.AsyncTasks.RegisterUser;
-import com.example.plan8_ui.Interfaces.AsyncResultTaskCompleteListener;
+import com.example.plan8_ui.Interfaces.AsyncGetResultTaskCompleteListener;
 import com.example.plan8_ui.Model.RegisterResult;
 
-public class RegisterActivity extends ActionBarActivity implements AsyncResultTaskCompleteListener<RegisterResult>{
+public class RegisterActivity extends ActionBarActivity implements AsyncGetResultTaskCompleteListener<RegisterResult>{
 
-	@InjectView (R.id.register_activity_username_edit_text) EditText username_edit_text;
-	@InjectView (R.id.register_activity_email_edit_text) EditText email_edit_text;
-	@InjectView (R.id.register_activity_first_name_edit_text) EditText first_name_edit_text;
-	@InjectView (R.id.register_activity_last_name_edit_text) EditText last_name_edit_text;
-	@InjectView (R.id.register_activity_password_edit_text) EditText password_edit_text;
-	@InjectView (R.id.register_activity_confirm_password_edit_text) EditText confirm_password_edit_text;
+	@InjectView(R.id.register_activity_username_edit_text) EditText username_edit_text;
+	@InjectView(R.id.register_activity_email_edit_text) EditText email_edit_text;
+	@InjectView(R.id.register_activity_first_name_edit_text) EditText first_name_edit_text;
+	@InjectView(R.id.register_activity_last_name_edit_text) EditText last_name_edit_text;
+	@InjectView(R.id.register_activity_password_edit_text) EditText password_edit_text;
+	@InjectView(R.id.register_activity_confirm_password_edit_text) EditText confirm_password_edit_text;
+	
+	@InjectView(R.id.register_activity_toolbar) Toolbar toolbar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,6 @@ public class RegisterActivity extends ActionBarActivity implements AsyncResultTa
 		setContentView(R.layout.activity_register);
 		ButterKnife.inject(this);
 		
-		Toolbar toolbar = (Toolbar) findViewById(R.id.register_activity_toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
         }
@@ -43,7 +43,6 @@ public class RegisterActivity extends ActionBarActivity implements AsyncResultTa
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		new MenuInflater(getApplication()).inflate(R.menu.register, menu);
 		return true;
 	}
@@ -64,8 +63,6 @@ public class RegisterActivity extends ActionBarActivity implements AsyncResultTa
 			return true;
 			
 		}else if(id == R.id.register_send){
-			
-			Log.wtf("tag", username_edit_text.getText().toString());
 			
 			String[] inputs = {
 				username_edit_text.getText().toString(),

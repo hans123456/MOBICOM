@@ -5,6 +5,7 @@ import java.util.HashMap;
 public class User {
 	
 	public static final String id_unique_id = "unique_id";
+	public static final String id_pic = "pic";
 	public static final String id_first_name = "first_name";
 	public static final String id_last_name = "last_name";
 	
@@ -20,6 +21,10 @@ public class User {
 	
 	public String get_information(String key){
 		return info.get(key);
+	}
+	
+	public boolean is_valid(){
+		return info.size()>0;
 	}
 
 }

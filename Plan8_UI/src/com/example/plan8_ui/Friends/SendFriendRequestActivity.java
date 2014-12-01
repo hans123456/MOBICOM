@@ -8,23 +8,53 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.AsyncTasks.FetchFriendInfo;
+import com.example.plan8_ui.AsyncTasks.SendFriendRequest;
+import com.example.plan8_ui.Interfaces.AsyncGetInfoTaskCompleteListener;
+import com.example.plan8_ui.Interfaces.AsyncGetResultTaskCompleteListener;
+import com.example.plan8_ui.Model.Friend;
+import com.melnykov.fab.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
-public class SendFriendRequestActivity extends ActionBarActivity {
+public class SendFriendRequestActivity extends ActionBarActivity implements AsyncGetInfoTaskCompleteListener<Friend>, AsyncGetResultTaskCompleteListener<Boolean>{
 
+	@InjectView(R.id.send_friend_request_activity_toolbar) Toolbar toolbar;
+	@InjectView(R.id.send_friend_request_activity_fab) FloatingActionButton fab;
+	@InjectView(R.id.send_friend_request_activity_unique_id_edit_text) EditText unique_id_edit_text;
+	@InjectView(R.id.send_friend_request_activity_profile_pic) ImageView pic_image_view;
+	@InjectView(R.id.send_friend_request_activity_first_name_text_view) TextView first_name_text_view;
+	@InjectView(R.id.send_friend_request_activity_last_name_text_view) TextView last_name_text_view;
+	
+	Friend friend;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_send_friend_request);
-
-		Toolbar toolbar = (Toolbar) findViewById(R.id.send_friend_request_activity_toolbar);
+		ButterKnife.inject(this);
+		
         if (toolbar != null) {
             setSupportActionBar(toolbar);
         }
         
 	}
 
+	@OnClick(R.id.send_friend_request_activity_fab)
+	public void onClickSearch(){
+
+		String unique_id = unique_id_edit_text.getText().toString();
+        new FetchFriendInfo(this).execute(unique_id);
+        
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -45,7 +75,40 @@ public class SendFriendRequestActivity extends ActionBarActivity {
 		if (id == R.id.send_friend_request_cancel) {
 			finish();
 			return true;
+		}else if (id == R.id.send_friend_request_save) {
+			
+			if(friend != null){
+				if(friend.isEmpty() == false){
+					new SendFriendRequest(this).execute(friend.get_information(Friend.id_id).toString());
+				}
+			}
+			
+			return true;
 		}
+		
 		return super.onOptionsItemSelected(item);
+		
 	}
+
+	@Override
+	public void display_info(Friend info) {
+		
+		friend = info;
+		
+		Picasso.with(getBaseContext())
+				.load("https://graph.facebook.com/"+friend.get_information(Friend.id_pic)+"/picture?type=large")
+				.resize(300, 300)
+				.centerCrop()
+				.into(pic_image_view);
+		
+		first_name_text_view.setText(friend.get_information(Friend.id_first_name));
+		last_name_text_view.setText(friend.get_information(Friend.id_last_name));
+		
+	}
+
+	@Override
+	public void display_result(Boolean result) {
+		finish();
+	}
+	
 }

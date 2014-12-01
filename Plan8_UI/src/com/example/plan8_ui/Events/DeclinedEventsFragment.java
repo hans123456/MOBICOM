@@ -71,7 +71,7 @@ public class DeclinedEventsFragment extends Fragment implements AsyncFetchListTa
 	// lazy to find view by id 
 	@InjectView(R.id.declined_events_fragment_list_view) ListView events_list_view;
 	
-	EventsAdapter eventsAdapter;
+	EventsListViewAdapter eventsAdapter;
 	View DeclinedEventsFragmentView;
 	ArrayList<Event> events;
 	FetchDeclinedEvents fetchDeclinedEvents;
@@ -86,7 +86,7 @@ public class DeclinedEventsFragment extends Fragment implements AsyncFetchListTa
 		ButterKnife.inject(this, DeclinedEventsFragmentView);
 		
 		events = new ArrayList<Event>();
-		eventsAdapter = new EventsAdapter(getActivity().getBaseContext(), R.layout.event_item, events);
+		eventsAdapter = new EventsListViewAdapter(getActivity().getBaseContext(), R.layout.event_item, events);
 
 		events_list_view.setAdapter(eventsAdapter);
 
@@ -108,6 +108,7 @@ public class DeclinedEventsFragment extends Fragment implements AsyncFetchListTa
 
 		Intent i = new Intent();
 		i.setClass(getActivity().getBaseContext(), EventProfileActivity.class);
+		i.putExtra(Event.id_id, events.get(position).get_information(Event.id_id));
 		startActivityForResult(i, 1);
 		
 	}
@@ -117,6 +118,12 @@ public class DeclinedEventsFragment extends Fragment implements AsyncFetchListTa
 		events.clear();
 		events.addAll(result);
 		eventsAdapter.notifyDataSetChanged();
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
 	}
 
 }

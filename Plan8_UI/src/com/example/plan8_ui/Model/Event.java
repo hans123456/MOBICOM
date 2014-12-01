@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Event {
 
-	public static final String id_id = "id";
+	public static final String id_id = "event_id";
 	public static final String id_title = "title";
 	public static final String id_description = "description";
 	public static final String id_location = "location";
@@ -15,7 +15,7 @@ public class Event {
 	public static final String id_latitude = "latitude";
 	public static final String id_longitude = "longitude";
 	public static final String id_created_by = "created_by";
-	public static final String id_you = "you";
+	public static final String id_you = "is_user";
 	
 	private HashMap<String, String> info;
 		

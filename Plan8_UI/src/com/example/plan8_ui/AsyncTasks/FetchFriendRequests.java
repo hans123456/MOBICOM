@@ -34,6 +34,7 @@ public class FetchFriendRequests extends AsyncTask<Void, Void, ArrayList<Friend>
 			
 			Document doc = Jsoup.connect(HTML.website + HTML.friend_requests)
 								.userAgent(HTML.user_agent)
+								.cookie(HTML.session_id, HTML.SessionID)
 								.get();
 			
 			Element json_element = doc.getElementById(HTML.element_id);

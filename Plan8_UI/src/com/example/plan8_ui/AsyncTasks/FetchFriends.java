@@ -1,9 +1,11 @@
 package com.example.plan8_ui.AsyncTasks;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -34,6 +36,7 @@ public class FetchFriends extends AsyncTask<Void, Void, ArrayList<Friend>> {
 
 			Document doc = Jsoup.connect(HTML.website + HTML.friends)
 								.userAgent(HTML.user_agent)
+								.cookie(HTML.session_id, HTML.SessionID)
 								.get();
 			
 			Element json_element = doc.getElementById(HTML.element_id);
@@ -61,7 +64,9 @@ public class FetchFriends extends AsyncTask<Void, Void, ArrayList<Friend>> {
 			
 			}
 				
-		} catch (Exception e) {
+		} catch (IOException e) {
+			Log.e(TAG, e.getMessage());
+		} catch (JSONException e) {
 			Log.e(TAG, e.getMessage());
 		}
 

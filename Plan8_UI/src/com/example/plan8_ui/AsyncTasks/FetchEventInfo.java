@@ -1,8 +1,10 @@
 package com.example.plan8_ui.AsyncTasks;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,16 +13,16 @@ import org.jsoup.nodes.Element;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.plan8_ui.Interfaces.AsyncResultTaskCompleteListener;
+import com.example.plan8_ui.Interfaces.AsyncGetInfoTaskCompleteListener;
 import com.example.plan8_ui.Model.Event;
 import com.example.plan8_ui.Model.HTML;
 
 public class FetchEventInfo extends AsyncTask<String, Void, Event>{
 
 	private final String TAG = "Event Info";
-	private AsyncResultTaskCompleteListener<Event> listener;
+	private AsyncGetInfoTaskCompleteListener<Event> listener;
 
-	public FetchEventInfo(AsyncResultTaskCompleteListener<Event> listener) {
+	public FetchEventInfo(AsyncGetInfoTaskCompleteListener<Event> listener) {
 		this.listener = listener;
 	}
 	
@@ -34,6 +36,7 @@ public class FetchEventInfo extends AsyncTask<String, Void, Event>{
 			Document doc = Jsoup.connect(HTML.website + HTML.event_info)
 								.data(HTML.post_event_id, arg[0])
 								.userAgent(HTML.user_agent)
+								.cookie(HTML.session_id, HTML.SessionID)
 								.post();
 			
 			Element json_element = doc.getElementById(HTML.element_id);
@@ -58,7 +61,9 @@ public class FetchEventInfo extends AsyncTask<String, Void, Event>{
 			
 			}
 			
-		} catch (Exception e) {
+		} catch (IOException e) {
+			Log.e(TAG, e.getMessage());
+		} catch (JSONException e) {
 			Log.e(TAG, e.getMessage());
 		}
 		
@@ -69,7 +74,7 @@ public class FetchEventInfo extends AsyncTask<String, Void, Event>{
 	@Override
 	protected void onPostExecute(Event result) {
 		super.onPostExecute(result);
-		listener.display_result(result);
+		listener.display_info(result);
 	}
 	
 }
