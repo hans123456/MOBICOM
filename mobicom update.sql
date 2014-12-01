@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS plan8;
 CREATE DATABASE IF NOT EXISTS plan8;
 USE plan8;
 
@@ -74,7 +75,7 @@ CREATE TABLE `login_attempts` (
 
 DROP TABLE IF EXISTS `friend_request`;
 
---- 0 request, 1 friends ---
+-- 0 request, 1 friends
 CREATE TABLE `friends` (
   `user_a_id` int(11) unsigned NOT NULL,
   `user_b_id` int(11) unsigned NOT NULL,
