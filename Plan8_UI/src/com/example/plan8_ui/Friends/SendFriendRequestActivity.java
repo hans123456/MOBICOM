@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -95,15 +96,25 @@ public class SendFriendRequestActivity extends ActionBarActivity implements Asyn
 		
 		friend = info;
 		
-		Picasso.with(getBaseContext())
-				.load("https://graph.facebook.com/"+friend.get_information(Friend.id_pic)+"/picture?type=large")
-				.resize(300, 300)
-				.centerCrop()
-				.into(pic_image_view);
-		
-		first_name_text_view.setText(friend.get_information(Friend.id_first_name));
-		last_name_text_view.setText(friend.get_information(Friend.id_last_name));
-		
+		if(friend.isEmpty() == false){
+
+			Picasso.with(getBaseContext())
+					.load("https://graph.facebook.com/"+friend.get_information(Friend.id_pic)+"/picture?type=large")
+					.resize(300, 300)
+					.centerCrop()
+					.into(pic_image_view);
+			
+			pic_image_view.setVisibility(View.VISIBLE);
+			first_name_text_view.setText(friend.get_information(Friend.id_first_name));
+			last_name_text_view.setText(friend.get_information(Friend.id_last_name));
+			
+		}else {
+			
+			pic_image_view.setVisibility(View.INVISIBLE);
+			first_name_text_view.setText("");
+			last_name_text_view.setText("");
+			
+		}
 	}
 
 	@Override

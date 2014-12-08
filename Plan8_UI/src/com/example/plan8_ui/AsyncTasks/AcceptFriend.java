@@ -42,6 +42,6 @@ public class AcceptFriend extends AsyncTask<String, Void, Boolean>{
 	protected void onPostExecute(Boolean result) {
 		super.onPostExecute(result);
 		listener.display_result(result);
-	}	
+	}
 	
 }

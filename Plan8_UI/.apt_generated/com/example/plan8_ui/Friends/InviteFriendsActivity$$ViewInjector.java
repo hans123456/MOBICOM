@@ -7,7 +7,9 @@ import butterknife.ButterKnife.Finder;
 public class InviteFriendsActivity$$ViewInjector {
   public static void inject(Finder finder, final com.example.plan8_ui.Friends.InviteFriendsActivity target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131493003, "field 'friends_list_view' and method 'onItemClickFriends'");
+    view = finder.findRequiredView(source, 2131493001, "field 'toolbar'");
+    target.toolbar = (android.support.v7.widget.Toolbar) view;
+    view = finder.findRequiredView(source, 2131493002, "field 'friends_list_view' and method 'onItemClickFriends'");
     target.friends_list_view = (android.widget.ListView) view;
     ((android.widget.AdapterView<?>) view).setOnItemClickListener(
       new android.widget.AdapterView.OnItemClickListener() {
@@ -20,12 +22,10 @@ public class InviteFriendsActivity$$ViewInjector {
           target.onItemClickFriends(p2);
         }
       });
-    view = finder.findRequiredView(source, 2131493002, "field 'toolbar'");
-    target.toolbar = (android.support.v7.widget.Toolbar) view;
   }
 
   public static void reset(com.example.plan8_ui.Friends.InviteFriendsActivity target) {
-    target.friends_list_view = null;
     target.toolbar = null;
+    target.friends_list_view = null;
   }
 }

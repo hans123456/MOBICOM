@@ -24,17 +24,14 @@ class User_Model extends CI_Model {
 
     }
 
-    public function get_profile_by_unique_id($unique_id){
+    public function get_profile_by_username($username){
 
-        $user = $this->ion_auth->user()->row();
-        //".$user->id."
-        //`users`.`id` != '".$user->id."'' and
         $query = $this->db->query("
 
             SELECT
                 `users`.`id`,
                 `users`.`pic`,
-                `users`.`unique_id`,
+                `users`.`username`,
                 `users`.`first_name`,
                 `users`.`last_name`
 
@@ -42,7 +39,7 @@ class User_Model extends CI_Model {
                 `users`
 
             WHERE
-                `users`.`unique_id` = '".$unique_id."'
+                `users`.`username` = '".$username."'
 
         ");
 

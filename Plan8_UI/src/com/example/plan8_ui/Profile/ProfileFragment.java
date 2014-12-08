@@ -5,8 +5,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 import com.example.plan8_ui.R;
+import com.example.plan8_ui.Model.HTML;
+import com.example.plan8_ui.Model.User;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass. Use the
@@ -15,31 +22,16 @@ import com.example.plan8_ui.R;
  *
  */
 public class ProfileFragment extends Fragment {
-	// TODO: Rename parameter arguments, choose names that match
-	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-	private static final String ARG_PARAM1 = "param1";
-	private static final String ARG_PARAM2 = "param2";
 
-	// TODO: Rename and change types of parameters
-	private String mParam1;
-	private String mParam2;
-
-	/**
-	 * Use this factory method to create a new instance of this fragment using
-	 * the provided parameters.
-	 *
-	 * @param param1
-	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
-	 * @return A new instance of fragment ProfileFragment.
-	 */
-	// TODO: Rename and change types and number of parameters
+	@InjectView(R.id.profile_fragment_pic_image_view) ImageView image_view;
+	@InjectView(R.id.profile_fragment_first_name_text_view) TextView first_name_text_view;
+	@InjectView(R.id.profile_fragment_last_name_text_view) TextView last_name_text_view;
+	
+	private View ProfileFragmentView;
+	
 	public static ProfileFragment newInstance(String param1, String param2) {
 		ProfileFragment fragment = new ProfileFragment();
 		Bundle args = new Bundle();
-		args.putString(ARG_PARAM1, param1);
-		args.putString(ARG_PARAM2, param2);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -52,21 +44,26 @@ public class ProfileFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			mParam1 = getArguments().getString(ARG_PARAM1);
-			mParam2 = getArguments().getString(ARG_PARAM2);
 		}
 	}
 
-	private View ProfileFragmentView;
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
 		
 		super.onCreateView(inflater, container, savedInstanceState);
 		
 		ProfileFragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
+		ButterKnife.inject(this, ProfileFragmentView);
+		
+		Picasso.with(ProfileFragmentView.getContext())
+			.load("https://graph.facebook.com/"+HTML.userProfile.get_information(User.id_pic)+"/picture?type=large")
+			.resize(300, 300)
+			.centerCrop()
+			.into(image_view);
+
+		first_name_text_view.setText(HTML.userProfile.get_information(User.id_first_name));
+		last_name_text_view.setText(HTML.userProfile.get_information(User.id_last_name));
 		
 		return ProfileFragmentView;
 		

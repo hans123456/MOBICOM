@@ -32,7 +32,6 @@ import com.example.plan8_ui.AsyncTasks.CreateEvent;
 import com.example.plan8_ui.Friends.InviteFriendsActivity;
 import com.example.plan8_ui.Interfaces.AsyncGetResultTaskCompleteListener;
 import com.example.plan8_ui.Model.CreateEventResult;
-import com.example.plan8_ui.Model.Event;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -152,7 +151,7 @@ public class CreateEventActivity extends ActionBarActivity implements AsyncGetRe
                 tempET.setText(timeFormatter.format(newDate.getTime()));
 			}
  
-        },newCalendar.get(Calendar.HOUR), newCalendar.get(Calendar.MINUTE), true);
+        },newCalendar.get(Calendar.HOUR_OF_DAY), newCalendar.get(Calendar.MINUTE), true);
 		
 		tpd.show();
 		

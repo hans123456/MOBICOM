@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +31,8 @@ public class SentFriendRequestsFragment extends Fragment implements AsyncFetchLi
 	private static final String ARG_PARAM2 = "param2";
 
 	// TODO: Rename and change types of parameters
-	private String mParam1;
-	private String mParam2;
+//	private String mParam1;
+//	private String mParam2;
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -64,8 +63,8 @@ public class SentFriendRequestsFragment extends Fragment implements AsyncFetchLi
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			mParam1 = getArguments().getString(ARG_PARAM1);
-			mParam2 = getArguments().getString(ARG_PARAM2);
+//			mParam1 = getArguments().getString(ARG_PARAM1);
+//			mParam2 = getArguments().getString(ARG_PARAM2);
 		}
 	}
 	

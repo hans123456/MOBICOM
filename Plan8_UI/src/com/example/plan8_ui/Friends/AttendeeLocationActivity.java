@@ -26,7 +26,7 @@ public class AttendeeLocationActivity extends ActionBarActivity {
 	
 	private GoogleMap googleMap;
 	private MarkerOptions markerOptions1, markerOptions2;
-	private Marker marker1, marker2;
+	private Marker marker2;
 	
 	private LatLng latLng1 = new LatLng(14.566402, 120.993179);
     private LatLng latLng2 = new LatLng(14.563935, 120.994237);
@@ -59,7 +59,7 @@ public class AttendeeLocationActivity extends ActionBarActivity {
 			
 			markerOptions1.position(latLng1);
 			markerOptions2.position(latLng2);
-			marker1 = googleMap.addMarker(markerOptions1);
+			googleMap.addMarker(markerOptions1);
 			marker2 = googleMap.addMarker(markerOptions2);
 			marker2.showInfoWindow();
 			

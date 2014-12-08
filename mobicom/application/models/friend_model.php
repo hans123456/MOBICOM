@@ -12,12 +12,11 @@ class Friend_Model extends CI_Model {
 	public function get_friends(){
 
 		$user = $this->ion_auth->user()->row();
-		//".$user->id."
+
 		$query = $this->db->query("
 
 			SELECT
 				`friends`.`id`,
-				`users`.`unique_id`,
 				`users`.`pic`,
 				`users`.`first_name`,
 				`users`.`last_name`
@@ -60,12 +59,11 @@ class Friend_Model extends CI_Model {
 	public function get_friend_requests(){
 
 		$user = $this->ion_auth->user()->row();
-		// ".$user->id."
+
 		$query = $this->db->query("
 
 			SELECT
 				`users`.`id`,
-				`users`.`unique_id`,
 				`users`.`pic`,
 				`users`.`first_name`,
 				`users`.`last_name`
@@ -96,12 +94,11 @@ class Friend_Model extends CI_Model {
 	public function get_sent_friend_requests(){
 
 		$user = $this->ion_auth->user()->row();
-		// ".$user->id."
+
 		$query = $this->db->query("
 
 			SELECT
 				`users`.`id`,
-				`users`.`unique_id`,
 				`users`.`pic`,
 				`users`.`first_name`,
 				`users`.`last_name`
@@ -133,63 +130,59 @@ class Friend_Model extends CI_Model {
 
 		$user = $this->ion_auth->user()->row();
 
-		$this->db->trans_start();
+		$query = $this->db->query("
 
-			$query = $this->db->query("
+			INSERT INTO
+			    `friends`
+			    (
+			        `user_a_id`,
+			        `user_b_id`,
+			        `status`
+			    )
 
-				INSERT INTO
-				    `friends`
-				    (
-				        `user_a_id`,
-				        `user_b_id`,
-				        `status`
-				    )
+			    VALUES
+			    (
+			        ".$user->id.",
+			        ".$friend_id.",
+			        1
+			    )
 
-				    VALUES
-				    (
-				        ".$user->id.",
-				        ".$friend_id.",
-				        1
-				    )
+			ON DUPLICATE KEY
+			    UPDATE
+			        `user_a_id` = ".$user->id.",
+			        `user_b_id` = ".$friend_id.",
+			        `status` = 1
 
-				ON DUPLICATE KEY
-				    UPDATE
-				        `user_a_id` = ".$user->id.",
-				        `user_b_id` = ".$friend_id.",
-				        `status` = 1
+			;
 
-				;
+		");
 
-			");
+		$query = $this->db->query("
 
-			$query = $this->db->query("
+			INSERT INTO
+			    `friends`
+			    (
+			        `user_a_id`,
+			        `user_b_id`,
+			        `status`
+			    )
 
-				INSERT INTO
-				    `friends`
-				    (
-				        `user_a_id`,
-				        `user_b_id`,
-				        `status`
-				    )
+			    VALUES
+			    (
+			        ".$friend_id.",
+			        ".$user->id.",
+			        1
+			    )
 
-				    VALUES
-				    (
-				        ".$friend_id.",
-				        ".$user->id.",
-				        1
-				    )
+			ON DUPLICATE KEY
+			    UPDATE
+			        `user_a_id` = ".$friend_id.",
+			        `user_b_id` = ".$user->id.",
+			        `status` = 1
 
-				ON DUPLICATE KEY
-				    UPDATE
-				        `user_a_id` = ".$friend_id.",
-				        `user_b_id` = ".$user->id.",
-				        `status` = 1
+			;
 
-				;
-
-			");
-
-		$this->db->trans_complete();
+		");
 
 	}
 
@@ -197,41 +190,37 @@ class Friend_Model extends CI_Model {
 
 		$user = $this->ion_auth->user()->row();
 
-		//".$user->id."
-		$this->db->trans_start();
+		$this->db->query("
 
-			$this->db->query("
+			DELETE
+				FROM
+			    `friends`
 
-				DELETE
-					FROM
-				    `friends`
-
-				WHERE
-			       	`friends`.`user_a_id` = ".$user->id." and
-			        `friends`.`user_b_id` = ".$friend_id."
+			WHERE
+		       	`friends`.`user_a_id` = ".$user->id." and
+		        `friends`.`user_b_id` = ".$friend_id."
 
 
-			");
+		");
 
-			$this->db->query("
+		$this->db->query("
 
-				DELETE
-					FROM
-				    `friends`
+			DELETE
+				FROM
+			    `friends`
 
-				WHERE
-					`friends`.`user_a_id` = ".$friend_id." and
-			        `friends`.`user_b_id` = ".$user->id."
+			WHERE
+				`friends`.`user_a_id` = ".$friend_id." and
+		        `friends`.`user_b_id` = ".$user->id."
 
-			");
-
-		$this->db->trans_complete();
+		");
 
 	}
 
 	public function send_friend_request($friend_id){
 
 		$user = $this->ion_auth->user()->row();
+
 		$this->db->query("
 
 			INSERT INTO

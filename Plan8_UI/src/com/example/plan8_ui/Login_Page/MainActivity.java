@@ -18,6 +18,7 @@ import com.example.plan8_ui.R;
 import com.example.plan8_ui.AsyncTasks.LoginUser;
 import com.example.plan8_ui.Interfaces.AsyncGetResultTaskCompleteListener;
 import com.example.plan8_ui.Main_Page.MainMenuActivity;
+import com.example.plan8_ui.Model.HTML;
 import com.example.plan8_ui.Model.User;
 	
 public class MainActivity extends ActionBarActivity implements AsyncGetResultTaskCompleteListener<User>{
@@ -38,7 +39,8 @@ public class MainActivity extends ActionBarActivity implements AsyncGetResultTas
         if (toolbar != null) {
             setSupportActionBar(toolbar);
         }
-        
+
+		HTML.userProfile = null;
         username_edit_text.setText("administrator");
         password_edit_text.setText("password");
         
@@ -89,8 +91,10 @@ public class MainActivity extends ActionBarActivity implements AsyncGetResultTas
 	public void display_result(User result) {
 		
 		if(result.is_valid()){
+			HTML.userProfile = result;
 			startActivity(i);
 		}else{
+			HTML.userProfile = null;
 			Toast.makeText(getBaseContext(), "Invalid Login Credentials", Toast.LENGTH_LONG).show();
 		}
 		

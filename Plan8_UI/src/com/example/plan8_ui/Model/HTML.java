@@ -3,15 +3,15 @@ package com.example.plan8_ui.Model;
 public class HTML {
 
 	// general
-	public static final String website = "http://172.16.3.119/mobicom/index.php/";
+	public static final String website = "http://192.168.1.149/mobicom/index.php/";
 	public static final String user_agent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36";
 	public static final String element_id = "result";
 	public static final String session_id = "ci_session";
 	public static String SessionID = null;
+	public static User userProfile = null;
 	
 	// user
 	public static final String post_username = "username";
-	public static final String post_unique_id = "unique_id";
 	public static final String post_email_address = "email";
 	public static final String post_password = "password";
 	public static final String post_confirm_password = "confirm_password";
@@ -49,7 +49,7 @@ public class HTML {
 	public static final String sent_friend_requests = "sent_friend_requests";
 	public static final String send_friend_request = "send_friend_request";
 	
-	public static final String search_profile_by_unique_id = "search_profile_by_unique_id";
+	public static final String search_profile_by_username = "search_profile_by_username";
 	public static final String friend_info = "friend_info";
 	public static final String accept_friend_request = "accept_friend_request";
 	public static final String delete_friend = "delete_friend";

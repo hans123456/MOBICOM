@@ -82,9 +82,9 @@ class Event_Model extends CI_Model {
 
     public function invite_self($data){
 
-        $event_id = $data['event_id'];
-        //'".$user->id."'
         $user = $this->ion_auth->user()->row();
+        $event_id = $data['event_id'];
+
         $this->db->query("
 
             INSERT INTO
@@ -118,34 +118,37 @@ class Event_Model extends CI_Model {
         $friend_ids = explode(',', $data['friends_ids']);
         $event_id = $data['event_id'];
 
-        if( $data['friends_ids'] != '')
-        foreach($friend_ids as $friend_id){
+        if( $data['friends_ids'] != ''){
 
-            $this->db->query("
+            foreach($friend_ids as $friend_id){
 
-                INSERT INTO
+                $this->db->query("
 
-                    `plan8`.`invites` (
+                    INSERT INTO
 
-                        `id`,
-                        `user_id`,
-                        `event_id`,
-                        `status`,
-                        `geolocation`
+                        `plan8`.`invites` (
 
-                    )
+                            `id`,
+                            `user_id`,
+                            `event_id`,
+                            `status`,
+                            `geolocation`
 
-                    VALUES (
+                        )
 
-                        NULL,
-                        '".$friend_id."',
-                        '".$event_id."',
-                        '0',
-                        GeomFromText(NULL)
+                        VALUES (
 
-                    )
+                            NULL,
+                            '".$friend_id."',
+                            '".$event_id."',
+                            '0',
+                            GeomFromText(NULL)
 
-            ");
+                        )
+
+                ");
+
+            }
 
         }
 
@@ -187,7 +190,8 @@ class Event_Model extends CI_Model {
                 `events`.`geolocation` = GeomFromText('POINT(".$latitude." ".$longitude.")',0)
 
             WHERE
-                `events`.`id` = ".$event_id."
+                `events`.`id` = ".$event_id." and
+                `events`.`user_id` = ".$user->id."
 
         ");
 
@@ -252,7 +256,9 @@ class Event_Model extends CI_Model {
                 ".$this->columns['date start'].",
                 ".$this->columns['time start'].",
                 ".$this->columns['date end'].",
-                ".$this->columns['time end']."
+                ".$this->columns['time end'].",
+                ".$this->columns['latitude'].",
+                ".$this->columns['longitude']."
 
             FROM
                 (
@@ -317,7 +323,9 @@ class Event_Model extends CI_Model {
                 ".$this->columns['date start'].",
                 ".$this->columns['time start'].",
                 ".$this->columns['date end'].",
-                ".$this->columns['time end']."
+                ".$this->columns['time end'].",
+                ".$this->columns['latitude'].",
+                ".$this->columns['longitude']."
 
             FROM
                 (
@@ -384,7 +392,9 @@ class Event_Model extends CI_Model {
                 ".$this->columns['date start'].",
                 ".$this->columns['time start'].",
                 ".$this->columns['date end'].",
-                ".$this->columns['time end']."
+                ".$this->columns['time end'].",
+                ".$this->columns['latitude'].",
+                ".$this->columns['longitude']."
 
             FROM
                 (
@@ -451,7 +461,9 @@ class Event_Model extends CI_Model {
                 ".$this->columns['date start'].",
                 ".$this->columns['time start'].",
                 ".$this->columns['date end'].",
-                ".$this->columns['time end']."
+                ".$this->columns['time end'].",
+                ".$this->columns['latitude'].",
+                ".$this->columns['longitude']."
 
             FROM
                 (

@@ -27,7 +27,6 @@ public class FriendProfileActivity extends ActionBarActivity implements AsyncGet
 	public static final String FRIEND = "FRIEND";
 	public static final String SENT_FRIEND_REQUEST = "SENT FRIEND REQUEST";
 
-	@InjectView(R.id.friend_profile_activity_unique_id_text_view) TextView unique_id_text_view;
 	@InjectView(R.id.friend_profile_activity_pic_image_view) ImageView pic_image_view;
 	@InjectView(R.id.friend_profile_activity_first_name_text_view) TextView first_name_text_view;
 	@InjectView(R.id.friend_profile_activity_last_name_text_view) TextView last_name_text_view;
@@ -66,7 +65,6 @@ public class FriendProfileActivity extends ActionBarActivity implements AsyncGet
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        unique_id_text_view.setText(friend.get_information(Friend.id_unique_id));
         first_name_text_view.setText(friend.get_information(Friend.id_first_name));
         last_name_text_view.setText(friend.get_information(Friend.id_last_name));
 

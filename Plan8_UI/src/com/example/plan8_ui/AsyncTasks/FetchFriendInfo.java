@@ -33,8 +33,8 @@ public class FetchFriendInfo extends AsyncTask<String, Void, Friend>{
 
 		try {
 			
-			Document doc = Jsoup.connect(HTML.website + HTML.search_profile_by_unique_id)
-								.data(HTML.post_unique_id, arg[0])
+			Document doc = Jsoup.connect(HTML.website + HTML.search_profile_by_username)
+								.data(HTML.post_username, arg[0])
 								.userAgent(HTML.user_agent)
 								.cookie(HTML.session_id, HTML.SessionID)
 								.post();

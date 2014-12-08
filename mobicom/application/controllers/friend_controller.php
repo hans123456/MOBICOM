@@ -58,7 +58,11 @@ class Friend_Controller extends CI_Controller {
 
 		if(true == $this->ion_auth->logged_in()){
 
-			$this->friend_model->accept_friend_request($friend_id);
+			$this->db->trans_start();
+
+				$this->friend_model->accept_friend_request($friend_id);
+
+			$this->db->trans_complete();
 
 		}
 
@@ -70,7 +74,11 @@ class Friend_Controller extends CI_Controller {
 
 		if(true == $this->ion_auth->logged_in()){
 
-			$this->friend_model->delete_friend($friend_id);
+			$this->db->trans_start();
+
+				$this->friend_model->delete_friend($friend_id);
+
+			$this->db->trans_complete();
 
 		}
 

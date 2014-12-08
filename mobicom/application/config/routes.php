@@ -45,7 +45,7 @@ $route['login'] = 'user_controller/login';
 $route['logout'] = 'user_controller/logout';
 $route['register'] = 'user_controller/register';
 $route['change_profile_picture'] = 'user_controller/change_profile_picture';
-$route['search_profile_by_unique_id'] = 'user_controller/search_profile_by_unique_id';
+$route['search_profile_by_username'] = 'user_controller/search_profile_by_username';
 
 $route['(:any)_events'] = 'event_controller/$1_events';
 $route['event_info'] = 'event_controller/event_info';

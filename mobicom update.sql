@@ -1,4 +1,3 @@
-DROP DATABASE IF EXISTS plan8;
 CREATE DATABASE IF NOT EXISTS plan8;
 USE plan8;
 
@@ -20,8 +19,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(15) NOT NULL,
-  `unique_id` varchar(13) NOT NULL UNIQUE,
-  `pic` varchar(10) NOT NULL,
+  `pic` varchar(50) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `salt` varchar(255) DEFAULT NULL,
@@ -39,11 +37,11 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `users`
-    (`id`, `ip_address`, `unique_id`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`) VALUES
-    ('1','127.0.0.1','ABECUAC3','administrator','$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36','','admin@admin.com','',NULL,'1268889823','1268889823','1', 'Admin','istrator'),
-    ('2','127.0.0.1','ABECUAC3Z','abcdefghi','$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36','','user@user.com','',NULL,'1268889823','1268889823','1', 'user','user'),
-    ('3','127.0.0.1','ABECUAC3c','abcd','$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36','','user1@user1.com','',NULL,'1268889823','1268889823','1', 'user1','user'),
-    ('4','127.0.0.1','ABECUAC3k','abcd','$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36','','user1@user1.com','',NULL,'1268889823','1268889823','1', 'user2','user');
+    (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`) VALUES
+    ('1','127.0.0.1','administrator','$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36','','admin@admin.com','',NULL,'1268889823','1268889823','1', 'Admin','istrator');
+INSERT INTO `users`
+    (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`) VALUES
+    ('2','127.0.0.1','abcdefghi','$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36','','user@user.com','',NULL,'1268889823','1268889823','1', 'user','user');
 
 DROP TABLE IF EXISTS `users_groups`;
 
@@ -75,7 +73,6 @@ CREATE TABLE `login_attempts` (
 
 DROP TABLE IF EXISTS `friend_request`;
 
--- 0 request, 1 friends
 CREATE TABLE `friends` (
   `user_a_id` int(11) unsigned NOT NULL,
   `user_b_id` int(11) unsigned NOT NULL,
@@ -86,8 +83,6 @@ CREATE TABLE `friends` (
   CONSTRAINT `fk_user_a_idy` FOREIGN KEY (`user_a_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_b_idy` FOREIGN KEY (`user_b_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO `plan8`.`friends` (`user_a_id`, `user_b_id`, `status`) VALUES ('1', '2', '1'), ('2', '1', '1'), ('3', '1', '0'), ('1', '4', '0');
 
 DROP TABLE IF EXISTS `events`;
 
@@ -110,8 +105,6 @@ CREATE TABLE `events` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `plan8`.`events` (`id`, `title`, `description`, `date_start`, `time_start`, `date_end`, `time_end`, `location`, `geolocation`, `user_id`, `date_created`, `time_created`) VALUES (NULL, 'MOBICOM 1 FEATURE IMPLEMENTED', 'MOBICOM 1 FEATURE IMPLEMENTED', '2014-12-01', '12:45:00', '2014-12-01', '14:15:00', 'G301', GeomFromText('POINT(14.5662712 120.9929645)',0), '1', '2014-11-17', '22:42:00');
-INSERT INTO `plan8`.`events` (`id`, `title`, `description`, `date_start`, `time_start`, `date_end`, `time_end`, `location`, `geolocation`, `user_id`, `date_created`, `time_created`) VALUES (NULL, 'MOBICOM WIREFRAME', 'MOBICOM WIREFRAME', '2014-11-10', '12:45:00', '2014-11-10', '14:15:00', 'G301', GeomFromText('POINT(14.5662712 120.9929645)',0), '1', '2014-11-17', '22:42:00');
-INSERT INTO `plan8`.`events` (`id`, `title`, `description`, `date_start`, `time_start`, `date_end`, `time_end`, `location`, `geolocation`, `user_id`, `date_created`, `time_created`) VALUES (NULL, 'MOBICOM FINAL PRESENTATION', 'MOBICOM FINAL PRESENTATION', '2014-12-13', '00:00:00', '2014-12-18', '24:00:00', 'G301', GeomFromText('POINT(14.5662712 120.9929645)',0), '1', '2014-11-17', '22:42:00');
 
 DROP TABLE IF EXISTS `invites`;
 
@@ -130,5 +123,3 @@ CREATE TABLE `invites` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `plan8`.`invites` (`id`, `user_id`, `event_id`, `status`, `geolocation`) VALUES (NULL, '1', '1', '1', GeomFromText(NULL));
-INSERT INTO `plan8`.`invites` (`id`, `user_id`, `event_id`, `status`, `geolocation`) VALUES (NULL, '1', '2', '1', GeomFromText(NULL));
-INSERT INTO `plan8`.`invites` (`id`, `user_id`, `event_id`, `status`, `geolocation`) VALUES (NULL, '1', '3', '0', GeomFromText(NULL));

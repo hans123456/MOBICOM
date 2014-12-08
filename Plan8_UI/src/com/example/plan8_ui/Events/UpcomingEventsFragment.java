@@ -2,7 +2,6 @@ package com.example.plan8_ui.Events;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,16 +27,7 @@ import com.melnykov.fab.FloatingActionButton;
  *
  */
 public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTaskCompleteListener<ArrayList<Event>>{
-	// TODO: Rename parameter arguments, choose names that match
-	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-	private static final String ARG_PARAM1 = "param1";
-	private static final String ARG_PARAM2 = "param2";
 
-	// TODO: Rename and change types of parameters
-	private String mParam1;
-	private String mParam2;
-
-	// lazy to find view by id 
 	@InjectView(R.id.upcoming_events_fragment_fab) FloatingActionButton create_button;
 	@InjectView(R.id.upcoming_events_fragment_list_view) ListView events_list_view;
 	
@@ -46,24 +36,11 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 	private ArrayList<Event> events;
 	private FetchUpcomingEvents fetchUpcomingEvents;
 	private final int REQUEST_CODE_CREATE_EVENT = 0;
-	
-	/**
-	 * Use this factory method to create a new instance of this fragment using
-	 * the provided parameters.
-	 *
-	 * @param param1
-	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
-	 * @return A new instance of fragment UpcomingEventsFragment.
-	 */
-	// TODO: Rename and change types and number of parameters
+
 	public static UpcomingEventsFragment newInstance(String param1,
 			String param2) {
 		UpcomingEventsFragment fragment = new UpcomingEventsFragment();
 		Bundle args = new Bundle();
-		args.putString(ARG_PARAM1, param1);
-		args.putString(ARG_PARAM2, param2);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -76,10 +53,7 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			mParam1 = getArguments().getString(ARG_PARAM1);
-			mParam2 = getArguments().getString(ARG_PARAM2);
 		}
-		
 	}
 	
 	@Override
@@ -97,9 +71,6 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 		events_list_view.setAdapter(eventsAdapter);
 		create_button.attachToListView(events_list_view);
 
-		fetchUpcomingEvents = new FetchUpcomingEvents(this);
-		fetchUpcomingEvents.execute();
-		
 		return UpcomingEventsFragmentView;
 
 	}
@@ -135,17 +106,20 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 		events.addAll(result);
 		eventsAdapter.notifyDataSetChanged();
 	}
-	
+
 	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
+	public void onResume() {
 		
-		if(requestCode == REQUEST_CODE_CREATE_EVENT){
-			if(resultCode == Activity.RESULT_OK){
-				fetchUpcomingEvents = new FetchUpcomingEvents(this);
-				fetchUpcomingEvents.execute();
+		super.onResume();
+
+		if(fetchUpcomingEvents != null){
+			if(fetchUpcomingEvents.isCancelled() == false){
+				fetchUpcomingEvents.cancel(true);
 			}
 		}
+	
+		fetchUpcomingEvents = new FetchUpcomingEvents(this);
+		fetchUpcomingEvents.execute();
 		
 	}
 	

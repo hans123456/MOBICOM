@@ -31,4 +31,8 @@ public class Event {
 		return info.get(key);
 	}
 	
+	public boolean has_information(String key){
+		return info.get(key).equals("") == false;
+	}
+	
 }

@@ -4,12 +4,11 @@ import java.io.IOException;
 
 import org.jsoup.Jsoup;
 
-import com.example.plan8_ui.Interfaces.AsyncGetResultTaskCompleteListener;
-import com.example.plan8_ui.Model.HTML;
-import com.google.android.gms.internal.li;
-
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.plan8_ui.Interfaces.AsyncGetResultTaskCompleteListener;
+import com.example.plan8_ui.Model.HTML;
 
 public class SendFriendRequest extends AsyncTask<String, Void, Boolean>{
 

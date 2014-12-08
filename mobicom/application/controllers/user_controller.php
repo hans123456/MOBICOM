@@ -17,7 +17,7 @@ class User_Controller extends CI_Controller {
 		if(true == $this->ion_auth->logged_in()){
 
 			$user = $this->ion_auth->user()->row();
-			$info['unique_id'] = $user->unique_id;
+			$info['pic'] = $user->pic;
 			$info['first_name'] = $user->first_name;
 			$info['last_name'] = $user->last_name;
 			$data['data'] = json_encode($info);
@@ -112,16 +112,6 @@ class User_Controller extends CI_Controller {
 
 		if(true == $valid_register){
 
-			$unique_id = uniqid();
-
-			while($this->user_model->get_profile_by_unique_id($unique_id) != ''){
-
-				$unique_id = uniqid();
-
-			}
-
-			$additional_data['unique_id'] = $unique_id;
-
 			if(true == $this->ion_auth->register($username, $password, $email, $additional_data, $group)){
 
 				$data['data'] = 'success';
@@ -148,14 +138,13 @@ class User_Controller extends CI_Controller {
 
 	}
 
-	public function search_profile_by_unique_id(){
+	public function search_profile_by_username(){
 
-		//$this->input->post('unique id')
-		$unique_id = $this->input->post('unique_id'); //"ABECUAC3Z";
+		$username = $this->input->post('username');
 
 		if(true == $this->ion_auth->logged_in()){
 
-			$data['data'] = $this->user_model->get_profile_by_unique_id($unique_id);
+			$data['data'] = $this->user_model->get_profile_by_username($username);
 
 		}else {
 

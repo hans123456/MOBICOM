@@ -21,22 +21,22 @@ public final class R {
 		public static final int tile = 0x7f020076;
 	}
 	public static final class id {
-		public static final int item_subtitle = 0x7f0c00c1;
-		public static final int item_title = 0x7f0c00c2;
-		public static final int log_fragment = 0x7f0c0094;
-		public static final int sample_content_fragment = 0x7f0c0095;
-		public static final int sample_main_layout = 0x7f0c0092;
-		public static final int sample_output = 0x7f0c0093;
-		public static final int sliding_tabs = 0x7f0c00b9;
-		public static final int viewpager = 0x7f0c00ba;
+		public static final int item_subtitle = 0x7f0c00c4;
+		public static final int item_title = 0x7f0c00c5;
+		public static final int log_fragment = 0x7f0c0093;
+		public static final int sample_content_fragment = 0x7f0c0094;
+		public static final int sample_main_layout = 0x7f0c0091;
+		public static final int sample_output = 0x7f0c0092;
+		public static final int sliding_tabs = 0x7f0c00bc;
+		public static final int viewpager = 0x7f0c00bd;
 	}
 	public static final class layout {
-		public static final int activity_main = 0x7f03001d;
-		public static final int fragment_sample = 0x7f03002b;
-		public static final int pager_item = 0x7f03002f;
+		public static final int activity_main = 0x7f03001e;
+		public static final int fragment_sample = 0x7f03002c;
+		public static final int pager_item = 0x7f030030;
 	}
 	public static final class menu {
-		public static final int main = 0x7f0d0008;
+		public static final int main = 0x7f0d0009;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f060023;

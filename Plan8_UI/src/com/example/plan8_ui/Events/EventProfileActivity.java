@@ -71,7 +71,7 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncGetI
 	private EditText tempET;
 	private SimpleDateFormat dateFormatter, timeFormatter;
 	private Event event;
-	private Menu menu;
+//	private Menu menu;
 	private boolean editable = false;
 	private MenuItem edit, cancel, save, delete;
 	private boolean you = true;
@@ -199,18 +199,18 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncGetI
 	private void showTimePicker(){
 		
 		Calendar newCalendar = Calendar.getInstance();
-		
+
 		TimePickerDialog tpd = new TimePickerDialog(EventProfileActivity.this, new OnTimeSetListener() {
 
 			@Override
 			public void onTimeSet(TimePicker view, int hour, int minute) {
 				Calendar newDate = Calendar.getInstance();
-				newDate.set(Calendar.HOUR, hour);
+				newDate.set(Calendar.HOUR_OF_DAY, hour);
 				newDate.set(Calendar.MINUTE, minute);
                 tempET.setText(timeFormatter.format(newDate.getTime()));
 			}
  
-        },newCalendar.get(Calendar.HOUR), newCalendar.get(Calendar.MINUTE), true);
+        },newCalendar.get(Calendar.HOUR_OF_DAY), newCalendar.get(Calendar.MINUTE), true);
 
 		tpd.show();
 		
@@ -220,7 +220,7 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncGetI
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		new MenuInflater(getApplication()).inflate(R.menu.event_profile, menu);
-		this.menu = menu;
+//		this.menu = menu;
 		
 		edit = menu.findItem(R.id.event_profile_edit);
 		cancel = menu.findItem(R.id.event_profile_cancel);
