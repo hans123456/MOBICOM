@@ -32,6 +32,7 @@ import com.example.plan8_ui.AsyncTasks.CreateEvent;
 import com.example.plan8_ui.Friends.InviteFriendsActivity;
 import com.example.plan8_ui.Interfaces.AsyncGetResultTaskCompleteListener;
 import com.example.plan8_ui.Model.CreateEventResult;
+import com.example.plan8_ui.Model.Event;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -63,6 +64,7 @@ public class CreateEventActivity extends ActionBarActivity implements AsyncGetRe
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_event);
 		ButterKnife.inject(this);
@@ -116,6 +118,7 @@ public class CreateEventActivity extends ActionBarActivity implements AsyncGetRe
 	public void onClickInvite(View v) {
 		Intent i = new Intent();
 		i.setClass(getBaseContext(), InviteFriendsActivity.class);
+		i.putExtra(Event.id_id, "-1");
 		startActivityForResult(i, 0);
 	}
 	

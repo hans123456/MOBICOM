@@ -135,13 +135,14 @@ class Event_Controller extends CI_Controller {
 
 		if(true == $valid_edit_event){
 
-			// if(true == $this->ion_auth->logged_in()){
+			if(true == $this->ion_auth->logged_in()){
 
 				$this->db->trans_start();
 				$this->event_model->edit_event_info($data);
 				$this->db->trans_complete();
+				$data['data'] = 'success';
 
-			// }
+			}
 
 		}else {
 
@@ -160,7 +161,7 @@ class Event_Controller extends CI_Controller {
 		$data['location'] = $this->input->post('location');
 		$data['description'] = $this->input->post('description');
 		$data['date_start'] = $this->input->post('date_start');
-		$data['time_start'] = $this->input->post('time_start');
+		$data['time_start'] = '15:15';$this->input->post('time_start');
 		$data['date_end'] = $this->input->post('date_end');
 		$data['time_end'] = $this->input->post('time_end');
 		$data['latitude'] = $this->input->post('latitude');
@@ -179,6 +180,10 @@ class Event_Controller extends CI_Controller {
 		$time_start = $data['time_start'];
 		$date_end = strtotime($data['date_end']);
 		$time_end = $data['time_end'];
+
+		if(false == $this->ion_auth->logged_in()){
+			return;
+		}
 
 		if($date_start > $date_end){
 
@@ -200,7 +205,7 @@ class Event_Controller extends CI_Controller {
 				$this->event_model->create_event($data);
 				$invite['event_id'] = $this->db->insert_id();
 				$this->event_model->invite_self($invite);
-				$this->event_model->friends_ids_to_event($invite);
+				$this->event_model->invite_friends_to_event($invite);
 				$this->db->trans_complete();
 				$data['data'] = 'success';
 			 }

@@ -95,7 +95,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".EditProfileActivity"
+            android:name="com.example.plan8_ui.Profile.EditProfileActivity"
             android:label="@string/title_activity_edit_profile" >
         </activity>
     </application>

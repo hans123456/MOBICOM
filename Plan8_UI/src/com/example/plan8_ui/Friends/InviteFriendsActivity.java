@@ -25,7 +25,7 @@ public class InviteFriendsActivity extends ActionBarActivity implements AsyncFet
 	@InjectView(R.id.invite_friends_activity_toolbar) Toolbar toolbar;
 	@InjectView(R.id.invite_friends_activity_list_view) ListView friends_list_view;
 	
-	private FriendsListViewAdapter friendsAdapter;
+	private FriendsAttendanceInviteListViewAdapter friendsAttendanceInviteAdapter;
 	private ArrayList<Friend> friends;
 	
 	@Override
@@ -34,26 +34,23 @@ public class InviteFriendsActivity extends ActionBarActivity implements AsyncFet
 		setContentView(R.layout.activity_invite_friends);
 		ButterKnife.inject(this);
 		
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-        }
-        
-        friends = new ArrayList<Friend>();
-        friendsAdapter = new FriendsListViewAdapter(getBaseContext(), R.layout.friend_item, friends);
-        
-        friends_list_view.setAdapter(friendsAdapter);
-        
-        Intent i = getIntent();
-        Bundle b = i.getExtras();
-        
-        if(b.containsKey(Event.id_id)){
-        
-	        String event_id = b.getString(Event.id_id);
-	        
-	        new FetchFriendsNotYetInvited(this).execute(event_id);
-        
-        }
-	        
+		if (toolbar != null) {
+			setSupportActionBar(toolbar);
+		}
+		
+		friends = new ArrayList<Friend>();
+		friendsAttendanceInviteAdapter = new FriendsAttendanceInviteListViewAdapter(getBaseContext(), R.layout.friend_attendance_invite_item, friends, false);
+		
+		friends_list_view.setAdapter(friendsAttendanceInviteAdapter);
+
+		Intent i = getIntent();
+		Bundle b = i.getExtras();
+		
+		FetchFriendsNotYetInvited friendsNotYetInvited = new FetchFriendsNotYetInvited(this);
+		
+		String event_id = b.getString(Event.id_id);
+		friendsNotYetInvited.execute(event_id);
+	
 	}
 	
 	@OnItemClick(R.id.invite_friends_activity_list_view)
@@ -85,6 +82,6 @@ public class InviteFriendsActivity extends ActionBarActivity implements AsyncFet
 	public void update_list(ArrayList<Friend> result) {
 		friends.clear();
 		friends.addAll(result);
-		friendsAdapter.notifyDataSetChanged();
+		friendsAttendanceInviteAdapter.notifyDataSetChanged();
 	}
 }

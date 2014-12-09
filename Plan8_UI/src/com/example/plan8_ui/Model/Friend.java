@@ -11,6 +11,7 @@ public class Friend {
 	public static final String id_last_name = "last_name";
 	public static final String id_latitude = "latitude";
 	public static final String id_longitude = "longitude";
+	public static final String id_checked = "checked";
 	
 	private boolean empty = true;
 	private HashMap<String, String> info;

@@ -49,9 +49,9 @@ public class EventsListViewAdapter extends ArrayAdapter<Event>{
 		
 		if(event.has_information(Event.id_title)){
 			eventViewHolder.get_title_text_view().setText(event.get_information(Event.id_title));
-			eventViewHolder.get_location_text_view().setVisibility(View.VISIBLE);
+			eventViewHolder.get_title_text_view().setVisibility(View.VISIBLE);
 		}else{
-			eventViewHolder.get_location_text_view().setVisibility(View.GONE);
+			eventViewHolder.get_title_text_view().setVisibility(View.GONE);
 		}
 		
 		if(event.has_information(Event.id_location)){

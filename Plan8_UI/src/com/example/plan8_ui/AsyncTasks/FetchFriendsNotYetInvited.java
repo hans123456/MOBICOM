@@ -33,13 +33,14 @@ public class FetchFriendsNotYetInvited extends AsyncTask<String, Void, ArrayList
 		ArrayList<Friend> friends = new ArrayList<Friend>();
 		
 		try {
-
-			Document doc = Jsoup.connect(HTML.website + HTML.friends_not_yet_invited)
-								.data(HTML.post_event_id, arg[0])
-								.userAgent(HTML.user_agent)
-								.cookie(HTML.session_id, HTML.SessionID)
-								.post();
+			Document doc;
 			
+			doc = Jsoup.connect(HTML.website + HTML.friends_not_yet_invited)
+							.data(HTML.post_event_id, arg[0])
+							.userAgent(HTML.user_agent)
+							.cookie(HTML.session_id, HTML.SessionID)
+							.post();
+				
 			Element json_element = doc.getElementById(HTML.element_id);
 
 			if(json_element.text().equals("empty") == false){

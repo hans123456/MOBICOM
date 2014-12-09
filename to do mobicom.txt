@@ -1,0 +1,46 @@
+Finished
+
+- register
+- login
+- add remove friends
+- create event ( need ui )
+- view upcoming events
+- view program details ( need ui )
+- accept invites
+- 
+
+Not finished
+- invite people
+- program notifications
+- track attendees
+- send location
+- attendance
+
+
+
+To Do
+
+Search friend in invite friend for event
+friend requests -
+profile (friends and self) -
+unfriend - 
+events -
+view / edit / delete events - 
+
+invite friends no edit needed
+
+
+-----------------------
+
+event
+- body -> description
+
+getUpcomingEvents
+- where date
+- get android date
+
+invites
+- status -> integer ( 0 invited, etc.)
+
+---------------------
+

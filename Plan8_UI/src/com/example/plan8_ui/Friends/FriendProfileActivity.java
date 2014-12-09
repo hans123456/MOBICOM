@@ -69,7 +69,7 @@ public class FriendProfileActivity extends ActionBarActivity implements AsyncGet
         last_name_text_view.setText(friend.get_information(Friend.id_last_name));
 
         if(type.equals(FRIEND_REQUEST)){
-        	fab.setImageResource(R.drawable.ic_add_white_24dp);
+        	fab.setImageResource(R.drawable.ic_done_white_24dp);
         }
         
 	}

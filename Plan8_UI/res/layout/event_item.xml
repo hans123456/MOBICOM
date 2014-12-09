@@ -28,8 +28,7 @@
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:textColor="@color/secondary_text"
-			    android:textAppearance="?android:attr/textAppearanceSmall"
-			    android:text="Nov 10, 2014"/>
+			    android:textAppearance="?android:attr/textAppearanceSmall"/>
 			
 			<TextView 
 			    android:layout_width="wrap_content"
@@ -47,8 +46,7 @@
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:textColor="@color/secondary_text"
-			    android:textAppearance="?android:attr/textAppearanceSmall"
-			    android:text="12:45" />
+			    android:textAppearance="?android:attr/textAppearanceSmall" />
 			
 			<TextView 
 			    android:layout_width="wrap_content"
@@ -75,8 +73,7 @@
 			    android:layout_marginLeft="5dp"
 			    android:layout_marginStart="5dp"
 			    android:textColor="@color/secondary_text"
-			    android:textAppearance="?android:attr/textAppearanceSmall"
-			    android:text="Nov 10, 2014"/>
+			    android:textAppearance="?android:attr/textAppearanceSmall"/>
     
 			<TextView 
 			    android:layout_width="wrap_content"
@@ -94,8 +91,7 @@
 			    android:layout_marginLeft="5dp"
 			    android:layout_marginStart="5dp"
 			    android:textColor="@color/secondary_text"
-			    android:textAppearance="?android:attr/textAppearanceSmall"
-			    android:text="13:15"/>
+			    android:textAppearance="?android:attr/textAppearanceSmall"/>
 			
 			<TextView
 			    android:layout_width="wrap_content"
@@ -116,8 +112,7 @@
 		    android:maxLength="30"
 		    android:ellipsize="marquee"
 		    android:textColor="@color/primary_text"
-		    android:textAppearance="?android:attr/textAppearanceMedium"
-		    android:text="Mobicom Wireframe Presentation" />
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
 		
 		<TextView 
 		    android:id="@+id/event_item_location_text_view" 
@@ -126,8 +121,7 @@
 		    android:layout_height="wrap_content"
 		    android:maxLength="40"
 		    android:textColor="@color/secondary_text"
-		    android:textAppearance="?android:attr/textAppearanceSmall"
-		    android:text="G301" />
+		    android:textAppearance="?android:attr/textAppearanceSmall" />
 
 	</TableLayout>
 

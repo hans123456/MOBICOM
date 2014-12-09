@@ -30,17 +30,17 @@ public class FriendsListViewAdapter extends ArrayAdapter<Friend>{
 			
 		}
 		
-		Friend i = getItem(position);
+		Friend friend = getItem(position);
 		FriendViewHolder friendViewHolder = (FriendViewHolder) convertView.getTag();
 		
 		Picasso.with(getContext())
-				.load("https://graph.facebook.com/"+i.get_information(Friend.id_pic)+"/picture?type=large")
+				.load("https://graph.facebook.com/"+friend.get_information(Friend.id_pic)+"/picture?type=large")
 				.resize(120, 120)
 				.centerCrop()
 				.into(friendViewHolder.get_pic_image_view());
 		
-		friendViewHolder.get_first_name_text_view().setText(i.get_information(Friend.id_first_name));
-		friendViewHolder.get_last_name_text_view().setText(i.get_information(Friend.id_last_name));
+		friendViewHolder.get_first_name_text_view().setText(friend.get_information(Friend.id_first_name));
+		friendViewHolder.get_last_name_text_view().setText(friend.get_information(Friend.id_last_name));
 		
 		return convertView;
 		

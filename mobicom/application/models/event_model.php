@@ -156,6 +156,8 @@ class Event_Model extends CI_Model {
 
     public function edit_event_info($data){
 
+        $user = $this->ion_auth->user()->row();
+
         $event_id = $data['event_id'];
         $title = $data['title'];
         $location = $data['location'];
@@ -166,7 +168,6 @@ class Event_Model extends CI_Model {
         $time_end = $data['time_end'];
         $latitude = $data['latitude'];
         $longitude = $data['longitude'];
-
 
         $result['date_start'] = 'valid';
         $result['time_start'] = 'valid';
@@ -550,11 +551,11 @@ class Event_Model extends CI_Model {
     public function get_friends_not_yet_invited($event_id){
 
         $user = $this->ion_auth->user()->row();
+
         $query = $this->db->query("
 
             SELECT
-                `friends`.`id`,
-                `users`.`unique_id`,
+                `users`.`id`,
                 `users`.`pic`,
                 `users`.`first_name`,
                 `users`.`last_name`
@@ -569,28 +570,19 @@ class Event_Model extends CI_Model {
 
                     FROM
                         `friends`
+                        LEFT JOIN `invites`
+                        ON `invites`.`user_id` = `friends`.`user_b_id` and
+                        `invites`.`event_id` = ".$event_id."
 
                     WHERE
                         `friends`.`user_a_id` = ".$user->id." and
-                        `friends`.`status` = 1 and
-                        EXISTS
-                        (
-
-                            SELECT
-                                `invites`.`user_id`
-
-                            FROM
-                                `invites`
-
-                            WHERE
-                                `invites`.`event_id` = ".$event_id."
-
-                        )
+                        `invites`.`user_id` is NULL
 
                 ) as `friends`
 
             WHERE
-                `users`.`id` = `friends`.`id`
+                `users`.`id` = `friends`.`id` and
+                `users`.`id` != ".$user->id."
 
         ");
 
