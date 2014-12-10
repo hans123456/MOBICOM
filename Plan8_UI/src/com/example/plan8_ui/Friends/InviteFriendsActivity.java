@@ -22,6 +22,8 @@ import com.example.plan8_ui.Model.Friend;
 
 public class InviteFriendsActivity extends ActionBarActivity implements AsyncFetchListTaskCompleteListener<ArrayList<Friend>>{
 
+	public static final String id_friends_ids = "friends_ids";
+	
 	@InjectView(R.id.invite_friends_activity_toolbar) Toolbar toolbar;
 	@InjectView(R.id.invite_friends_activity_list_view) ListView friends_list_view;
 	
@@ -73,8 +75,38 @@ public class InviteFriendsActivity extends ActionBarActivity implements AsyncFet
 		int id = item.getItemId();
 		if (R.id.invite_friends_cancel == id) {
 			finish();
-			return true;
+		}else if(R.id.invite_friends_save == id){
+			
+			StringBuilder sb = new StringBuilder("");
+			boolean first = true;
+			
+			for(Friend i : friends){
+				
+				if(i.contains_information(Friend.id_checked) == true){
+					
+					if(i.get_information(Friend.id_checked).equals("true")){
+						
+						if(first == false){
+							sb.append(",");
+						}
+						
+						sb.append(i.get_information(Friend.id_id));
+						first = false;
+						
+					}
+					
+				}
+				
+			}
+			
+			Intent i = new Intent();
+			i.putExtra(id_friends_ids, sb.toString());
+			setResult(RESULT_OK, i);
+
+			finish();
+			
 		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -84,4 +116,5 @@ public class InviteFriendsActivity extends ActionBarActivity implements AsyncFet
 		friends.addAll(result);
 		friendsAttendanceInviteAdapter.notifyDataSetChanged();
 	}
+	
 }

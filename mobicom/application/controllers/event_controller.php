@@ -222,12 +222,17 @@ class Event_Controller extends CI_Controller {
 
 	public function invite_friends_to_event(){
 
-		$data['friends_ids'] = $this->input->post('friends_ids');
-		$data['event_id'] = $this->input->post('event id');
+		$event_id = $this->input->post('event_id');
+		$friends_ids = $this->input->post('friends_ids');
 
 		if(true == $this->ion_auth->logged_in()){
-			$this->event_model->invite_friends_to_event($data);
+			$this->db->trans_start();
+			$this->event_model->invite_friends_to_event($event_id, $friends_ids);
+			$data['data'] = 'success';
+			$this->db->trans_complete();
 		}
+
+		$this->load->view('general_view', $data);
 
 	}
 

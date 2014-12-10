@@ -110,16 +110,15 @@ DROP TABLE IF EXISTS `invites`;
 
 -- 0 invite, 1 going, 2 declined
 CREATE TABLE `invites` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
   `event_id` int(11) unsigned NOT NULL,
   `status` int(1) NOT NULL,
   `geolocation` point,
+  PRIMARY KEY (`user_id`, `event_id`),
   KEY `fk_event_idx` (`event_id`),
   KEY `fk_user_idx` (`user_id`),
   CONSTRAINT `fk_user_id1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `fk_event_id1` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  PRIMARY KEY (`id`)
+  CONSTRAINT `fk_event_id1` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `plan8`.`invites` (`id`, `user_id`, `event_id`, `status`, `geolocation`) VALUES (NULL, '1', '1', '1', GeomFromText(NULL));
+INSERT INTO `plan8`.`invites` (`user_id`, `event_id`, `status`, `geolocation`) VALUES ('1', '1', '1', GeomFromText(NULL));

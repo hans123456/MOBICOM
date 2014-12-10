@@ -35,6 +35,7 @@ public class FriendsAttendanceInviteListViewAdapter extends ArrayAdapter<Friend>
 		
 		Friend friend = getItem(position);
 		FriendAttendanceInviteViewHolder friendAttendanceInviteViewHolder = (FriendAttendanceInviteViewHolder) convertView.getTag();
+		friendAttendanceInviteViewHolder.setFriend(friend);
 		
 		if(attendance == true){
 			friendAttendanceInviteViewHolder.get_check_box().setChecked(friend.get_information(Friend.id_checked).equals("true") ? true : false );

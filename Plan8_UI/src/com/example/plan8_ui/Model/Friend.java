@@ -36,6 +36,10 @@ public class Friend {
 		return info.get(key);
 	}
 	
+	public boolean contains_information(String key){
+		return info.containsKey(key);
+	}
+	
 	public boolean isEmpty(){
 		return empty;
 	}

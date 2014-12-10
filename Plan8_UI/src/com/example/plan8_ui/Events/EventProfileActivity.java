@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,6 +32,7 @@ import butterknife.OnClick;
 import com.example.plan8_ui.R;
 import com.example.plan8_ui.AsyncTasks.EditEventInfo;
 import com.example.plan8_ui.AsyncTasks.FetchEventInfo;
+import com.example.plan8_ui.AsyncTasks.InviteFriends;
 import com.example.plan8_ui.AsyncTasks.SetInvitationStatus;
 import com.example.plan8_ui.Friends.EventAttendeesActivity;
 import com.example.plan8_ui.Friends.InviteFriendsActivity;
@@ -71,7 +73,6 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncGetI
 	private EditText tempET;
 	private SimpleDateFormat dateFormatter, timeFormatter;
 	private Event event;
-//	private Menu menu;
 	private boolean editable = false;
 	private MenuItem edit, cancel, save, delete;
 	private boolean you = true;
@@ -220,8 +221,7 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncGetI
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		new MenuInflater(getApplication()).inflate(R.menu.event_profile, menu);
-//		this.menu = menu;
-		
+
 		edit = menu.findItem(R.id.event_profile_edit);
 		cancel = menu.findItem(R.id.event_profile_cancel);
 		save = menu.findItem(R.id.event_profile_save);
@@ -322,6 +322,19 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncGetI
 		
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if(requestCode == 0){
+			if(resultCode == RESULT_OK){
+				Bundle b = data.getExtras();
+				new InviteFriends().execute(event.get_information(Event.id_id), b.getString(InviteFriendsActivity.id_friends_ids));
+			}
+		}
+		
+	}
+	
 	public void initialize(){
 
 		getSupportActionBar().setTitle(event.get_information(Event.id_title));

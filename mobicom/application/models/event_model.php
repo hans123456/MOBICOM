@@ -91,7 +91,6 @@ class Event_Model extends CI_Model {
 
                 `plan8`.`invites` (
 
-                    `id`,
                     `user_id`,
                     `event_id`,
                     `status`,
@@ -101,7 +100,6 @@ class Event_Model extends CI_Model {
 
                 VALUES (
 
-                    NULL,
                     ".$user->id.",
                     '".$event_id."',
                     '1',
@@ -113,12 +111,12 @@ class Event_Model extends CI_Model {
 
     }
 
-    public function invite_friends_to_event($data){
+    public function invite_friends_to_event($event_id, $friends_ids){
 
-        $friend_ids = explode(',', $data['friends_ids']);
-        $event_id = $data['event_id'];
+        $friend_ids = explode(',', $friends_ids);
+        $event_id = $event_id;
 
-        if( $data['friends_ids'] != ''){
+        if($friends_ids != ''){
 
             foreach($friend_ids as $friend_id){
 
@@ -128,7 +126,6 @@ class Event_Model extends CI_Model {
 
                         `plan8`.`invites` (
 
-                            `id`,
                             `user_id`,
                             `event_id`,
                             `status`,
@@ -138,7 +135,6 @@ class Event_Model extends CI_Model {
 
                         VALUES (
 
-                            NULL,
                             '".$friend_id."',
                             '".$event_id."',
                             '0',
@@ -641,10 +637,10 @@ class Event_Model extends CI_Model {
                 `invites`
 
             SET
-                `user_id` = ".$user->id.",
                 `status` = ".$invitation_status."
 
             WHERE
+                `user_id` = ".$user->id." and
                 `event_id` = ".$event_id."
 
 

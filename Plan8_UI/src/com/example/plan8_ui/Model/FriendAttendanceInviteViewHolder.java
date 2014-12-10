@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnCheckedChanged;
 
 import com.example.plan8_ui.R;
 
@@ -15,11 +16,19 @@ public class FriendAttendanceInviteViewHolder {
 	@InjectView(R.id.friend_attendance_invite_item_first_name_text_view) TextView first_name_text_view;
 	@InjectView(R.id.friend_attendance_invite_item_last_name_text_view) TextView last_name_text_view;
 	@InjectView(R.id.friend_attendance_invite_item_check_box) CheckBox check_box;
-
+	private Friend friend;	
+	
 	public FriendAttendanceInviteViewHolder(View convertView) {
-		
 		ButterKnife.inject(this, convertView);
-		
+	}
+	
+	public void setFriend(Friend friend){
+		this.friend = friend;
+	}
+	
+	@OnCheckedChanged(R.id.friend_attendance_invite_item_check_box)
+	public void onCheckChangedCheckbox(boolean checked){
+		friend.put_information(Friend.id_checked, String.valueOf(checked));
 	}
 
 	public ImageView get_pic_image_view() {
