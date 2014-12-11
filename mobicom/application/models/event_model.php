@@ -518,7 +518,9 @@ class Event_Model extends CI_Model {
             SELECT
                 `users`.`pic`,
                 `users`.`first_name`,
-                `users`.`last_name`
+                `users`.`last_name`,
+                x(`invites`.`geolocation`) as latitude,
+                y(`invites`.`geolocation`) as longitude
 
             FROM
                 `users`, `invites`
