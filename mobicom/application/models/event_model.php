@@ -80,10 +80,9 @@ class Event_Model extends CI_Model {
 
     }
 
-    public function invite_self($data){
+    public function invite_self($event_id){
 
         $user = $this->ion_auth->user()->row();
-        $event_id = $data['event_id'];
 
         $this->db->query("
 

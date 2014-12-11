@@ -161,14 +161,13 @@ class Event_Controller extends CI_Controller {
 		$data['location'] = $this->input->post('location');
 		$data['description'] = $this->input->post('description');
 		$data['date_start'] = $this->input->post('date_start');
-		$data['time_start'] = '15:15';$this->input->post('time_start');
+		$data['time_start'] = $this->input->post('time_start');
 		$data['date_end'] = $this->input->post('date_end');
 		$data['time_end'] = $this->input->post('time_end');
 		$data['latitude'] = $this->input->post('latitude');
 		$data['longitude'] = $this->input->post('longitude');
 
-		$invite = array();
-		$invite['friends_ids'] = $this->input->post('friends_ids');
+		$friends_ids = $this->input->post('friends_ids');
 
 		$result['date_start'] = 'valid';
 		$result['time_start'] = 'valid';
@@ -203,9 +202,9 @@ class Event_Controller extends CI_Controller {
 			 if(true == $this->ion_auth->logged_in()){
 				$this->db->trans_start();
 				$this->event_model->create_event($data);
-				$invite['event_id'] = $this->db->insert_id();
-				$this->event_model->invite_self($invite);
-				$this->event_model->invite_friends_to_event($invite);
+				$event_id = $this->db->insert_id();
+				$this->event_model->invite_self($event_id);
+				$this->event_model->invite_friends_to_event($event_id, $friends_ids);
 				$this->db->trans_complete();
 				$data['data'] = 'success';
 			 }

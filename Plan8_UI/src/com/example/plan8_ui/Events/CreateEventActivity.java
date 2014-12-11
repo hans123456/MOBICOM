@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -61,6 +62,7 @@ public class CreateEventActivity extends ActionBarActivity implements AsyncGetRe
 	private GoogleMap googleMap;
 	private MarkerOptions markerOptions;
 	private Marker marker;
+	private String friends_ids = "";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -219,7 +221,8 @@ public class CreateEventActivity extends ActionBarActivity implements AsyncGetRe
 					date_end_edit_text.getText().toString(),
 					time_end_edit_text.getText().toString(),
 					String.valueOf(marker.getPosition().latitude),
-					String.valueOf(marker.getPosition().longitude)
+					String.valueOf(marker.getPosition().longitude),
+					friends_ids
 				};
 
 			new CreateEvent(this).execute(inputs);
@@ -230,6 +233,20 @@ public class CreateEventActivity extends ActionBarActivity implements AsyncGetRe
 		
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if(requestCode == 0){
+			if(resultCode == RESULT_OK){
+				Bundle b = data.getExtras();
+				friends_ids = b.getString(InviteFriendsActivity.id_friends_ids);
+				Log.wtf("Tag", friends_ids);
+			}
+		}
+		
+	}
+	
 	@Override
 	public void display_result(CreateEventResult result) {
 		

@@ -32,7 +32,7 @@ public class CreateEvent extends AsyncTask<String, Void, CreateEventResult>{
 		CreateEventResult result = new CreateEventResult();
 		
 		try {
-			
+			Log.wtf("Tag2", arg[9]);
 			doc = Jsoup.connect(HTML.website + HTML.create_event)
 						  .data(HTML.post_title, arg[0])
 						  .data(HTML.post_description, arg[1])
@@ -43,6 +43,7 @@ public class CreateEvent extends AsyncTask<String, Void, CreateEventResult>{
 						  .data(HTML.post_time_end, arg[6])
 						  .data(HTML.post_latitude, arg[7])
 						  .data(HTML.post_longitude, arg[8])
+						  .data(HTML.post_invited_friends, arg[9])
 						  .userAgent(HTML.user_agent)
 						  .cookie(HTML.session_id, HTML.SessionID)
 						  .post();
