@@ -7,7 +7,7 @@ import butterknife.ButterKnife.Finder;
 public class DeclinedEventsFragment$$ViewInjector {
   public static void inject(Finder finder, final com.example.plan8_ui.Events.DeclinedEventsFragment target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131493039, "field 'events_list_view' and method 'onItemClick'");
+    view = finder.findRequiredView(source, 2131493041, "field 'events_list_view' and method 'onItemClick'");
     target.events_list_view = (android.widget.ListView) view;
     ((android.widget.AdapterView<?>) view).setOnItemClickListener(
       new android.widget.AdapterView.OnItemClickListener() {

@@ -1,33 +1,54 @@
-<LinearLayout  
+<FrameLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+   	xmlns:fab="http://schemas.android.com/apk/res-auto"
    	xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.plan8_ui.Events.UpcomingEventsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-		
-    <android.support.v7.widget.Toolbar
-	    android:id="@+id/event_attendees_toolbar"
+    android:isScrollContainer="false" >
+
+	<LinearLayout  
 	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-		android:minHeight="?attr/actionBarSize"
-	    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    	app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    	android:background="@color/toolbar" />
-	    
-    <ListView
-		android:id="@+id/event_attendees_list_view"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-        android:paddingLeft="5dp"
-        android:paddingStart="5dp"
-        android:paddingRight="5dp"
-        android:paddingEnd="5dp"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp"
-        android:clipToPadding="false"
-		android:divider="@null"
-		android:scrollbars="none"/>
-	    	
-</LinearLayout>
+	    android:layout_height="match_parent"
+	    android:orientation="vertical">
+			
+	    <android.support.v7.widget.Toolbar
+		    android:id="@+id/event_attendees_activity_toolbar"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+			android:minHeight="?attr/actionBarSize"
+		    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+	    	app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+	    	android:background="@color/toolbar" />
+		    
+	    <ListView
+			android:id="@+id/event_attendees_activity_list_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+	        android:paddingLeft="5dp"
+	        android:paddingStart="5dp"
+	        android:paddingRight="5dp"
+	        android:paddingEnd="5dp"
+	        android:paddingTop="3dp"
+	        android:paddingBottom="3dp"
+	        android:clipToPadding="false"
+			android:divider="@null"
+			android:scrollbars="none"/>
+		    	
+	</LinearLayout>
+			    	
+	<com.melnykov.fab.FloatingActionButton
+		android:id="@+id/event_attendees_activity_fab"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="end|bottom"
+		android:layout_margin="16dp"
+		fab:fab_colorNormal="@color/fab_normal"
+		fab:fab_colorPressed="@color/fab_pressed"
+		fab:fab_colorRipple="@color/fab_ripple"
+		fab:fab_shadow="true"
+		android:src="@drawable/ic_room_white_24dp" />
+		
+</FrameLayout>
 	

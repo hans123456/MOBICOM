@@ -56,6 +56,7 @@ $route['event_attendees'] = 'event_controller/event_attendees';
 $route['attendee_location'] = 'event_controller/attendee_location';
 $route['invite_friends_to_event'] = 'event_controller/invite_friends_to_event';
 $route['friends_not_yet_invited'] = 'event_controller/friends_not_yet_invited';
+$route['send_location'] = 'event_controller/send_location';
 $route['invitation_status'] = 'event_controller/invitation_status';
 
 $route['friends'] = 'friend_controller/friends';

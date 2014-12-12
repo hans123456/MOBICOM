@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class AttendeeLocationActivity extends ActionBarActivity {
 	
-	@InjectView(R.id.event_attendees_toolbar) Toolbar toolbar;
+	@InjectView(R.id.attendee_activity_toolbar) Toolbar toolbar;
 	
 	private GoogleMap googleMap;
 	private MarkerOptions markerOptions1, markerOptions2;
@@ -52,7 +52,7 @@ public class AttendeeLocationActivity extends ActionBarActivity {
 		if (googleMap == null) {
 		
 			googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(
-			        R.id.attendee_location_map)).getMap();
+			        R.id.attendee_activity_location_map)).getMap();
 			
 			markerOptions1 = new MarkerOptions();
 			markerOptions2 = new MarkerOptions().title("Moira Paguiligan").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));

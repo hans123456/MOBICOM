@@ -365,7 +365,7 @@ public final class R {
 		public static final int abc_textfield_search_default_mtrl_alpha = 0x7f020031;
 		public static final int abc_textfield_search_material = 0x7f020032;
 		public static final int ic_launcher = 0x7f020062;
-		public static final int shadow = 0x7f020075;
+		public static final int shadow = 0x7f020076;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f0c0052;

@@ -7,7 +7,7 @@ import butterknife.ButterKnife.Finder;
 public class FriendsFragment$$ViewInjector {
   public static void inject(Finder finder, final com.example.plan8_ui.Friends.FriendsFragment target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131493044, "field 'friends_list_view' and method 'onItemClick'");
+    view = finder.findRequiredView(source, 2131493046, "field 'friends_list_view' and method 'onItemClick'");
     target.friends_list_view = (android.widget.ListView) view;
     ((android.widget.AdapterView<?>) view).setOnItemClickListener(
       new android.widget.AdapterView.OnItemClickListener() {
@@ -20,7 +20,7 @@ public class FriendsFragment$$ViewInjector {
           target.onItemClick(p2);
         }
       });
-    view = finder.findRequiredView(source, 2131493045, "field 'addFriends' and method 'onClick'");
+    view = finder.findRequiredView(source, 2131493047, "field 'addFriends' and method 'onClick'");
     target.addFriends = (com.melnykov.fab.FloatingActionButton) view;
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {

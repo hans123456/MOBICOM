@@ -7,7 +7,7 @@ import butterknife.ButterKnife.Finder;
 public class FriendRequestsFragment$$ViewInjector {
   public static void inject(Finder finder, final com.example.plan8_ui.Friends.FriendRequestsFragment target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131493043, "field 'friend_requests_list_view' and method 'onItemClick'");
+    view = finder.findRequiredView(source, 2131493045, "field 'friend_requests_list_view' and method 'onItemClick'");
     target.friend_requests_list_view = (android.widget.ListView) view;
     ((android.widget.AdapterView<?>) view).setOnItemClickListener(
       new android.widget.AdapterView.OnItemClickListener() {

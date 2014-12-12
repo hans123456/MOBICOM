@@ -7,7 +7,7 @@
     android:orientation="vertical">
 		
     <android.support.v7.widget.Toolbar
-	    android:id="@+id/event_attendees_toolbar"
+	    android:id="@+id/attendee_activity_toolbar"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 		android:minHeight="?attr/actionBarSize"
@@ -16,7 +16,7 @@
     	android:background="@color/toolbar" />
 
 	<fragment
-		android:id="@+id/attendee_location_map"
+		android:id="@+id/attendee_activity_location_map"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		class="com.google.android.gms.maps.SupportMapFragment" />

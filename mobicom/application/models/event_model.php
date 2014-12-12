@@ -242,7 +242,7 @@ class Event_Model extends CI_Model {
     public function get_declined_events(){
 
         $user = $this->ion_auth->user()->row();
-        //".$user->id."
+
         $query = $this->db->query("
 
             SELECT
