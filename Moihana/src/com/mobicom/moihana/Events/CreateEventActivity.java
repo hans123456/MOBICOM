@@ -241,7 +241,8 @@ public class CreateEventActivity extends ActionBarActivity implements AsyncGetRe
 			if(resultCode == RESULT_OK){
 				Bundle b = data.getExtras();
 				friends_ids = b.getString(InviteFriendsActivity.id_friends_ids);
-				Log.wtf("Tag", friends_ids);
+			}else if(resultCode == RESULT_CANCELED){
+				friends_ids = "";
 			}
 		}
 		

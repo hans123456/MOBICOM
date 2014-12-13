@@ -204,7 +204,10 @@ class Event_Controller extends CI_Controller {
 				$this->event_model->create_event($data);
 				$event_id = $this->db->insert_id();
 				$this->event_model->invite_self($event_id);
-				$this->event_model->invite_friends_to_event($event_id, $friends_ids);
+
+				if($friends_ids != '')
+					$this->event_model->invite_friends_to_event($event_id, $friends_ids);
+
 				$this->db->trans_complete();
 				$data['data'] = 'success';
 			 }

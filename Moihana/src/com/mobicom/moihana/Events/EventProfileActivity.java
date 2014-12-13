@@ -438,6 +438,7 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncGetI
 		Intent i = new Intent();
 		setResult(RESULT_OK, i);
 		progressDialog.dismiss();
+		Toast.makeText(getBaseContext(), "Event Deleted Successfully", Toast.LENGTH_LONG).show();
 		finish();
 		
 	}

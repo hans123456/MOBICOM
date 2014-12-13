@@ -97,7 +97,7 @@ public class EventAttendeesActivity extends ActionBarActivity implements AsyncFe
 		@Override
 		public void onLocationChanged(Location location) {
 
-			Log.wtf("tag", location.getAccuracy() + "");
+//			Log.wtf("tag", location.getAccuracy() + "");
 			if(previous == Float.MAX_VALUE){
 				previous = location.getAccuracy();
 			}else {

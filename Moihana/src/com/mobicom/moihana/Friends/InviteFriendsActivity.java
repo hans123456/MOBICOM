@@ -2,6 +2,7 @@ package com.mobicom.moihana.Friends;
 
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -29,6 +30,7 @@ public class InviteFriendsActivity extends ActionBarActivity implements AsyncFet
 	
 	private FriendsAttendanceInviteListViewAdapter friendsAttendanceInviteAdapter;
 	private ArrayList<Friend> friends;
+	private ProgressDialog progressDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,13 @@ public class InviteFriendsActivity extends ActionBarActivity implements AsyncFet
 		friendsAttendanceInviteAdapter = new FriendsAttendanceInviteListViewAdapter(getBaseContext(), R.layout.friend_attendance_invite_item, friends, false);
 		
 		friends_list_view.setAdapter(friendsAttendanceInviteAdapter);
-
+		
+		progressDialog = new ProgressDialog(this, ProgressDialog.THEME_HOLO_LIGHT);
+		//progressDialog.setCancelable(false);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		progressDialog.setMessage("Fetching Friends Please Wait");
+		
 		Intent i = getIntent();
 		Bundle b = i.getExtras();
 		
@@ -52,7 +60,8 @@ public class InviteFriendsActivity extends ActionBarActivity implements AsyncFet
 		
 		String event_id = b.getString(Event.id_id);
 		friendsNotYetInvited.execute(event_id);
-	
+		progressDialog.show();
+		
 	}
 	
 	@OnItemClick(R.id.invite_friends_activity_list_view)
@@ -74,6 +83,9 @@ public class InviteFriendsActivity extends ActionBarActivity implements AsyncFet
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (R.id.invite_friends_cancel == id) {
+			Intent i = new Intent();
+			setResult(RESULT_CANCELED, i);
+			progressDialog.dismiss();
 			finish();
 		}else if(R.id.invite_friends_save == id){
 			
@@ -103,6 +115,7 @@ public class InviteFriendsActivity extends ActionBarActivity implements AsyncFet
 			i.putExtra(id_friends_ids, sb.toString());
 			setResult(RESULT_OK, i);
 
+			progressDialog.dismiss();
 			finish();
 			
 		}
@@ -115,6 +128,7 @@ public class InviteFriendsActivity extends ActionBarActivity implements AsyncFet
 		friends.clear();
 		friends.addAll(result);
 		friendsAttendanceInviteAdapter.notifyDataSetChanged();
+		progressDialog.dismiss();
 	}
 	
 }

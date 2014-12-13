@@ -7,8 +7,6 @@ import butterknife.ButterKnife.Finder;
 public class EventAttendeesActivity$$ViewInjector {
   public static void inject(Finder finder, final com.mobicom.moihana.Friends.EventAttendeesActivity target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131492978, "field 'toolbar'");
-    target.toolbar = (android.support.v7.widget.Toolbar) view;
     view = finder.findRequiredView(source, 2131492979, "field 'event_attendees_listview' and method 'onItemClick'");
     target.event_attendees_listview = (android.widget.ListView) view;
     ((android.widget.AdapterView<?>) view).setOnItemClickListener(
@@ -22,6 +20,8 @@ public class EventAttendeesActivity$$ViewInjector {
           target.onItemClick(p0, p1, p2, p3);
         }
       });
+    view = finder.findRequiredView(source, 2131492978, "field 'toolbar'");
+    target.toolbar = (android.support.v7.widget.Toolbar) view;
     view = finder.findRequiredView(source, 2131492980, "method 'onClickSendLocation' and method 'onLongClickSendLocation'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
@@ -42,7 +42,7 @@ public class EventAttendeesActivity$$ViewInjector {
   }
 
   public static void reset(com.mobicom.moihana.Friends.EventAttendeesActivity target) {
-    target.toolbar = null;
     target.event_attendees_listview = null;
+    target.toolbar = null;
   }
 }
