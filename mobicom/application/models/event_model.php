@@ -239,6 +239,24 @@ class Event_Model extends CI_Model {
 
     }
 
+    public function delete_event($event_id){
+
+        $user = $this->ion_auth->user()->row();
+
+        $this->db->query("
+
+            DELETE
+                FROM
+                `events`
+
+            WHERE
+                `events`.`user_id` = ".$user->id." and
+                `events`.`id` = ".$event_id."
+
+        ");
+
+    }
+
     public function get_declined_events(){
 
         $user = $this->ion_auth->user()->row();
@@ -309,7 +327,7 @@ class Event_Model extends CI_Model {
     public function get_finished_events(){
 
         $user = $this->ion_auth->user()->row();
-        //".$user->id."
+
         $query = $this->db->query("
 
             SELECT
@@ -378,7 +396,6 @@ class Event_Model extends CI_Model {
 
         $user = $this->ion_auth->user()->row();
 
-        //".$user->id."
         $query = $this->db->query("
 
             SELECT
@@ -649,6 +666,25 @@ class Event_Model extends CI_Model {
 
     }
 
+    public function set_user_location($event_id, $latitude, $longitude){
+
+        $user = $this->ion_auth->user()->row();
+        $this->db->query("
+
+            UPDATE
+                `invites`
+
+            SET
+                `geolocation` = GeomFromText('POINT(".$latitude." ".$longitude.")',0)
+
+            WHERE
+                `user_id` = ".$user->id." and
+                `event_id` = ".$event_id."
+
+
+        ");
+
+    }
 
 }
 

@@ -219,6 +219,16 @@ class Event_Controller extends CI_Controller {
 
 	}
 
+	public function delete_event(){
+
+		$event_id = $this->input->post('event_id');
+
+		if(true == $this->ion_auth->logged_in()){
+			$this->event_model->delete_event($event_id);
+		}
+
+	}
+
 	public function invite_friends_to_event(){
 
 		$event_id = $this->input->post('event_id');
@@ -267,7 +277,19 @@ class Event_Controller extends CI_Controller {
 		$invitation_status = $this->input->post('invitation_status');
 
 		if(true == $this->ion_auth->logged_in()){
-			$data['data'] = $this->event_model->set_invitation_status($event_id, $invitation_status);
+			$this->event_model->set_invitation_status($event_id, $invitation_status);
+		}
+
+	}
+
+	public function send_location(){
+
+		$event_id = $this->input->post('event_id');
+		$latitude = $this->input->post('latitude');
+		$longitude = $this->input->post('longitude');
+
+		if(true == $this->ion_auth->logged_in()){
+			$this->event_model->set_user_location($event_id, $latitude, $longitude);
 		}
 
 	}

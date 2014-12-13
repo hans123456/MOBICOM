@@ -12,9 +12,9 @@ Finished
 Not finished
 - invite people ( okay na ata )
 - program notifications
-- track attendees
-- send location
-- attendance
+- track attendees //
+- send location // 
+- attendance 
 
 
 

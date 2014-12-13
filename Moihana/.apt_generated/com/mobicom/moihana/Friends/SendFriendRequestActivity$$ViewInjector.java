@@ -1,0 +1,40 @@
+// Generated code from Butter Knife. Do not modify!
+package com.mobicom.moihana.Friends;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+
+public class SendFriendRequestActivity$$ViewInjector {
+  public static void inject(Finder finder, final com.mobicom.moihana.Friends.SendFriendRequestActivity target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131493026, "field 'toolbar'");
+    target.toolbar = (android.support.v7.widget.Toolbar) view;
+    view = finder.findRequiredView(source, 2131493029, "field 'first_name_text_view'");
+    target.first_name_text_view = (android.widget.TextView) view;
+    view = finder.findRequiredView(source, 2131493027, "field 'unique_id_edit_text'");
+    target.unique_id_edit_text = (android.widget.EditText) view;
+    view = finder.findRequiredView(source, 2131493031, "field 'fab' and method 'onClickSearch'");
+    target.fab = (com.melnykov.fab.FloatingActionButton) view;
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.onClickSearch();
+        }
+      });
+    view = finder.findRequiredView(source, 2131493028, "field 'pic_image_view'");
+    target.pic_image_view = (android.widget.ImageView) view;
+    view = finder.findRequiredView(source, 2131493030, "field 'last_name_text_view'");
+    target.last_name_text_view = (android.widget.TextView) view;
+  }
+
+  public static void reset(com.mobicom.moihana.Friends.SendFriendRequestActivity target) {
+    target.toolbar = null;
+    target.first_name_text_view = null;
+    target.unique_id_edit_text = null;
+    target.fab = null;
+    target.pic_image_view = null;
+    target.last_name_text_view = null;
+  }
+}
