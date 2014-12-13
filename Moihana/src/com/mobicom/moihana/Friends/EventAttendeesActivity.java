@@ -10,7 +10,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -97,7 +96,6 @@ public class EventAttendeesActivity extends ActionBarActivity implements AsyncFe
 		@Override
 		public void onLocationChanged(Location location) {
 
-//			Log.wtf("tag", location.getAccuracy() + "");
 			if(previous == Float.MAX_VALUE){
 				previous = location.getAccuracy();
 			}else {

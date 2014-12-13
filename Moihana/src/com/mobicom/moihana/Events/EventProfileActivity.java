@@ -401,6 +401,16 @@ public class EventProfileActivity extends ActionBarActivity implements AsyncGetI
 			edit.setVisible(false);
 			cancel.setVisible(true);
 			save.setVisible(true);
+			cancel.setTitle("Deny Invitation");
+			save.setTitle("Accept Invitation");
+		}else {
+			you = true;
+			edit.setVisible(true);
+			cancel.setVisible(false);
+			save.setVisible(false);
+			cancel.setTitle("Edit Event Information");
+			cancel.setTitle("Cancel Changes Made");
+			save.setTitle("Save Changes Made");
 		}
 		
 		progressDialog.dismiss();

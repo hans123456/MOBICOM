@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
+import butterknife.OnLongClick;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.mobicom.moihana.R;
@@ -81,16 +83,20 @@ public class UpcomingEventsFragment extends Fragment implements AsyncFetchListTa
 		fetchUpcomingEvents.cancel(true);
 	}
 	
-	@OnClick (R.id.upcoming_events_fragment_fab)
+	@OnClick(R.id.upcoming_events_fragment_fab)
 	public void onClickCreateEvent(){
-
 		Intent i = new Intent();
 		i.setClass(getActivity().getBaseContext(), CreateEventActivity.class);
 		startActivityForResult(i, REQUEST_CODE_CREATE_EVENT);
-		
+	}
+	
+	@OnLongClick(R.id.upcoming_events_fragment_fab)
+	public boolean onLongClickCreateEvent(){	
+		Toast.makeText(getActivity().getBaseContext(), "Create An Event", Toast.LENGTH_LONG).show();
+		return true;
 	}
 
-	@OnItemClick (R.id.upcoming_events_fragment_list_view)
+	@OnItemClick(R.id.upcoming_events_fragment_list_view)
 	public void onItemClick(int position){
 
 		Intent i = new Intent();

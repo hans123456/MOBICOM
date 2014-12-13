@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
+import butterknife.OnLongClick;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.mobicom.moihana.R;
@@ -112,12 +114,20 @@ public class FriendsFragment extends Fragment implements AsyncFetchListTaskCompl
 		
 	}
 	
-	@OnClick (R.id.friends_fragment_fab)
+	@OnClick(R.id.friends_fragment_fab)
 	public void onClick() {
 		
 		Intent i = new Intent();
 		i.setClass(getActivity().getBaseContext(), SendFriendRequestActivity.class);
 		startActivityForResult(i, 0);
+		
+	}
+	
+	@OnLongClick(R.id.friends_fragment_fab)
+	public boolean onLongClick() {
+		
+		Toast.makeText(getActivity().getBaseContext(), "Send a friend request", Toast.LENGTH_LONG).show();;
+		return true;
 		
 	}
 	

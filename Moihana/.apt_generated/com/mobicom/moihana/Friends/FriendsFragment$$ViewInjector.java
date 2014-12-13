@@ -20,7 +20,7 @@ public class FriendsFragment$$ViewInjector {
           target.onItemClick(p2);
         }
       });
-    view = finder.findRequiredView(source, 2131493047, "field 'addFriends' and method 'onClick'");
+    view = finder.findRequiredView(source, 2131493047, "field 'addFriends', method 'onClick', and method 'onLongClick'");
     target.addFriends = (com.melnykov.fab.FloatingActionButton) view;
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
@@ -28,6 +28,14 @@ public class FriendsFragment$$ViewInjector {
           android.view.View p0
         ) {
           target.onClick();
+        }
+      });
+    view.setOnLongClickListener(
+      new android.view.View.OnLongClickListener() {
+        @Override public boolean onLongClick(
+          android.view.View p0
+        ) {
+          return target.onLongClick();
         }
       });
   }
